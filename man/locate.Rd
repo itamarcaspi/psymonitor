@@ -7,7 +7,7 @@
 locate(ind, date)
 }
 \arguments{
-\item{ind}{A vector. A dummy variabel that equals 1 for a bubble/crisis
+\item{ind}{A vector. A dummy variable that equals 1 for a bubble/crisis
 period and 0 otherwise.}
 
 \item{index}{A vector. Dates of the time series.}

@@ -1,5 +1,5 @@
 ---
-title: "Illustration of the Real-Time Monitoring of Bubbles and Ctisis"
+title: "Illustration of the Real-Time Monitoring of Bubbles and Crisis"
 author:
 - affiliation: Yale University
   name: Peter C. B. Phillips
@@ -92,14 +92,14 @@ autoplot(pd) +
 
 With a training period of 47 observations, we start the pseudo real-time monitoring exercise from November 1976 onwards. The PSY test statistics are compared with the 95% bootstrapped critical value. The empirical size is controlled over a two-year period, i.e., by taking $Tb = 24$. The lag order is selected by BIC with a maximum lag order of 6, applied to each subsample. The PSY statistic sequence and the corresponding bootstrap critical values can be calculated as follows in R:
 
-First, we set the seed for reproducability of the results:
+First, we set the seed for reproducibility of the results:
 
 ```{r seed, message=FALSE, results="hide"}
 # Set seed for reproducibility
 set.seed(109)
 ```
 
-Next, we define the series and paramaters that are used as inputes for the test procedure:
+Next, we define the series and parameters that are used as inputs for the test procedure:
 
 ```{r setup, include=TRUE, message=FALSE, warning=FALSE}
 y        <- pd
@@ -173,7 +173,7 @@ the PSY statistic exceeds its 95% bootstrapped critical value.
 
 # Example 2: Credit Risk in the European Sovereign Sector
 
-The European sovereign debt sector experienced an extremely turbulent period over the last decade, which caused significant harm to the real economy (Acharya et al., 2018) and led to an unprecedented level of unemployment (Karafolas and Alexandrakis, 2015). The PSY detection algorithm can serve as a useful early warning mechanism for escalating credit risk, which is acknowledged as a leading indicator of financial and economic crises, and thereby enable timely policy action and effective risk management to avert more serious economic damage. To show the potential eficacy of this early warning system, we conduct a pseudo monitoring exercise of credit risk in the European sovereign sector.
+The European sovereign debt sector experienced an extremely turbulent period over the last decade, which caused significant harm to the real economy (Acharya et al., 2018) and led to an unprecedented level of unemployment (Karafolas and Alexandrakis, 2015). The PSY detection algorithm can serve as a useful early warning mechanism for escalating credit risk, which is acknowledged as a leading indicator of financial and economic crises, and thereby enable timely policy action and effective risk management to avert more serious economic damage. To show the potential efficacy of this early warning system, we conduct a pseudo monitoring exercise of credit risk in the European sovereign sector.
 
 Credit risk in the European sovereign sector is proxied by an index constructed as a GDP weighted 10-year government bond yield of the PIIGS (Portugal, Ireland, Italy, Greece, and Spain) countries.5 The PSY strategy is applied to the spread between the PIIGS bond yield index and the 10-year government bond yield of Germany (used as a proxy for a prevailing
 benchmark of economic fundamentals). The sample data runs from June 1997 to June 2016 and was downloaded from Datastream International. The GDP data are downloaded quarterly and converted to a monthly frequency by assuming a constant value within each quarter.
@@ -195,4 +195,10 @@ autoplot(spread) +
 The shaded areas in Figure 3 are the identified periods of crisis obtained using the 95% bootstrap critical values. The first alarm signal of risk appeared in March 2008 and lasts for one month. The alarm was triggered again after the collapse of Lehman Brothers in October 2008 and turns off in March 2009. The stress indicator switched on again in May 2010 and lasted until August 2012.
 
 Figure 3: Crisis episodes in the European sovereign sector. The solid line is the 10-year government bond yield spread between the PIIGS countries and Germany and the shaded areas are the periods where the PSY statistic exceeds its 95% bootstrap critical value.
+
+---
+## References
+  * Phillips, P. C. B., Shi, S., & Yu, J. (2015a).  Testing for multiple bubbles: Historical episodes of exuberance and collapse in the S&P 500. *International Economic Review*, 56(4), 1034--1078.
+  * Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit Theory for Real-Time Detectors. *International Economic Review*, 56(4), 1079--1134.
+  * Phillips, P. C. B., & Shi, S.(2017). Detecting financial collapse and ballooning sovereign risk. Cowles Foundation Discussion Paper No. 2110.
 

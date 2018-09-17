@@ -34,6 +34,6 @@ devtools::install_github("itamarcaspi/psymonitor")
   - Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple
     bubbles: Limit Theory for Real-Time Detectors. *International
     Economic Review*, 56(4), 1079–1134.
-  - Phillips, P. C. B., & Shi, S.(2017). Detecting financial collaps and
-    ballooning sovereign risk. Cowels Foundation Discussion Paper
+  - Phillips, P. C. B., & Shi, S.(2017). Detecting financial collapse
+    and ballooning sovereign risk. Cowles Foundation Discussion Paper
     No. 2110.
