@@ -1,0 +1,7 @@
+^data-raw$
+^docs$
+^_pkgdown\.yml$
+^LICENSE\.md$
+^README\.Rmd$
+^psymonitor\.Rproj$
+^\.Rproj\.user$

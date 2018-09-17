@@ -1,0 +1,46 @@
+template:
+  params:
+    bootswatch: flatly
+
+authors:
+  Peter C.B. Phillips:
+    href: http://korora.econ.yale.edu/phillips/
+  Shuping Shi:
+    href: https://sites.google.com/site/shupingshi/home/
+  Itamar Caspi:
+    href: http://www.itamarcaspi.net/
+
+navbar:
+  type: default
+  left:
+    - text: "Functions"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
+    - text: "Guides"
+      href: articles/index.html
+  right:
+   - icon: fa-github
+     href: https://github.com/itamarcaspi/psymonitor/
+
+reference:
+  - title: "Test statistics"
+    desc: "Function to estimate the ADF/SADF/GSADF test statstics"
+    contents:
+      - ADF
+      - ADFres
+      - PSY
+  - title: "Monitoring"
+    desc: "Functions for real-time monitiring of asset markets"
+    contents:
+      - cvPSY
+      - wmboot
+      - locate
+      - disp
+  - title: "Data"
+    desc: "Data sets included in the package"
+    contents:
+      - snp
+      - spread
+
+

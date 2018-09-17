@@ -1,0 +1,28 @@
+Type: Package
+Package: psymonitor
+Title: Real Time Monitoring of Bubbles and Crisis with R
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Peter", "C.B. Phillips", role = c("aut")),
+    person("Shuping", "Shi", role = c("aut")),
+    person("Itamar", "Caspi", email = "caspi.itamar@gmail.com", role = c("aut", "cre"))
+    )
+Description: TBA
+License: GPL-3
+Language: en-US
+URL: https://github.com/itamarcaspi/psymonitor
+BugReports: https://github.com/itamarcaspi/psymonitor/issues
+Depends: 
+    R (>= 2.10)
+Imports: 
+    doParallel,
+    parallel,
+    foreach (>= 1.4.4),
+Suggests: 
+    testthat (>= 2.0.0),
+    knitr,
+    rmarkdown
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
+VignetteBuilder: knitr

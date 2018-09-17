@@ -1,0 +1,46 @@
+#' @title Estimate the PSY statistic sequence
+#'
+#' @description \code{PSY} implements the real time bubble detection procedure
+#'   of Phillips, Shi and Yu (2015a,b)
+#'
+#' @param y   A vector. The data.
+#' @param swindow0 A positive integer. Minimum window size.
+#' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.
+#' @param adflag  A positive integer, lag order when IC=0; maximum number of
+#'   lags when IC>0.
+#'
+#' @return Vector, BSADF test statistic.
+#'
+#' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
+#'   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
+#'   500. \emph{International Economic Review}, 56(4), 1034--1078. Phillips, P.
+#'   C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
+#'   Theory for Real-Time Detectors. \emph{International Economic Review},
+#'   56(4), 1079--1134.
+#'
+#' @export
+#'
+#'
+#' @examples
+#' \donttest{
+#' y     <- rnorm(100)
+#' BSADF <- PSY(y,  swindow0 = 90, IC = 0, adflag = 1)
+#' }
+
+PSY <- function(y, swindow0, IC, adflag) {
+  t <- length(y)
+  bsadfs <- matrix(data = NA, nrow = t, ncol = 1)
+
+  for (r2 in swindow0:t) {
+    rwadft <- matrix(data = 0, nrow = r2 - swindow0 + 1, ncol = 1)
+    for (r1 in 1:(r2 - swindow0 + 1)) {
+      rwadft[r1] <- as.numeric(ADF(y[r1:r2], IC, adflag)) # two tail 5% significant level
+    }
+
+    bsadfs[r2, 1] <- max(unlist(rwadft))
+  }
+
+  bsadf <- bsadfs[swindow0:t]
+
+  return(bsadf)
+}

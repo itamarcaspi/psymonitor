@@ -1,0 +1,96 @@
+#' @title Conduct the new composite bootstrapping for the PSY test.
+#'
+#' @description  \code{wmboot} TBA
+#'
+#' @param y   A vector. The data.
+#' @param swindow0 minimum window size.
+#' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.
+#' @param adflag  A positive integer. Lag order when IC=0; maximum number of lags when IC>0.
+#' @param Tb A positive integer. The simulated sample size swindow0+ controlling.
+#' @param nboot A positive integer. Number of bootstrap replications.
+#'
+#' @return TBA
+#'
+#' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for multiple bubbles:
+#'   Historical episodes of exuberance and collapse in the S&P 500.
+#'   \emph{International Economic Review}, 56(4), 1034--1078.
+#'   Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles:
+#'   Limit Theory for Real-Time Detectors.
+#'   \emph{International Economic Review}, 56(4), 1079--1134.
+#'
+#' @export
+#'
+#' @import doParallel
+#' @import parallel
+#' @import foreach
+#'
+#' @examples
+#' \donttest{
+#' y <- rnorm(100)
+#' wmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb = 10, nboot = 99)
+#' }
+
+
+wmboot <- function(y, swindow0, IC, adflag, Tb, nboot) {
+  qe    <- as.matrix(c(0.90, 0.95, 0.99))
+  nboot <- nboot
+
+  result <- ADFres(y, IC, adflag)
+  beta   <- result[[1]]
+  eps    <- result[[2]]
+  lag    <- result[[3]]
+
+  T0 <- length(eps)
+  t  <- length(y)
+  dy <- as.matrix(y[2:t] - y[1:(t - 1)])
+
+  # The DGP
+  set.seed(101)
+  rN <- matrix(sample(1:T0, Tb * nboot, replace = TRUE), nrow = Tb, ncol = nboot)
+  wn <- matrix(rnorm(1), nrow = Tb, ncol = nboot)
+
+  dyb <- matrix(0, nrow = Tb - 1, ncol = nboot)
+  dyb[1:lag, ] <- rep(dy[1:lag], times = nboot)
+
+  for (j in 1:nboot) {
+    if (lag == 0) {
+      for (i in (lag + 1):(Tb - 1)) {
+        dyb[i, j] <- wn[i - lag, j] * eps[rN[i - lag, j]]
+      }
+    }
+    else if (lag > 0) {
+      x <- matrix(0, nrow = Tb - 1, ncol = lag)
+      for (i in (lag + 1):(Tb - 1)) {
+        x <- matrix(0, nrow = Tb - 1, ncol = lag)
+        for (k in 1:lag) {
+          x[i, (k)] <- dyb[(i - k), j]
+        }
+        dyb[i, j] <- x[i, ] %*% beta + wn[i - lag, j] * eps[rN[i - lag, j]]
+      }
+    }
+  }
+
+  yb0  <- rep(y[1], times = nboot)
+  dyb0 <- rbind(yb0, dyb)
+  yb   <- apply(dyb0, 2, cumsum)
+
+
+  # The PSY Test ------------------------------------------------------------
+
+  # setup parallel backend to use many processors
+  no_cores <- detectCores() - 1
+  cl       <- makeCluster(no_cores)
+  registerDoParallel(cl)
+
+  #----------------------------------
+  dim  <- Tb - swindow0 + 1
+  MPSY <- foreach(iter = 1:nboot, .combine = rbind, .export = c("PSY", "ADF")) %dopar% {
+    PSY(yb[, iter], swindow0, IC, adflag)
+  }
+  #----------------------------------
+  stopCluster(cl)
+
+  SPSY   <- as.matrix(apply(MPSY, 1, max))
+  Q_SPSY <- as.matrix(quantile(SPSY, qe))
+  return(Q_SPSY)
+}
