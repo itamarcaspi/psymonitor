@@ -5,8 +5,10 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
-
 # psymonitor <img src="man/figures/logo.png" align="right" height=140/>
+
+
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 The psymonitor provides an R implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms. This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.
 
