@@ -1,5 +1,5 @@
 ---
-title: "Illustration of the Real-Time Monitoring of Bubbles and Crisis"
+title: "Real-Time Monitoring of Bubbles: S&P 500"
 author:
 - affiliation: Yale University
   name: Peter C. B. Phillips
@@ -23,7 +23,7 @@ output:
 keywords: Bubbles, crisis, recursive evolving, consistency.
 theme: null
 abstract: While each financial crisis has its own characteristics, there is now widespread           recognition that crises arising sources such as financial speculation and                 excessive credit creation do inflict harm on the real economy. Detecting                  speculative market conditions and ballooning credit risk in real time is                  therefore of prime importance in the complex exercises of market surveillance,            risk management, and policy action. This chapter provides an R implementation of           the popular real-time monitoring strategy proposed by Phillips, Shi and Yu                (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the              potential impact of heteroskedasticity and to effect family-wise size control in           recursive testing algorithms. This methodology has been shown effective for               bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now             widely used by academic researchers, central bank economists, and fiscal                  regulators. We illustrate the effectiveness of this procedure with applications           to the S&P 500 financial market and the European sovereign debt sector using R.
-    
+
 ---
 <!--
 <link href="https://fonts.googleapis.com/css?family=Lato:300|Tangerine|Yantramanav:100" rel="stylesheet">
@@ -36,7 +36,7 @@ Before beginning the tutorial, make sure that you have all the necessary package
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE,
                       message = FALSE, comment = NA)
 
-# CRAN Packages 
+# CRAN Packages
 # -------------
 # If any of these packages are not installed, write
 # install.packages("<name of package>")
@@ -46,9 +46,6 @@ library(psymonitor)  # For testting for bubble monitoring
 library(ggfortify)   # For time-series plots
 
 ```
-
-
-# Example 1: The S&P 500 Market
 
 The S&P 500 stock market has been a central focus of attention in global
 financial markets due to the size of this market and its impact on other
@@ -150,7 +147,7 @@ The codes for generating the plot and shaded overlays in the figure are
 as follows:
 
 ```{r dateStampPlot, eval=FALSE, echo=FALSE, fig.width=5,fig.height=5,warning=FALSE}
-plot(date, y[swindow0:t], xlim=c(min(date),max(date)), 
+plot(date, y[swindow0:t], xlim=c(min(date),max(date)),
      ylim=c(0.1,7), xlab='', ylab='', type='l', lwd=3)
 
 for(i in 1:length(date)){
