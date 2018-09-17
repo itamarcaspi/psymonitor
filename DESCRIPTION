@@ -15,13 +15,13 @@ BugReports: https://github.com/itamarcaspi/psymonitor/issues
 Depends: 
     R (>= 2.10)
 Imports: 
-    doParallel,
+    doParallel (>= 1.0.11),
     parallel,
-    foreach (>= 1.4.4),
+    foreach (>= 1.4.4)
 Suggests: 
     testthat (>= 2.0.0),
-    knitr,
-    rmarkdown
+    knitr (>= 1.20),
+    rmarkdown (>= 1.10)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
