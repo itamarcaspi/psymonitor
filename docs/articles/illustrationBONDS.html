@@ -159,7 +159,7 @@
 <div id="real-time-monitoring" class="section level2">
 <h2 class="hasAnchor">
 <a href="#real-time-monitoring" class="anchor"></a>Real-Time Monitoring</h2>
-<p>With a training period of 47 observations, we start the pseudo real-time monitoring exercise from November 1976 onwards. The PSY test statistics are compared with the 95% bootstrapped critical value. The empirical size is controlled over a two-year period, i.e., by taking <span class="math inline">\(Tb = 24\)</span>. The lag order is selected by BIC with a maximum lag order of 6, applied to each subsample. The PSY statistic sequence and the corresponding bootstrap critical values can be calculated as follows in R:</p>
+<p>With a training period of 29 observations, we start the pseudo real-time monitoring exercise from October 1999 onwards. The PSY test statistics are compared with the 95% bootstrapped critical value. The empirical size is controlled over a two-year period, i.e., by taking <span class="math inline">\(Tb = 24\)</span>. The lag order is selected by BIC with a maximum lag order of 6, applied to each subsample. The PSY statistic sequence and the corresponding bootstrap critical values can be calculated as follows in R:</p>
 <p>First, we define the series and parameters that are used as inputs for the test procedure:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
@@ -170,7 +170,7 @@
 <a class="sourceLine" id="cb4-7" data-line-number="7">adflag   &lt;-<span class="st"> </span><span class="dv">6</span></a>
 <a class="sourceLine" id="cb4-8" data-line-number="8">yr       &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">199</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">9</span></a></code></pre></div>
 <p>Next, we run the test</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">Q_SPSY &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wmboot.html">wmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot)</a></code></pre></div>
@@ -195,7 +195,7 @@
 </tr>
 <tr class="even">
 <td align="left">2008-09-23</td>
-<td align="left">2009-03-23</td>
+<td align="left">2009-04-23</td>
 </tr>
 <tr class="odd">
 <td align="left">2010-05-23</td>

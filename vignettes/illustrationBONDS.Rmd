@@ -70,7 +70,7 @@ ggplot(spread, aes(date, value)) +
 
 ## Real-Time Monitoring
 
-With a training period of 47 observations, we start the pseudo real-time monitoring exercise from November 1976 onwards. The PSY test statistics are compared with the 95% bootstrapped critical value. The empirical size is controlled over a two-year period, i.e., by taking $Tb = 24$. The lag order is selected by BIC with a maximum lag order of 6, applied to each subsample. The PSY statistic sequence and the corresponding bootstrap critical values can be calculated as follows in R:
+With a training period of 29 observations, we start the pseudo real-time monitoring exercise from October 1999 onwards. The PSY test statistics are compared with the 95% bootstrapped critical value. The empirical size is controlled over a two-year period, i.e., by taking $Tb = 24$. The lag order is selected by BIC with a maximum lag order of 6, applied to each subsample. The PSY statistic sequence and the corresponding bootstrap critical values can be calculated as follows in R:
 
 First, we define the series and parameters that are used as inputs for the test procedure:
 
@@ -84,7 +84,7 @@ IC       <- 2
 adflag   <- 6
 yr       <- 2
 Tb       <- 12*yr + swindow0 - 1
-nboot    <- 199
+nboot    <- 9
 ```
 
 Next, we run the test
