@@ -1,4 +1,4 @@
-#' @title Return the ADF statistic
+#' @title Estimates the ADF statistic
 #'
 #' @description \code{ADFRcpp} calculates the augmented Dickey-Fuller (ADF) test
 #'   statistic with lag order set fixed or selected by AIC or BIC.

@@ -1,15 +1,21 @@
 #' @title Conduct the new composite bootstrapping for the PSY test.
 #'
-#' @description  \code{wmboot} TBA
+#' @description  \code{wmboot} implements the new bootstrap procedure designed
+#'   to detect bubbles and crisis periods whilw mitigating the potential impact
+#'   of heteroskedasticity and to effect family-wise size control in recursive
+#'   testing algorithms (Phillips and Shi, forthcoming).
 #'
 #' @param y   A vector. The data.
-#' @param swindow0 minimum window size.
-#' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.
+#' @param swindow0 A positive integer. Minimum window size (default = \eqn{t_0=T
+#'   (0.01 + 1.8/\sqrt{T})}, where \eqn{T} denotes the sample size),
+#' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
+#'   (default = 0).
 #' @param adflag  A positive integer. Lag order when IC=0; maximum number of
-#'   lags when IC>0.
-#' @param Tb A positive integer. The simulated sample size swindow0+
-#'   controlling.
-#' @param nboot A positive integer. Number of bootstrap replications.
+#'   lags when IC>0 (default = 0).
+#' @param Tb A positive integer. The simulated sample size (swindow0+
+#'   controlling).
+#' @param nboot A positive integer. Number of bootstrap replications (default =
+#'   199).
 #'
 #' @return TBA
 #'
@@ -21,7 +27,8 @@
 #'   Economic Review}, 56(4), 1079--1134.
 #' @references * Phillips, P. C. B., & Shi, S.(forthcoming). Real time
 #'   monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
-#'   C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics Using R}.
+#'   C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics
+#'   Using R}.
 #'
 #' @export
 #'
@@ -32,11 +39,11 @@
 #' @examples
 #' \donttest{
 #' y <- rnorm(100)
-#' wmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb = 10, nboot = 99)
+#' wmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb = 20, nboot = 99)
 #' }
 
 
-wmboot <- function(y, swindow0=NULL, IC=0, adflag=0, Tb=NULL, nboot=199) {
+wmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199) {
   qe    <- as.matrix(c(0.90, 0.95, 0.99))
   nboot <- nboot
 
@@ -49,6 +56,10 @@ wmboot <- function(y, swindow0=NULL, IC=0, adflag=0, Tb=NULL, nboot=199) {
   t  <- length(y)
   dy <- as.matrix(y[2:t] - y[1:(t - 1)])
   g  <- length(beta)
+
+  if (missing(swindow0)) {
+    swindow0 <- floor(t * (0.01 + 1.8 / sqrt(t)))
+  }
 
   # The DGP
   set.seed(101)

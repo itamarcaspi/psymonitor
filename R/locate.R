@@ -1,6 +1,6 @@
-#' @title Locate periods with non-zero bubble indicator
+#' @title Locate bubble/crisis periods
 #'
-#' @description
+#' @description \code{locate} locate bubble/crisis periods with non-zero bubble indicator
 #'
 #' @param ind A vector. A dummy variable that equals 1 for a bubble/crisis
 #'   period and 0 otherwise.
@@ -10,10 +10,14 @@
 #'
 #' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
 #'   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
-#'   500. \emph{International Economic Review}, 56(4), 1034--1078. Phillips, P.
-#'   C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
-#'   Theory for Real-Time Detectors. \emph{International Economic Review},
-#'   56(4), 1079--1134.
+#'   500. \emph{International Economic Review}, 56(4), 1034--1078.
+#' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for
+#'   multiple bubbles: Limit Theory for Real-Time Detectors. \emph{International
+#'   Economic Review}, 56(4), 1079--1134.
+#' @references * Phillips, P. C. B., & Shi, S.(forthcoming). Real time
+#'   monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
+#'   C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics
+#'   Using R}.
 #'
 #' @export
 #'
