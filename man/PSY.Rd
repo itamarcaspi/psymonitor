@@ -4,17 +4,18 @@
 \alias{PSY}
 \title{Estimate the PSY statistic sequence}
 \usage{
-PSY(y, swindow0, IC, adflag)
+PSY(y, swindow0, IC = 0, adflag = 0)
 }
 \arguments{
 \item{y}{A vector. The data.}
 
 \item{swindow0}{A positive integer. Minimum window size.}
 
-\item{IC}{A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.}
+\item{IC}{A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
+(default = 0).}
 
 \item{adflag}{A positive integer, lag order when IC=0; maximum number of
-lags when IC>0.}
+lags when IC>0 (default = 0).}
 }
 \value{
 Vector, BSADF test statistic.
@@ -32,8 +33,9 @@ BSADF <- PSY(y,  swindow0 = 90, IC = 0, adflag = 1)
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
-  500. \emph{International Economic Review}, 56(4), 1034--1078. Phillips, P.
-  C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
+  500. \emph{International Economic Review}, 56(4), 1034--1078.
+
+Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
   Theory for Real-Time Detectors. \emph{International Economic Review},
   56(4), 1079--1134.
 }

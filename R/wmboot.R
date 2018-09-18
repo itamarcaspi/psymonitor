@@ -5,18 +5,23 @@
 #' @param y   A vector. The data.
 #' @param swindow0 minimum window size.
 #' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.
-#' @param adflag  A positive integer. Lag order when IC=0; maximum number of lags when IC>0.
-#' @param Tb A positive integer. The simulated sample size swindow0+ controlling.
+#' @param adflag  A positive integer. Lag order when IC=0; maximum number of
+#'   lags when IC>0.
+#' @param Tb A positive integer. The simulated sample size swindow0+
+#'   controlling.
 #' @param nboot A positive integer. Number of bootstrap replications.
 #'
 #' @return TBA
 #'
-#' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for multiple bubbles:
-#'   Historical episodes of exuberance and collapse in the S&P 500.
-#'   \emph{International Economic Review}, 56(4), 1034--1078.
-#'   Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles:
-#'   Limit Theory for Real-Time Detectors.
-#'   \emph{International Economic Review}, 56(4), 1079--1134.
+#' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
+#'   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
+#'   500. \emph{International Economic Review}, 56(4), 1034--1078.
+#' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for
+#'   multiple bubbles: Limit Theory for Real-Time Detectors. \emph{International
+#'   Economic Review}, 56(4), 1079--1134.
+#' @references * Phillips, P. C. B., & Shi, S.(forthcoming). Real time
+#'   monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
+#'   C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics Using R}.
 #'
 #' @export
 #'
@@ -31,7 +36,7 @@
 #' }
 
 
-wmboot <- function(y, swindow0, IC, adflag, Tb, nboot) {
+wmboot <- function(y, swindow0=NULL, IC=0, adflag=0, Tb=NULL, nboot=199) {
   qe    <- as.matrix(c(0.90, 0.95, 0.99))
   nboot <- nboot
 
@@ -43,6 +48,7 @@ wmboot <- function(y, swindow0, IC, adflag, Tb, nboot) {
   T0 <- length(eps)
   t  <- length(y)
   dy <- as.matrix(y[2:t] - y[1:(t - 1)])
+  g  <- length(beta)
 
   # The DGP
   set.seed(101)
@@ -65,7 +71,7 @@ wmboot <- function(y, swindow0, IC, adflag, Tb, nboot) {
         for (k in 1:lag) {
           x[i, (k)] <- dyb[(i - k), j]
         }
-        dyb[i, j] <- x[i, ] %*% beta + wn[i - lag, j] * eps[rN[i - lag, j]]
+        dyb[i, j] <- x[i, ] %*% beta[2:g, 1] + wn[i - lag, j] * eps[rN[i - lag, j]]
       }
     }
   }
@@ -84,7 +90,7 @@ wmboot <- function(y, swindow0, IC, adflag, Tb, nboot) {
 
   #----------------------------------
   dim  <- Tb - swindow0 + 1
-  MPSY <- foreach(iter = 1:nboot, .combine = rbind, .export = c("PSY", "ADF")) %dopar% {
+  MPSY <- foreach(iter = 1:nboot, .combine = rbind) %dopar% {
     PSY(yb[, iter], swindow0, IC, adflag)
   }
   #----------------------------------

@@ -1,6 +1,6 @@
 #' @title Return the ADF statistic
 #'
-#' @description \code{ADF} calculates the augmented Dickey-Fuller (ADF) test
+#' @description \code{ADFRcpp} calculates the augmented Dickey-Fuller (ADF) test
 #'   statistic with lag order set fixed or selected by AIC or BIC.
 #'
 #' @param y   A vector, The data.
@@ -14,8 +14,7 @@
 #' @references Said, S. E., & Dickey, D. A. (1984). Testing for Unit Roots in
 #'   ARMA Models of Unknown Order. \emph{Biometrika}, 71(1984), 599--607.
 #'
-#' @export
-#'
+#' @importFrom RcppEigen fastLmPure
 #'
 #' @examples
 #' \donttest{
@@ -23,7 +22,7 @@
 #' ADFstat <- ADF(y,  IC = 0, adflag = 1)
 #' }
 
-ADF <- function(y, IC=0, adflag=0) {
+ADFRcpp <- function(y, IC=0, adflag=0) {
   T0    <- length(y)
   T1    <- length(y) - 1
   const <- rep(1,T1)
@@ -51,18 +50,19 @@ ADF <- function(y, IC=0, adflag=0) {
       } else x2 <- xx
 
       # OLS regression
-      beta <- solve(t(x2) %*% x2) %*% (t(x2) %*% dy01)   #@-model A-@ ### need work
-      eps  <- dy01 - x2 %*% beta
+      result <- RcppEigen::fastLmPure(x2, dy01)
+      beta   <- result$coefficients   #@-model A-@ ### need work
+      eps    <- dy01 - x2 %*% beta
       # Information Criteria
       npdf <- sum(-1/2*log(2*pi) - 1/2*(eps^2))
       if (IC == 1) {       #@ AIC @
-        ICC[k + 1,] <- -2*npdf/t + 2*nrow(beta)/t
+        ICC[k + 1,] <- -2*npdf/t + 2*length(beta)/t
       } else if (IC == 2) {  #@ BIC @
-        ICC[k + 1,] <- -2*npdf/t + nrow(beta)*log(t)/t
+        ICC[k + 1,] <- -2*npdf/t + length(beta)*log(t)/t
       }
       se <- t(eps) %*% eps/dof
-      sig <- sqrt(diag(matrix(se,nrow(beta),nrow(beta))*solve(t(x2) %*% x2)))
-      ADF[k + 1,] <- beta[1,]/sig[1]
+      sig <- sqrt(diag(matrix(se,length(beta),length(beta))*solve(t(x2) %*% x2)))
+      ADF[k + 1,] <- beta[1]/sig[1]
     }
     lag0 <- which.min(ICC)
     ADFlag <- ADF[lag0,]
@@ -80,11 +80,8 @@ ADF <- function(y, IC=0, adflag=0) {
     } else x2 <- xx
 
     # OLS regression
-    beta <- solve(t(x2) %*% x2) %*% (t(x2) %*% dy01)   #@-model A-@
-    eps <- dy01 - x2 %*% beta
-    se <- t(eps) %*% eps/dof
-    sig <- sqrt(diag(matrix(se,nrow(beta),nrow(beta))*solve(t(x2) %*% x2)))
-    ADFlag <- beta[1,]/sig[1]
+    result <- fastLmPure(x2, dy01)
+    ADFlag <- result$coefficients[[1]]/result$se[[1]]
   }
 
   if (IC == 0) {

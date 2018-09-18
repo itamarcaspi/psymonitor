@@ -85,36 +85,137 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      In this tutorial we illustrate the effectiveness of the PSY procedure in detecting crisis with an applications to theThe European Sovereign Sector using R and the <em>psymonitor</em> package.
+      In this tutorial we illustrate the effectiveness of the PSY procedure in detecting crisis with an applications to the European Sovereign Sector using R and the <em>psymonitor</em> package.
     </div>
     
+<div id="setup" class="section level2">
+<h2 class="hasAnchor">
+<a href="#setup" class="anchor"></a>Setup</h2>
 <p>Before beginning the tutorial, make sure that you have all the necessary packages. Try running the cell below and, if any issues arise, follow the instructions within.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">                      <span class="dt">message =</span> <span class="ot">FALSE</span>, <span class="dt">comment =</span> <span class="ot">NA</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># CRAN Packages</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># CRAN Packages </span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># -------------</span></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co"># If any of these packages are not installed, write</span></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co"># install.packages("&lt;name of package&gt;")</span></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># e.g., install.packages("MultipleBubbles")</span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">library</span>(psymonitor)  <span class="co"># For testting for bubble monitoring</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">library</span>(ggfortify)   <span class="co"># For time-series plots</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">library</span>(tidyverse)   <span class="co"># To handle data</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">library</span>(lubridate)   <span class="co"># To handle dates</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="kw">library</span>(knitr)       <span class="co"># for tables</span></a></code></pre></div>
+</div>
+<div id="the-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-data" class="anchor"></a>The Data</h2>
 <p>The European sovereign debt sector experienced an extremely turbulent period over the last decade, which caused significant harm to the real economy (Acharya et al., 2018) and led to an unprecedented level of unemployment (Karafolas and Alexandrakis, 2015). The PSY detection algorithm can serve as a useful early warning mechanism for escalating credit risk, which is acknowledged as a leading indicator of financial and economic crises, and thereby enable timely policy action and effective risk management to avert more serious economic damage. To show the potential efficacy of this early warning system, we conduct a pseudo monitoring exercise of credit risk in the European sovereign sector.</p>
 <p>Credit risk in the European sovereign sector is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland, Italy, Greece, and Portugal) countries.5 The PSY strategy is applied to the spread between the GIIPS bond yield index and the 10-year government bond yield of Germany (used as a proxy for a prevailing benchmark of economic fundamentals). The sample data runs from June 1997 to June 2016 and was downloaded from <em>Datastream International</em>. The GDP data are downloaded quarterly and converted to a monthly frequency by assuming a constant value within each quarter.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(spread)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(spread)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">spread <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">dmy</span>(date)) -&gt;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span>spread</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">kable</span>(<span class="kw">head</span>(spread))</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">date</th>
+<th align="right">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1997-06-23</td>
+<td align="right">1.2225196</td>
+</tr>
+<tr class="even">
+<td align="left">1997-07-23</td>
+<td align="right">1.0259384</td>
+</tr>
+<tr class="odd">
+<td align="left">1997-08-23</td>
+<td align="right">1.0510309</td>
+</tr>
+<tr class="even">
+<td align="left">1997-09-23</td>
+<td align="right">0.8448181</td>
+</tr>
+<tr class="odd">
+<td align="left">1997-10-23</td>
+<td align="right">0.7406163</td>
+</tr>
+<tr class="even">
+<td align="left">1997-11-23</td>
+<td align="right">0.7833504</td>
+</tr>
+</tbody>
+</table>
 <p>Figure 3 plots the bond yield spread over the sample period. The bond yield index experienced a rapid and substantial rise between 2008-2009. It continued to mount to historical highs from 2010 onwards and peaked in June 2012. The bond yield index has dropped since then and becomes relatively stable over the last two years. The codes for implementing the PSY procedure are identical to those for Example 1. The estimated start and end dates of the crisis episodes are displayed below.</p>
-<p><img src="illustrationBONDS_files/figure-html/plotSpread-1.png" width="480"></p>
-<p>The shaded areas in Figure 3 are the identified periods of crisis obtained using the 95% bootstrap critical values. The first alarm signal of risk appeared in March 2008 and lasts for one month. The alarm was triggered again after the collapse of Lehman Brothers in October 2008 and turns off in March 2009. The stress indicator switched on again in May 2010 and lasted until August 2012.</p>
-<p>Figure 3: Crisis episodes in the European sovereign sector. The solid line is the 10-year government bond yield spread between the PIIGS countries and Germany and the shaded areas are the periods where the PSY statistic exceeds its 95% bootstrap critical value.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">ggplot</span>(spread, <span class="kw">aes</span>(date, value)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Figure 1: Credit Risk in the European Sovereign Sector"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Index"</span>)</a></code></pre></div>
+<p><img src="illustrationBONDS_files/figure-html/plotSpread-1.png" width="768"></p>
+</div>
+<div id="real-time-monitoring" class="section level2">
+<h2 class="hasAnchor">
+<a href="#real-time-monitoring" class="anchor"></a>Real-Time Monitoring</h2>
+<p>With a training period of 47 observations, we start the pseudo real-time monitoring exercise from November 1976 onwards. The PSY test statistics are compared with the 95% bootstrapped critical value. The empirical size is controlled over a two-year period, i.e., by taking <span class="math inline">\(Tb = 24\)</span>. The lag order is selected by BIC with a maximum lag order of 6, applied to each subsample. The PSY statistic sequence and the corresponding bootstrap critical values can be calculated as follows in R:</p>
+<p>First, we define the series and parameters that are used as inputs for the test procedure:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">r0       &lt;-<span class="st"> </span><span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span><span class="op">/</span><span class="kw">sqrt</span>(obs)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(r0<span class="op">*</span>obs)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">dim      &lt;-<span class="st"> </span>obs <span class="op">-</span><span class="st"> </span>swindow0 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">IC       &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">adflag   &lt;-<span class="st"> </span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">yr       &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">199</span></a></code></pre></div>
+<p>Next, we run the test</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">Q_SPSY &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wmboot.html">wmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot)</a></code></pre></div>
+<p>The identified origination and termination dates can be calculated and viewed with the following commands:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">date  &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">Q_PSY &lt;-<span class="st"> </span>Q_SPSY <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">ind95 &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(Q_PSY[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">OT    &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, date)</a></code></pre></div>
+<p>and printed out using the <em>disp</em> function</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(OT)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(bubbleDates, <span class="dt">caption =</span> <span class="st">"Crisis Periods in the European Soevereign Debt Market"</span>)</a></code></pre></div>
+<table class="table">
+<caption>Crisis Periods in the European Soevereign Debt Market</caption>
+<thead><tr class="header">
+<th align="left">start</th>
+<th align="left">end</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2008-03-23</td>
+<td align="left">2008-03-23</td>
+</tr>
+<tr class="even">
+<td align="left">2008-09-23</td>
+<td align="left">2009-03-23</td>
+</tr>
+<tr class="odd">
+<td align="left">2010-05-23</td>
+<td align="left">2012-08-23</td>
+</tr>
+</tbody>
+</table>
+<p>The shaded areas in Figure 2 are the identified periods of crisis obtained using the 95% bootstrap critical values. The first alarm signal of risk appeared in March 2008 and lasts for one month. The alarm was triggered again after the collapse of Lehman Brothers in October 2008 and turns off in March 2009. The stress indicator switched on again in May 2010 and lasted until August 2012.</p>
+<p>The codes for generating the plot and shaded overlays in the figure are as follows:</p>
+<p><img src="illustrationBONDS_files/figure-html/dateStampPlot-1.png" width="768"></p>
 <hr>
+</div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <ul>
+<li>Phillips, P. C. B., &amp; Shi, S.(2017). Detecting financial collapse and ballooning sovereign risk. Cowles Foundation Discussion Paper No. 2110.</li>
+<li>Phillips, P. C. B., &amp; Shi, S.(forthcoming). Real time monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and C.R. Rao (Eds.), <em>Handbook of Statistics Volume 41 - Econometrics Using R</em>.</li>
 <li>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015a). Testing for multiple bubbles: Historical episodes of exuberance and collapse in the S&amp;P 500. <em>International Economic Review</em>, 56(4), 1034–1078.</li>
 <li>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015b). Testing for multiple bubbles: Limit Theory for Real-Time Detectors. <em>International Economic Review</em>, 56(4), 1079–1134.</li>
-<li>Phillips, P. C. B., &amp; Shi, S.(2017). Detecting financial collapse and ballooning sovereign risk. Cowles Foundation Discussion Paper No. 2110.</li>
 </ul>
 </div>
   </div>
@@ -124,7 +225,10 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#references">References</a></li>
+<li><a href="#setup">Setup</a></li>
+      <li><a href="#the-data">The Data</a></li>
+      <li><a href="#real-time-monitoring">Real-Time Monitoring</a></li>
+      <li><a href="#references">References</a></li>
       </ul>
 </div>
       </div>

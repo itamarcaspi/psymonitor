@@ -33,8 +33,9 @@ cv <- cvPSY(100,  swindow0 = 90, IC = 0, adflag = 1, nrep = 99)
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
-  500. \emph{International Economic Review}, 56(4), 1034--1078. Phillips, P.
-  C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
+  500. \emph{International Economic Review}, 56(4), 1034--1078.
+
+Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
   Theory for Real-Time Detectors. \emph{International Economic Review},
   56(4), 1079--1134.
 }

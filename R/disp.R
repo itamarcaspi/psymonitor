@@ -25,13 +25,20 @@
 disp <- function(OT) {
   t <- length(y)
   v <- nrow(OT)
-  rN <- sample(1:t, v, replace = T)
+  dateStamps <- data.frame(start = NULL, end = NULL)
+  rN <- sample(1:t, v, replace = TRUE)
   for (j in 1:v) {
     if (OT[j, 1] == OT[j, 2]) {
-      print(strtrim(OT[j, 1], 7))
+      newEntry <- data.frame(start = OT[j, 1],
+                             end = OT[j, 1])
+      dateStamps <- rbind(dateStamps, newEntry)
+
     } else {
-      strs <- c(strtrim(OT[j, 1], 7), strtrim(OT[j, 2], 7))
-      print(strs)
+      newEntry <- data.frame(start = OT[j, 1],
+                             end = OT[j, 2])
+      dateStamps <- rbind(dateStamps, newEntry)
+
     }
   }
+  dateStamps
 }

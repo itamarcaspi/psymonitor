@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Conduct the new composite bootstrapping for the PSY test. — wmboot • psymonitor</title>
+<title>Pipe operator — %&gt;% • psymonitor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Conduct the new composite bootstrapping for the PSY test. — wmboot" />
+<meta property="og:title" content="Pipe operator — %&gt;%" />
 
-<meta property="og:description" content="wmboot TBA" />
+<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -99,86 +99,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Conduct the new composite bootstrapping for the PSY test.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/itamarcaspi/psymonitor/blob/master/R/wmboot.R'><code>R/wmboot.R</code></a></small>
-    <div class="hidden name"><code>wmboot.Rd</code></div>
+    <h1>Pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/itamarcaspi/psymonitor/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>wmboot</code> TBA</p>
+    <p>See <code>magrittr::%&gt;%</code> for details.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wmboot</span>(<span class='no'>y</span>, <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>Tb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>199</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>y</th>
-      <td><p>A vector. The data.</p></td>
-    </tr>
-    <tr>
-      <th>swindow0</th>
-      <td><p>minimum window size.</p></td>
-    </tr>
-    <tr>
-      <th>IC</th>
-      <td><p>A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.</p></td>
-    </tr>
-    <tr>
-      <th>adflag</th>
-      <td><p>A positive integer. Lag order when IC=0; maximum number of
-lags when IC&gt;0.</p></td>
-    </tr>
-    <tr>
-      <th>Tb</th>
-      <td><p>A positive integer. The simulated sample size swindow0+
-controlling.</p></td>
-    </tr>
-    <tr>
-      <th>nboot</th>
-      <td><p>A positive integer. Number of bootstrap replications.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+        
 
-    <p>TBA</p>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015a). Testing for
-  multiple bubbles: Historical episodes of exuberance and collapse in the S&amp;P
-  500. <em>International Economic Review</em>, 56(4), 1034--1078.</p>
-<p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015b). Testing for
-  multiple bubbles: Limit Theory for Real-Time Detectors. <em>International
-  Economic Review</em>, 56(4), 1079--1134.</p>
-<p>* Phillips, P. C. B., &amp; Shi, S.(forthcoming). Real time
-  monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
-  C.R. Rao (Eds.), <em>Handbook of Statistics Volume 41 - Econometrics Using R</em>.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>)
-<span class='fu'>wmboot</span>(<span class='no'>y</span>,  <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Tb</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>99</span>)</div><div class='output co'>#&gt;           [,1]
-#&gt; 90% -0.1997547
-#&gt; 95%  0.4812963
-#&gt; 99%  0.8635790</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

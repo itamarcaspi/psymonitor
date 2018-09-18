@@ -4,11 +4,17 @@
 \name{psymonitor-package}
 \alias{psymonitor}
 \alias{psymonitor-package}
-\title{psymonitor: Real Time Monitoring of Bubbles and Crisis with R}
+\title{psymonitor: psymonitor: Real Time Monitoring of Bubbles and Crisis with R}
 \description{
 \if{html}{\figure{logo.png}{options: align='right'}}
 
-TBA
+The *psymonitor* package provides an R implementation of the popular real-time
+             monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new 
+             bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and
+             to effect family-wise size control in recursive testing algorithms (Phillips and Shi,
+             forthcoming). This methodology has been shown effective for bubble and crisis detection 
+             (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers,
+             central bank economists, and fiscal regulators.
 }
 \seealso{
 Useful links:

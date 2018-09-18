@@ -112,7 +112,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>ADF</span>(<span class='no'>y</span>, <span class='no'>IC</span>, <span class='no'>adflag</span>)</pre>
+    <pre class="usage"><span class='fu'>ADF</span>(<span class='no'>y</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -123,12 +123,13 @@
     </tr>
     <tr>
       <th>IC</th>
-      <td><p>A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.</p></td>
+      <td><p>A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
+(default = 0).</p></td>
     </tr>
     <tr>
       <th>adflag</th>
-      <td><p>A positive integer. Lag order when IC=0; maximum number of lags when
-IC&gt;0.</p></td>
+      <td><p>A positive integer. Lag order when IC=0; maximum number of
+lags when IC&gt;0 (default = 0).</p></td>
     </tr>
     </table>
     

@@ -1,0 +1,11 @@
+vers <- packageVersion("psymonitor")
+vers <- paste("R package version", vers)
+
+citHeader("To cite the psymonitor package in publications, please use:")
+
+bibentry(bibtype = "Manual",
+  title = "{psymonitor}: Real Time Monitoring of Asset Markets with R",
+  author = "Peter C.B. Phillips and Shuping Shi and Itamar Caspi",
+  year = 2018,
+  note = vers,
+  url = "https://itamarcaspi.github.io/psymonitor/")
