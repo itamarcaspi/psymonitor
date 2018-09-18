@@ -32,7 +32,10 @@
 
 <meta property="og:title" content="Conduct the new composite bootstrapping for the PSY test. — wmboot" />
 
-<meta property="og:description" content="wmboot TBA" />
+<meta property="og:description" content="wmboot implements the new bootstrap procedure designed
+  to detect bubbles and crisis periods whilw mitigating the potential impact
+  of heteroskedasticity and to effect family-wise size control in recursive
+  testing algorithms (Phillips and Shi, forthcoming)." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -106,12 +109,14 @@
 
     <div class="ref-description">
     
-    <p><code>wmboot</code> TBA</p>
+    <p><code>wmboot</code> implements the new bootstrap procedure designed
+  to detect bubbles and crisis periods whilw mitigating the potential impact
+  of heteroskedasticity and to effect family-wise size control in recursive
+  testing algorithms (Phillips and Shi, forthcoming).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wmboot</span>(<span class='no'>y</span>, <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>Tb</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>199</span>)</pre>
+    <pre class="usage"><span class='fu'>wmboot</span>(<span class='no'>y</span>, <span class='no'>swindow0</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>Tb</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>199</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -122,25 +127,28 @@
     </tr>
     <tr>
       <th>swindow0</th>
-      <td><p>minimum window size.</p></td>
+      <td><p>A positive integer. Minimum window size (default = \(T
+(0.01 + 1.8/\sqrt{T})\), where \(T\) denotes the sample size),</p></td>
     </tr>
     <tr>
       <th>IC</th>
-      <td><p>A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.</p></td>
+      <td><p>A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
+(default = 0).</p></td>
     </tr>
     <tr>
       <th>adflag</th>
       <td><p>A positive integer. Lag order when IC=0; maximum number of
-lags when IC&gt;0.</p></td>
+lags when IC&gt;0 (default = 0).</p></td>
     </tr>
     <tr>
       <th>Tb</th>
-      <td><p>A positive integer. The simulated sample size swindow0+
-controlling.</p></td>
+      <td><p>A positive integer. The simulated sample size (swindow0+
+controlling).</p></td>
     </tr>
     <tr>
       <th>nboot</th>
-      <td><p>A positive integer. Number of bootstrap replications.</p></td>
+      <td><p>A positive integer. Number of bootstrap replications (default =
+199).</p></td>
     </tr>
     </table>
     
@@ -158,15 +166,16 @@ controlling.</p></td>
   Economic Review</em>, 56(4), 1079--1134.</p>
 <p>* Phillips, P. C. B., &amp; Shi, S.(forthcoming). Real time
   monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
-  C.R. Rao (Eds.), <em>Handbook of Statistics Volume 41 - Econometrics Using R</em>.</p>
+  C.R. Rao (Eds.), <em>Handbook of Statistics Volume 41 - Econometrics
+  Using R</em>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>)
-<span class='fu'>wmboot</span>(<span class='no'>y</span>,  <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Tb</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>99</span>)</div><div class='output co'>#&gt;           [,1]
-#&gt; 90% -0.1997547
-#&gt; 95%  0.4812963
-#&gt; 99%  0.8635790</div></pre>
+<span class='fu'>wmboot</span>(<span class='no'>y</span>,  <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Tb</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>99</span>)</div><div class='output co'>#&gt;         [,1]
+#&gt; 90% 1.358302
+#&gt; 95% 1.704912
+#&gt; 99% 2.067460</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

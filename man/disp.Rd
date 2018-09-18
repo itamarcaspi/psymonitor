@@ -2,7 +2,7 @@
 % Please edit documentation in R/disp.R
 \name{disp}
 \alias{disp}
-\title{Display bubble/crisis periods}
+\title{Bubble/crisis periods data frame}
 \usage{
 disp(OT)
 }
@@ -14,7 +14,8 @@ disp(OT)
 A vector of strings with bubble/crisis periods.
 }
 \description{
-TBA
+\code{disp} generates a data.frame that holds bubble/crisis
+  periods identified by the PSY procedure
 }
 \examples{
 \donttest{
@@ -24,8 +25,14 @@ y  <- rnorm(100)
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
-  500. \emph{International Economic Review}, 56(4), 1034--1078. Phillips, P.
-  C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
-  Theory for Real-Time Detectors. \emph{International Economic Review},
-  56(4), 1079--1134.
+  500. \emph{International Economic Review}, 56(4), 1034--1078.
+
+Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for
+  multiple bubbles: Limit Theory for Real-Time Detectors. \emph{International
+  Economic Review}, 56(4), 1079--1134.
+
+* Phillips, P. C. B., & Shi, S.(forthcoming). Real time
+  monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
+  C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics
+  Using R}.
 }

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Estimate the PSY statistic sequence — PSY • psymonitor</title>
+<title>Estimate PSY's BSADF sequence of test statistics — PSY • psymonitor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Estimate the PSY statistic sequence — PSY" />
+<meta property="og:title" content="Estimate PSY's BSADF sequence of test statistics — PSY" />
 
 <meta property="og:description" content="PSY implements the real time bubble detection procedure
   of Phillips, Shi and Yu (2015a,b)" />
@@ -100,7 +100,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Estimate the PSY statistic sequence</h1>
+    <h1>Estimate PSY's BSADF sequence of test statistics</h1>
     <small class="dont-index">Source: <a href='https://github.com/itamarcaspi/psymonitor/blob/master/R/PSY.R'><code>R/PSY.R</code></a></small>
     <div class="hidden name"><code>PSY.Rd</code></div>
     </div>
@@ -123,7 +123,8 @@
     </tr>
     <tr>
       <th>swindow0</th>
-      <td><p>A positive integer. Minimum window size.</p></td>
+      <td><p>A positive integer. Minimum window size (default = \(T
+(0.01 + 1.8/\sqrt{T})\), where \(T\) denotes the sample size)</p></td>
     </tr>
     <tr>
       <th>IC</th>
@@ -146,9 +147,9 @@ lags when IC&gt;0 (default = 0).</p></td>
     <p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015a). Testing for
   multiple bubbles: Historical episodes of exuberance and collapse in the S&amp;P
   500. <em>International Economic Review</em>, 56(4), 1034--1078.</p>
-<p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015b). Testing for multiple bubbles: Limit
-  Theory for Real-Time Detectors. <em>International Economic Review</em>,
-  56(4), 1079--1134.</p>
+<p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015b). Testing for
+  multiple bubbles: Limit Theory for Real-Time Detectors. <em>International
+  Economic Review</em>, 56(4), 1079--1134.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

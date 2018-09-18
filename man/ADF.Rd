@@ -2,7 +2,7 @@
 % Please edit documentation in R/ADF.R
 \name{ADF}
 \alias{ADF}
-\title{Return the ADF statistic}
+\title{Estimate the ADF statistic}
 \usage{
 ADF(y, IC = 0, adflag = 0)
 }

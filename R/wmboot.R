@@ -6,7 +6,7 @@
 #'   testing algorithms (Phillips and Shi, forthcoming).
 #'
 #' @param y   A vector. The data.
-#' @param swindow0 A positive integer. Minimum window size (default = \eqn{t_0=T
+#' @param swindow0 A positive integer. Minimum window size (default = \eqn{T
 #'   (0.01 + 1.8/\sqrt{T})}, where \eqn{T} denotes the sample size),
 #' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
 #'   (default = 0).

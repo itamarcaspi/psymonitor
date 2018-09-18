@@ -2,7 +2,7 @@
 % Please edit documentation in R/locate.R
 \name{locate}
 \alias{locate}
-\title{Locate periods with non-zero bubble indicator}
+\title{Locate bubble/crisis periods}
 \usage{
 locate(ind, date)
 }
@@ -16,7 +16,7 @@ period and 0 otherwise.}
 A vector. Dates identified as bubbles or crisis.
 }
 \description{
-
+\code{locate} locate bubble/crisis periods with non-zero bubble indicator
 }
 \examples{
 \donttest{
@@ -26,8 +26,14 @@ y <- rnorm(100)
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
-  500. \emph{International Economic Review}, 56(4), 1034--1078. Phillips, P.
-  C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
-  Theory for Real-Time Detectors. \emph{International Economic Review},
-  56(4), 1079--1134.
+  500. \emph{International Economic Review}, 56(4), 1034--1078.
+
+Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for
+  multiple bubbles: Limit Theory for Real-Time Detectors. \emph{International
+  Economic Review}, 56(4), 1079--1134.
+
+* Phillips, P. C. B., & Shi, S.(forthcoming). Real time
+  monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
+  C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics
+  Using R}.
 }

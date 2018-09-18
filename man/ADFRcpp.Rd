@@ -2,7 +2,7 @@
 % Please edit documentation in R/ADFRcpp.R
 \name{ADFRcpp}
 \alias{ADFRcpp}
-\title{Return the ADF statistic}
+\title{Estimates the ADF statistic}
 \usage{
 ADFRcpp(y, IC = 0, adflag = 0)
 }

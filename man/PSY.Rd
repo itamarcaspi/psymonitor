@@ -2,14 +2,15 @@
 % Please edit documentation in R/PSY.R
 \name{PSY}
 \alias{PSY}
-\title{Estimate the PSY statistic sequence}
+\title{Estimate PSY's BSADF sequence of test statistics}
 \usage{
 PSY(y, swindow0, IC = 0, adflag = 0)
 }
 \arguments{
 \item{y}{A vector. The data.}
 
-\item{swindow0}{A positive integer. Minimum window size.}
+\item{swindow0}{A positive integer. Minimum window size (default = \eqn{T
+(0.01 + 1.8/\sqrt{T})}, where \eqn{T} denotes the sample size)}
 
 \item{IC}{A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
 (default = 0).}
@@ -35,7 +36,7 @@ Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
   500. \emph{International Economic Review}, 56(4), 1034--1078.
 
-Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
-  Theory for Real-Time Detectors. \emph{International Economic Review},
-  56(4), 1079--1134.
+Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for
+  multiple bubbles: Limit Theory for Real-Time Detectors. \emph{International
+  Economic Review}, 56(4), 1079--1134.
 }

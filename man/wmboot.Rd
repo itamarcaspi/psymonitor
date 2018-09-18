@@ -4,34 +4,39 @@
 \alias{wmboot}
 \title{Conduct the new composite bootstrapping for the PSY test.}
 \usage{
-wmboot(y, swindow0 = NULL, IC = 0, adflag = 0, Tb = NULL,
-  nboot = 199)
+wmboot(y, swindow0, IC = 0, adflag = 0, Tb, nboot = 199)
 }
 \arguments{
 \item{y}{A vector. The data.}
 
-\item{swindow0}{minimum window size.}
+\item{swindow0}{A positive integer. Minimum window size (default = \eqn{T
+(0.01 + 1.8/\sqrt{T})}, where \eqn{T} denotes the sample size),}
 
-\item{IC}{A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC.}
+\item{IC}{A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
+(default = 0).}
 
 \item{adflag}{A positive integer. Lag order when IC=0; maximum number of
-lags when IC>0.}
+lags when IC>0 (default = 0).}
 
-\item{Tb}{A positive integer. The simulated sample size swindow0+
-controlling.}
+\item{Tb}{A positive integer. The simulated sample size (swindow0+
+controlling).}
 
-\item{nboot}{A positive integer. Number of bootstrap replications.}
+\item{nboot}{A positive integer. Number of bootstrap replications (default =
+199).}
 }
 \value{
 TBA
 }
 \description{
-\code{wmboot} TBA
+\code{wmboot} implements the new bootstrap procedure designed
+  to detect bubbles and crisis periods whilw mitigating the potential impact
+  of heteroskedasticity and to effect family-wise size control in recursive
+  testing algorithms (Phillips and Shi, forthcoming).
 }
 \examples{
 \donttest{
 y <- rnorm(100)
-wmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb = 10, nboot = 99)
+wmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb = 20, nboot = 99)
 }
 }
 \references{
@@ -45,5 +50,6 @@ Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for
 
 * Phillips, P. C. B., & Shi, S.(forthcoming). Real time
   monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
-  C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics Using R}.
+  C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics
+  Using R}.
 }
