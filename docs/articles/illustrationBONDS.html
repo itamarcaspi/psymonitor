@@ -127,27 +127,27 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">1997-06-23</td>
+<td align="left">1997-06-01</td>
 <td align="right">1.2225196</td>
 </tr>
 <tr class="even">
-<td align="left">1997-07-23</td>
+<td align="left">1997-07-01</td>
 <td align="right">1.0259384</td>
 </tr>
 <tr class="odd">
-<td align="left">1997-08-23</td>
+<td align="left">1997-08-01</td>
 <td align="right">1.0510309</td>
 </tr>
 <tr class="even">
-<td align="left">1997-09-23</td>
+<td align="left">1997-09-01</td>
 <td align="right">0.8448181</td>
 </tr>
 <tr class="odd">
-<td align="left">1997-10-23</td>
+<td align="left">1997-10-01</td>
 <td align="right">0.7406163</td>
 </tr>
 <tr class="even">
-<td align="left">1997-11-23</td>
+<td align="left">1997-11-01</td>
 <td align="right">0.7833504</td>
 </tr>
 </tbody>
@@ -184,8 +184,8 @@
 <a class="sourceLine" id="cb6-3" data-line-number="3">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(Q_PSY[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">OT           &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, monitorDates)</a></code></pre></div>
 <p>and printed out using the <em>disp</em> function</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(OT)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(bubbleDates, <span class="dt">caption =</span> <span class="st">"Crisis Periods in the European Soevereign Debt Market"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">crisisDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(OT)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(crisisDates, <span class="dt">caption =</span> <span class="st">"Crisis Periods in the European Soevereign Debt Market"</span>)</a></code></pre></div>
 <table class="table">
 <caption>Crisis Periods in the European Soevereign Debt Market</caption>
 <thead><tr class="header">
@@ -194,23 +194,23 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2008-03-23</td>
-<td align="left">2008-03-23</td>
+<td align="left">2008-03-01</td>
+<td align="left">2008-03-01</td>
 </tr>
 <tr class="even">
-<td align="left">2008-09-23</td>
-<td align="left">2009-04-23</td>
+<td align="left">2008-09-01</td>
+<td align="left">2009-04-01</td>
 </tr>
 <tr class="odd">
-<td align="left">2010-05-23</td>
-<td align="left">2012-08-23</td>
+<td align="left">2010-05-01</td>
+<td align="left">2012-08-01</td>
 </tr>
 </tbody>
 </table>
 <p>The shaded areas in Figure 2 are the identified periods of crisis obtained using the 95% bootstrap critical values. The first alarm signal of risk appeared in March 2008 and lasts for one month. The alarm was triggered again after the collapse of Lehman Brothers in October 2008 and turns off in March 2009. The stress indicator switched on again in May 2010 and lasted until August 2012.</p>
 <p>The codes for generating the plot and shaded overlays in the figure are as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data =</span> bubbleDates, <span class="kw">aes</span>(<span class="dt">xmin =</span> start, <span class="dt">xmax =</span> end, </a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data =</span> crisisDates, <span class="kw">aes</span>(<span class="dt">xmin =</span> start, <span class="dt">xmax =</span> end, </a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">                              <span class="dt">ymin =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">ymax =</span> <span class="ot">Inf</span>), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> spread, <span class="kw">aes</span>(date, value)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Figure 2: Crisis episodes in the European Sovereign Sector"</span>,</a>
