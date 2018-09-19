@@ -4,7 +4,7 @@
 \name{spread}
 \alias{spread}
 \title{Credit risk in the European sovereign sector}
-\format{Time series data}
+\format{Data frame}
 \source{
 Datastream International.
 }
@@ -17,7 +17,7 @@ an index constructed as a GDP weighted 10-year government bond yield of the
 GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries.
 }
 \examples{
-plot(spread)
+head(spread)
 
 }
 \keyword{datasets}

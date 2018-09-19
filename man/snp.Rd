@@ -4,7 +4,7 @@
 \name{snp}
 \alias{snp}
 \title{S&P 500 price to dividend ratio}
-\format{Time series data}
+\format{Data frame}
 \source{
 Datastream International.
 }
@@ -15,7 +15,7 @@ snp
 S&P 500 price to dividend ratio: January 1973-- July 2017
 }
 \examples{
-plot(snp)
+head(snp)
 
 }
 \keyword{datasets}
