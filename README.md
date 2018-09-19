@@ -4,6 +4,8 @@
 # psymonitor <img src="man/figures/logo.png" align="right" height=139/>
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build
+status](https://travis-ci.org/itamarcaspi/psymonitor.svg?branch=master)](https://travis-ci.org/itamarcaspi/psymonitor)
 
 The *psymonitor* package provides an R implementation of the popular
 real-time monitoring strategy proposed by Phillips, Shi and Yu
