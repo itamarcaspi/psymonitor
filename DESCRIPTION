@@ -1,37 +1,49 @@
 Type: Package
 Package: psymonitor
-Title: psymonitor: Real Time Monitoring of Bubbles and Crisis with R
+Title: psymonitor: Real Time Monitoring of Bubbles and Crisis
+    with R
 Version: 0.0.0.9000
-Authors@R: c(
-    person("Peter", "C.B. Phillips", role = c("aut")),
-    person("Shuping", "Shi", role = c("aut")),
-    person("Itamar", "Caspi", email = "caspi.itamar@gmail.com", role = c("aut", "cre"))
-    )
-Description: The *psymonitor* package provides an R implementation of the popular real-time
-             monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new 
-             bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and
-             to effect family-wise size control in recursive testing algorithms (Phillips and Shi,
-             forthcoming). This methodology has been shown effective for bubble and crisis detection 
-             (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers,
-             central bank economists, and fiscal regulators.
+Authors@R: 
+    c(person(given = "Peter",
+             family = "C.B. Phillips",
+             role = "aut"),
+      person(given = "Shuping",
+             family = "Shi",
+             role = "aut"),
+      person(given = "Itamar",
+             family = "Caspi",
+             role = c("aut", "cre"),
+             email = "caspi.itamar@gmail.com"))
+Description: The *psymonitor* package provides an R
+    implementation of the popular real-time monitoring strategy proposed
+    by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap
+    procedure designed to mitigate the potential impact of
+    heteroskedasticity and to effect family-wise size control in recursive
+    testing algorithms (Phillips and Shi, forthcoming). This methodology
+    has been shown effective for bubble and crisis detection (PSY,
+    2015a,b; Phillips and Shi, 2017) and is now widely used by academic
+    researchers, central bank economists, and fiscal regulators.
 License: GPL-3
-Language: en-US
 URL: https://github.com/itamarcaspi/psymonitor
 BugReports: https://github.com/itamarcaspi/psymonitor/issues
 Depends: 
     R (>= 2.10)
 Imports: 
     doParallel (>= 1.0.11),
-    parallel,
     foreach (>= 1.4.4),
-    RcppEigen (>= 0.3.3.4.0),
-    magrittr
+    magrittr,
+    parallel,
+    RcppEigen (>= 0.3.3.4.0)
 Suggests: 
-    testthat (>= 2.0.0),
     knitr (>= 1.20),
+    lubridate,
     rmarkdown (>= 1.10),
-    spelling
+    spelling,
+    testthat (>= 2.0.0),
+    tidyverse
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 RoxygenNote: 6.1.0
-VignetteBuilder: knitr
