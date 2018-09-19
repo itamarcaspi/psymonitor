@@ -25,10 +25,9 @@ navbar:
 
 reference:
   - title: "Test statistics"
-    desc: "Function to estimate the ADF/SADF/GSADF test statstics"
+    desc: "Function to estimate the PSY test statistics"
     contents:
       - ADF
-      - ADFres
       - PSY
   - title: "Monitoring"
     desc: "Functions for real-time monitiring of asset markets"
