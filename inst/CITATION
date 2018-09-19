@@ -5,7 +5,7 @@ citHeader("To cite the psymonitor package in publications, please use:")
 
 bibentry(bibtype = "Manual",
   title = "{psymonitor}: Real Time Monitoring of Asset Markets with R",
-  author = "Caspi, Itamar and Phillips, Peter C B and Shi, Shuping",
+  author = "Itamar Caspi and Peter C. B. Phillips and Shuping Shi",
   year = 2018,
   note = vers,
   url = "https://itamarcaspi.github.io/psymonitor/")
