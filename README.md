@@ -18,7 +18,7 @@ regulators.
 ## Installation
 
 You can install the **development** version from
-[Github](https://github.com/itamarcaspi/psymonitor/)
+[GitHub](https://github.com/itamarcaspi/psymonitor/)
 
 ``` r
 # install.packages("devtools")
