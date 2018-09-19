@@ -112,8 +112,8 @@ OT           <- locate(ind95, monitorDates)
 and printed out using the *disp* function
 
 ```{r printResults, include=TRUE, message=FALSE, warning=FALSE, results = 'asis'}
-bubbleDates <- disp(OT)
-kable(bubbleDates, caption = "Crisis Periods in the European Soevereign Debt Market")
+crisisDates <- disp(OT)
+kable(crisisDates, caption = "Crisis Periods in the European Soevereign Debt Market")
 ```
 
 The shaded areas in Figure 2 are the identified periods of crisis obtained using the 95% bootstrap critical values. The first alarm signal of risk appeared in March 2008 and lasts for one month. The alarm was triggered again after the collapse of Lehman Brothers in October 2008 and turns off in March 2009. The stress indicator switched on again in May 2010 and lasted until August 2012.
@@ -124,7 +124,7 @@ as follows:
 ```{r dateStampPlot, fig.width=8,fig.height=5,include=TRUE, message=FALSE, warning=FALSE}
 
 ggplot() + 
-  geom_rect(data = bubbleDates, aes(xmin = start, xmax = end, 
+  geom_rect(data = crisisDates, aes(xmin = start, xmax = end, 
                               ymin = -Inf, ymax = Inf), alpha = 0.5) + 
   geom_line(data = spread, aes(date, value)) +
   labs(title = "Figure 2: Crisis episodes in the European Sovereign Sector",
