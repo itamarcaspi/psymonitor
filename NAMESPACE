@@ -2,7 +2,6 @@
 
 export("%>%")
 export(ADF)
-export(ADFres)
 export(PSY)
 export(cvPSY)
 export(disp)
