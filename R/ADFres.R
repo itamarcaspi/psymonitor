@@ -16,7 +16,6 @@
 #'   Limit Theory for Real-Time Detectors.
 #'   \emph{International Economic Review}, 56(4), 1079--1134.
 #'
-#' @export
 #'
 #' @examples
 #' \donttest{
