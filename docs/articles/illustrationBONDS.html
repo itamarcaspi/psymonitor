@@ -68,19 +68,23 @@
       <h1>Real-Time Monitoring of Crisis: The European Sovereign Sector</h1>
                         <h4 class="author">Peter C. B. Phillips</h4>
             <address class="author_afil">
-      Yale University<br><h4 class="author">Shuping Shi</h4>
+      Yale University<br><a class="author_email" href="mailto:#"></a><a href="mailto:peter.phillips@yale.edu">peter.phillips@yale.edu</a>
+      </address>
+                              <h4 class="author">Shuping Shi</h4>
             <address class="author_afil">
-      Macquarie University<br><h4 class="author">Itamar Caspi</h4>
+      Macquarie University<br><a class="author_email" href="mailto:#"></a><a href="mailto:shuping.shi@mq.edu.au">shuping.shi@mq.edu.au</a>
+      </address>
+                              <h4 class="author">Itamar Caspi</h4>
             <address class="author_afil">
-      Bank of Israel and Bar-Illan University<br><h4 class="date">October, 2018</h4>
+      Bank of Israel and Bar-Illan University<br><a class="author_email" href="mailto:#"></a><a href="mailto:caspi.itamar@gmail.com">caspi.itamar@gmail.com</a>
+      </address>
+                  
+            <h4 class="date">October, 2018</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/itamarcaspi/psymonitor/blob/master/vignettes/illustrationBONDS.Rmd"><code>vignettes/illustrationBONDS.Rmd</code></a></small>
       <div class="hidden name"><code>illustrationBONDS.Rmd</code></div>
 
-    </address>
-</address>
-</address>
-</div>
+    </div>
 
     
         <div class="abstract">
@@ -175,10 +179,10 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">Q_SPSY &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wmboot.html">wmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot)</a></code></pre></div>
 <p>The identified origination and termination dates can be calculated and viewed with the following commands:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">date  &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">Q_PSY &lt;-<span class="st"> </span>Q_SPSY <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">ind95 &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(Q_PSY[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">OT    &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, date)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">Q_PSY        &lt;-<span class="st"> </span>Q_SPSY <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(Q_PSY[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">OT           &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, monitorDates)</a></code></pre></div>
 <p>and printed out using the <em>disp</em> function</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(OT)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(bubbleDates, <span class="dt">caption =</span> <span class="st">"Crisis Periods in the European Soevereign Debt Market"</span>)</a></code></pre></div>
@@ -205,6 +209,14 @@
 </table>
 <p>The shaded areas in Figure 2 are the identified periods of crisis obtained using the 95% bootstrap critical values. The first alarm signal of risk appeared in March 2008 and lasts for one month. The alarm was triggered again after the collapse of Lehman Brothers in October 2008 and turns off in March 2009. The stress indicator switched on again in May 2010 and lasted until August 2012.</p>
 <p>The codes for generating the plot and shaded overlays in the figure are as follows:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data =</span> bubbleDates, <span class="kw">aes</span>(<span class="dt">xmin =</span> start, <span class="dt">xmax =</span> end, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                              <span class="dt">ymin =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">ymax =</span> <span class="ot">Inf</span>), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> spread, <span class="kw">aes</span>(date, value)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Figure 2: Crisis episodes in the European Sovereign Sector"</span>,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">       <span class="dt">subtitle =</span> <span class="st">"June 1997 - June 2016"</span>,</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">       <span class="dt">caption =</span> <span class="st">"Notes: The solid line is the 10-year government bond yield spread between the PIIGS countries and Germany and the shaded areas are the periods where the PSY statistic exceeds its 95% bootstrap critical value."</span>, </a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">       <span class="dt">x =</span> <span class="st">"Year"</span>, <span class="dt">y =</span> <span class="st">"Index"</span>) </a></code></pre></div>
 <p><img src="illustrationBONDS_files/figure-html/dateStampPlot-1.png" width="768"></p>
 <hr>
 </div>

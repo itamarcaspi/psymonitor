@@ -68,24 +68,28 @@
       <h1>Real-Time Monitoring of Bubbles: The S&amp;P 500</h1>
                         <h4 class="author">Peter C. B. Phillips</h4>
             <address class="author_afil">
-      Yale University<br><h4 class="author">Shuping Shi</h4>
+      Yale University<br><a class="author_email" href="mailto:#"></a><a href="mailto:peter.phillips@yale.edu">peter.phillips@yale.edu</a>
+      </address>
+                              <h4 class="author">Shuping Shi</h4>
             <address class="author_afil">
-      Macquarie University<br><h4 class="author">Itamar Caspi</h4>
+      Macquarie University<br><a class="author_email" href="mailto:#"></a><a href="mailto:shuping.shi@mq.edu.au">shuping.shi@mq.edu.au</a>
+      </address>
+                              <h4 class="author">Itamar Caspi</h4>
             <address class="author_afil">
-      Bank of Israel and Bar-Illan University<br><h4 class="date">October, 2018</h4>
+      Bank of Israel and Bar-Illan University<br><a class="author_email" href="mailto:#"></a><a href="mailto:caspi.itamar@gmail.com">caspi.itamar@gmail.com</a>
+      </address>
+                  
+            <h4 class="date">October, 2018</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/itamarcaspi/psymonitor/blob/master/vignettes/illustrationSNP.Rmd"><code>vignettes/illustrationSNP.Rmd</code></a></small>
       <div class="hidden name"><code>illustrationSNP.Rmd</code></div>
 
-    </address>
-</address>
-</address>
-</div>
+    </div>
 
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      In this tutorial we illustrate the effectiveness of the PSY procedure in detecting bubbles with an applications to the S&amp;P 500 financial market using R and the <em>psymonitor</em> package.
+      <p>In this tutorial we illustrate the effectiveness of the PSY procedure in detecting bubbles with an applications to the S&amp;P 500 financial market using R and the <em>psymonitor</em> package.</p>
     </div>
     
 <div id="setup" class="section level2">
@@ -145,10 +149,10 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">Q_SPSY &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wmboot.html">wmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot)</a></code></pre></div>
 <p>The identified origination and termination dates can be calculated and viewed with the following commands:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">date  &lt;-<span class="st"> </span>snp<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">Q_PSY &lt;-<span class="st"> </span>Q_SPSY <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">ind95 &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(Q_PSY[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">OT    &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, date)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">monitorDates  &lt;-<span class="st"> </span>snp<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">Q_PSY         &lt;-<span class="st"> </span>Q_SPSY <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">ind95         &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(Q_PSY[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">OT            &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, monitorDates)</a></code></pre></div>
 <p>and printed out using the <em>disp</em> function</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(OT)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(bubbleDates, <span class="dt">caption =</span> <span class="st">"Bubble and Crisis Periods in the S&amp;P 500"</span>)</a></code></pre></div>
@@ -203,6 +207,16 @@
 </table>
 <p>Identified periods that last more than a month are shaded in Figure 2. As is evident in the figure, the procedure detects two bubble episode and one crisis episode. The first bubble episode only lasts for two months (1986M06 and 1987M08) and occurred before the Black Monday crash on October 1987. The second bubble episode is the well-known dot-com bubble, starting from January 1996 and terminating in October 2000 (with several breaks in between). For the dot-com bubble episode the identified starting date for market exuberance occurs well before the speech of the former chairman of the Federal Reserve Bank Alan Greenspan in December 1996 where the now famous question `how do we know when irrational exuberance has unduly escalated asset values’ was posed to the audience and financial world. The identified subprime mortgage crisis starts in October 2008, which is one month after the collapse of Lehman Brothers, and terminates in February 2009.</p>
 <p>The codes for generating the plot and shaded overlays in the figure are as follows:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data =</span> bubbleDates, <span class="kw">aes</span>(<span class="dt">xmin =</span> start, <span class="dt">xmax =</span> end, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                              <span class="dt">ymin =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">ymax =</span> <span class="ot">Inf</span>), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> snp, <span class="kw">aes</span>(date, pd)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Figure 2: S&amp;P 500 Price-to-Dividend Ratio"</span>,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">       <span class="dt">subtitle =</span> <span class="st">"January 1973 - July 2018"</span>,</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">       <span class="dt">caption =</span> <span class="st">"Notes: The solid</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">line is the price-to-dividend ratio and the shaded areas are the periods where</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">the PSY statistic exceeds its 95% bootstrapped critical value."</span>, </a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">       <span class="dt">x =</span> <span class="st">"Year"</span>, <span class="dt">y =</span> <span class="st">"Ratio"</span>) </a></code></pre></div>
 <p><img src="illustrationSNP_files/figure-html/dateStampPlot-1.png" width="768"></p>
 <hr>
 </div>

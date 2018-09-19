@@ -3,10 +3,13 @@ title: "Real-Time Monitoring of Bubbles: The S&P 500"
 author:
 - affiliation: Yale University
   name: Peter C. B. Phillips
+  email: peter.phillips@yale.edu
 - affiliation: Macquarie University
   name: Shuping Shi
+  email: shuping.shi@mq.edu.au
 - affiliation: Bank of Israel and Bar-Illan University
-  name: Itamar Caspi
+  name: Itamar Caspi  
+  email: caspi.itamar@gmail.com
 
 date: "October, 2018"
 output: rmarkdown::html_vignette
@@ -16,7 +19,8 @@ vignette: >
   \usepackage[utf8]{inputenc}
 keywords: Bubbles, crisis, recursive evolving, consistency.
 theme: null
-abstract: In this tutorial we illustrate the effectiveness of the PSY procedure in                  detecting bubbles with an applications to the S&P 500 financial market using R            and the *psymonitor* package.
+abstract: |
+  In this tutorial we illustrate the effectiveness of the PSY procedure in                  detecting bubbles with an applications to the S&P 500 financial market using R            and the *psymonitor* package.
     
 ---
 
@@ -117,10 +121,10 @@ The identified origination and termination dates can be calculated and
 viewed with the following commands:
 
 ```{r dateStamp, include=TRUE, message=FALSE, warning=FALSE}
-date  <- snp$date[swindow0:obs]
-Q_PSY <- Q_SPSY %*% matrix(1, nrow = 1, ncol = dim)
-ind95 <- (bsadf > t(Q_PSY[2, ])) * 1
-OT    <- locate(ind95, date)
+monitorDates  <- snp$date[swindow0:obs]
+Q_PSY         <- Q_SPSY %*% matrix(1, nrow = 1, ncol = dim)
+ind95         <- (bsadf > t(Q_PSY[2, ])) * 1
+OT            <- locate(ind95, monitorDates)
 ```
 
 and printed out using the *disp* function
@@ -147,7 +151,7 @@ of Lehman Brothers, and terminates in February 2009.
 The codes for generating the plot and shaded overlays in the figure are
 as follows:
 
-```{r dateStampPlot, echo=FALSE, fig.width=8,fig.height=5,warning=FALSE}
+```{r dateStampPlot, fig.width=8,fig.height=5,include=TRUE, message=FALSE, warning=FALSE}
 
 ggplot() + 
   geom_rect(data = bubbleDates, aes(xmin = start, xmax = end, 

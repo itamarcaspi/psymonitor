@@ -3,10 +3,13 @@ title: "Real-Time Monitoring of Crisis: The European Sovereign Sector"
 author:
 - affiliation: Yale University
   name: Peter C. B. Phillips
+  email: peter.phillips@yale.edu
 - affiliation: Macquarie University
   name: Shuping Shi
+  email: shuping.shi@mq.edu.au
 - affiliation: Bank of Israel and Bar-Illan University
-  name: Itamar Caspi
+  name: Itamar Caspi  
+  email: caspi.itamar@gmail.com
 
 date: "October, 2018"
 output: rmarkdown::html_vignette
@@ -15,7 +18,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 keywords: Bubbles, crisis, recursive evolving, consistency.
-abstract: In this tutorial we illustrate the effectiveness of the PSY procedure in                  detecting crisis with an applications to the European Sovereign Sector using           R and the *psymonitor* package.
+abstract: |
+  In this tutorial we illustrate the effectiveness of the PSY procedure in detecting        crisis with an applications to the European Sovereign Sector using R and the              *psymonitor* package.
+  
 ---
 
 ## Setup
@@ -98,10 +103,10 @@ The identified origination and termination dates can be calculated and
 viewed with the following commands:
 
 ```{r dateStamp, include=TRUE, message=FALSE, warning=FALSE}
-date  <- spread$date[swindow0:obs]
-Q_PSY <- Q_SPSY %*% matrix(1, nrow = 1, ncol = dim)
-ind95 <- (bsadf > t(Q_PSY[2, ])) * 1
-OT    <- locate(ind95, date)
+monitorDates <- spread$date[swindow0:obs]
+Q_PSY        <- Q_SPSY %*% matrix(1, nrow = 1, ncol = dim)
+ind95        <- (bsadf > t(Q_PSY[2, ])) * 1
+OT           <- locate(ind95, monitorDates)
 ```
 
 and printed out using the *disp* function
@@ -116,7 +121,7 @@ The shaded areas in Figure 2 are the identified periods of crisis obtained using
 The codes for generating the plot and shaded overlays in the figure are
 as follows:
 
-```{r dateStampPlot, echo=FALSE, fig.width=8,fig.height=5,warning=FALSE}
+```{r dateStampPlot, fig.width=8,fig.height=5,include=TRUE, message=FALSE, warning=FALSE}
 
 ggplot() + 
   geom_rect(data = bubbleDates, aes(xmin = start, xmax = end, 
