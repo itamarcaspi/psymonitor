@@ -25,7 +25,8 @@ controlling).}
 199).}
 }
 \value{
-TBA
+A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
+  99 percetn level.
 }
 \description{
 \code{wmboot} implements the new bootstrap procedure designed

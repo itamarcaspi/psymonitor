@@ -21,7 +21,8 @@ lags when IC>0 (default = 0).}
 \item{nrep}{A positive integer. Number of replications (default = 199).}
 }
 \value{
-Vector, BSADF test statistic.
+A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
+  99 percetn level.
 }
 \description{
 \code{cvPSY} implements the real time bubble detection procedure

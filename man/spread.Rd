@@ -4,7 +4,7 @@
 \name{spread}
 \alias{spread}
 \title{Credit risk in the European sovereign sector}
-\format{Data frame}
+\format{A tibble}
 \source{
 Datastream International.
 }

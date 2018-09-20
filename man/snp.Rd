@@ -4,7 +4,7 @@
 \name{snp}
 \alias{snp}
 \title{S&P 500 price to dividend ratio}
-\format{Data frame}
+\format{A tibble}
 \source{
 Datastream International.
 }

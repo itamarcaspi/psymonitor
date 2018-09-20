@@ -4,11 +4,13 @@
 \alias{disp}
 \title{Bubble/crisis periods data frame}
 \usage{
-disp(OT)
+disp(OT, obs)
 }
 \arguments{
-\item{OT}{A vector. Dates identified as bubbles/crisis by the
+\item{OT}{A date vector. Bubbles/crisis periods identified by the
 \code{spymonitor::locate} function.}
+
+\item{obs}{A positive integer. The number of observations.}
 }
 \value{
 A vector of strings with bubble/crisis periods.
@@ -19,7 +21,28 @@ A vector of strings with bubble/crisis periods.
 }
 \examples{
 \donttest{
-y  <- rnorm(100)
+data(spread)
+y <- spread$value
+obs <- length(y)
+swindow0 <- floor(obs*(0.01 + 1.8/sqrt(obs)))
+dim      <- obs - swindow0 + 1
+Tb       <- 24 + swindow0 - 1
+
+# Estimate PSY statistics and CVs
+bsadf  <- PSY(y, swindow0)
+quantilesBsadf <- wmboot(y, swindow0, Tb=Tb)
+
+#' monitorDates <- spread$date[swindow0:obs]
+quantile95 <- quantilesBsadf \%*\% matrix(1, nrow = 1, ncol = dim)
+ind95      <- (bsadf > t(quantile95[2, ])) * 1
+
+# locate bubble/crisis dates
+monitorDates <- spread$date[swindow0:obs]
+OT      <- locate(ind95, monitorDates)
+
+# Show bubble/crisis periods
+disp(OT, obs)
+
 }
 }
 \references{
