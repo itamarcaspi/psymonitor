@@ -55,9 +55,6 @@ Credit risk in the European sovereign sector is proxied by an index constructed 
 
 ```{r readData, include=TRUE, message=FALSE, warning=FALSE}
 data(spread)
-spread %>%
-  mutate(date = dmy(date)) ->
-  spread
 kable(head(spread))
 ```
 
@@ -95,8 +92,8 @@ nboot    <- 9
 Next, we run the test
 
 ```{r PSY, include=TRUE, message=FALSE, warning=FALSE}
-bsadf  <- PSY(y, swindow0, IC, adflag)
-Q_SPSY <- wmboot(y, swindow0, IC, adflag, Tb, nboot)
+bsadf          <- PSY(y, swindow0, IC, adflag)
+quantilesBsadf <- wmboot(y, swindow0, IC, adflag, Tb, nboot)
 ```
 
 The identified origination and termination dates can be calculated and
@@ -104,15 +101,15 @@ viewed with the following commands:
 
 ```{r dateStamp, include=TRUE, message=FALSE, warning=FALSE}
 monitorDates <- spread$date[swindow0:obs]
-Q_PSY        <- Q_SPSY %*% matrix(1, nrow = 1, ncol = dim)
-ind95        <- (bsadf > t(Q_PSY[2, ])) * 1
-OT           <- locate(ind95, monitorDates)
+quantile95   <- quantilesBsadf %*% matrix(1, nrow = 1, ncol = dim)
+ind95        <- (bsadf > t(quantile95[2, ])) * 1
+periods      <- locate(ind95, monitorDates)
 ```
 
 and printed out using the *disp* function
 
 ```{r printResults, include=TRUE, message=FALSE, warning=FALSE, results = 'asis'}
-crisisDates <- disp(OT)
+crisisDates <- disp(periods, obs)
 kable(crisisDates, caption = "Crisis Periods in the European Soevereign Debt Market")
 ```
 

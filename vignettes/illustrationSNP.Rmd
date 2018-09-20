@@ -61,7 +61,7 @@ first step is to import the data to R, using the following code:
 ```{r readData, include=TRUE, message=FALSE, warning=FALSE}
 data(snp)
 snp %>%
-  mutate(pd = 1/value, date = dmy(date)) ->
+  mutate(pd = 1/value) ->
   snp
 head(snp)
 ```
@@ -113,24 +113,24 @@ nboot    <- 199
 Next, we run the test
 
 ```{r PSY, include=TRUE, message=FALSE, warning=FALSE}
-bsadf  <- PSY(y, swindow0, IC, adflag)
-Q_SPSY <- wmboot(y, swindow0, IC, adflag, Tb, nboot)
+bsadf          <- PSY(y, swindow0, IC, adflag)
+quantilesBsadf <- wmboot(y, swindow0, IC, adflag, Tb, nboot)
 ```
 
 The identified origination and termination dates can be calculated and
 viewed with the following commands:
 
 ```{r dateStamp, include=TRUE, message=FALSE, warning=FALSE}
-monitorDates  <- snp$date[swindow0:obs]
-Q_PSY         <- Q_SPSY %*% matrix(1, nrow = 1, ncol = dim)
-ind95         <- (bsadf > t(Q_PSY[2, ])) * 1
-OT            <- locate(ind95, monitorDates)
+monitorDates <- snp$date[swindow0:obs]
+quantile95   <- quantilesBsadf %*% matrix(1, nrow = 1, ncol = dim)
+ind95        <- (bsadf > t(quantile95[2, ])) * 1
+periods      <- locate(ind95, monitorDates)
 ```
 
 and printed out using the *disp* function
 
 ```{r printResults, include=TRUE, message=FALSE, warning=FALSE, results = 'asis'}
-bubbleDates <- disp(OT)
+bubbleDates <- disp(periods, obs)
 kable(bubbleDates, caption = "Bubble and Crisis Periods in the S&P 500")
 ```
 
