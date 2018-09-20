@@ -42,7 +42,7 @@
 #'
 #' # locate bubble/crisis dates
 #' monitorDates <- spread$date[swindow0:obs]
-#' OT      <- locate(ind95, monitorDates)
+#' OT           <- locate(ind95, monitorDates)
 #'
 #' # Show bubble/crisis periods
 #' disp(OT, obs)
@@ -50,6 +50,10 @@
 #' }
 
 disp <- function(OT, obs) {
+  if (is.null(OT)) {
+    stop("No bubble periods were found.", call. = FALSE)
+  }
+
   v <- nrow(OT)
   dateStamps <- data.frame(start = NULL, end = NULL)
   rN <- sample(1:obs, v, replace = TRUE)

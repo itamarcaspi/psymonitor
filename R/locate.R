@@ -2,9 +2,9 @@
 #'
 #' @description \code{locate} locate bubble/crisis periods with non-zero bubble indicator
 #'
-#' @param ind A vector. A dummy variable that equals 1 for a bubble/crisis
+#' @param index A vector. A dummy variable that equals 1 for a bubble/crisis
 #'   period and 0 otherwise.
-#' @param index A vector. Dates of the time series.
+#' @param dates A vector. Dates of the time series.
 #'
 #' @return A vector. Dates identified as bubbles or crisis.
 #'
@@ -36,37 +36,35 @@
 #' bsadf          <- PSY(y, swindow0)
 #' quantilesBsadf <- wmboot(y, swindow0, Tb=Tb)
 #'
-#' #' monitorDates <- spread$date[swindow0:obs]
+#' # monitorDates <- spread$date[swindow0:obs]
 #' quantile95 <- quantilesBsadf %*% matrix(1, nrow = 1, ncol = dim)
 #' ind95      <- (bsadf > t(quantile95[2, ])) * 1
-#'
-#' # locate bubble/crisis dates
 #' monitorDates <- spread$date[swindow0:obs]
 #'
-#'
+#' # locate bubble/crisis dates
 #' locate(ind95, monitorDates)
 #'
 #'
 #' }
 
 
-locate <- function(ind, date) {
-  maxi <- max(ind)
-  lc <- which.max(ind)
+locate <- function(index, dates) {
+  maxi <- max(index)
+  lc <- which.max(index)
 
   if (maxi == 1) { # there is at least one episode
     count <- 1
     EP <- matrix(0, nrow = 30, ncol = 2)
     # maximum 20 episodes: col1 origination date col2 termination date
     i <- lc + 1
-    EP[count, 1] <- date[lc]
-    while (i <= length(ind)) {
-      if (ind[i - 1] == 1 && ind[i] == 0) {
-        EP[count, 2] <- date[i - 1]
+    EP[count, 1] <- dates[lc]
+    while (i <= length(index)) {
+      if (index[i - 1] == 1 && index[i] == 0) {
+        EP[count, 2] <- dates[i - 1]
         i <- i + 1
-      } else if (ind[i - 1] == 0 && ind[i] == 1) {
+      } else if (index[i - 1] == 0 && index[i] == 1) {
         count <- count + 1
-        EP[count, 1] <- date[i]
+        EP[count, 1] <- dates[i]
         i <- i + 1
       } else {
         i <- i + 1
@@ -75,11 +73,12 @@ locate <- function(ind, date) {
     OT <- EP[1:count, ]
     v <- nrow(OT)
     if (OT[v, 2] == 0) {
-      OT[v, 2] <- date[length(date)]
+      OT[v, 2] <- dates[length(dates)]
     }
     OT <- as.Date(OT, origin = "1970-01-01")
   } else if (maxi == 0) {
     OT <- NULL
+    warning("No bubble or crisis periods found", call. = FALSE)
   }
 
   return(OT)

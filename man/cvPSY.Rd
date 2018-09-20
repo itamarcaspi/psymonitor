@@ -4,7 +4,8 @@
 \alias{cvPSY}
 \title{Simulate the finite sample critical values for the PSY test.}
 \usage{
-cvPSY(obs, swindow0, IC = 0, adflag = 0, nrep = 199)
+cvPSY(obs, swindow0, IC = 0, adflag = 0, nrep = 199,
+  useParallel = TRUE, nCores)
 }
 \arguments{
 \item{obs}{A positive integer. The number of observations.}
@@ -19,10 +20,16 @@ cvPSY(obs, swindow0, IC = 0, adflag = 0, nrep = 199)
 lags when IC>0 (default = 0).}
 
 \item{nrep}{A positive integer. Number of replications (default = 199).}
+
+\item{useParallel}{Logical. If \code{useParallel=TRUE}, use multi core
+computation.}
+
+\item{nCores}{A positive integer. Optional. If \code{useParallel=TRUE}, the
+number of cores defaults to all but one.}
 }
 \value{
 A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
-  99 percetn level.
+  99 percent level.
 }
 \description{
 \code{cvPSY} implements the real time bubble detection procedure

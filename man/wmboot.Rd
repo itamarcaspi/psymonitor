@@ -4,7 +4,8 @@
 \alias{wmboot}
 \title{Conduct the new composite bootstrapping for the PSY test.}
 \usage{
-wmboot(y, swindow0, IC = 0, adflag = 0, Tb, nboot = 199)
+wmboot(y, swindow0, IC = 0, adflag = 0, Tb, nboot = 199,
+  useParallel = TRUE, nCores)
 }
 \arguments{
 \item{y}{A vector. The data.}
@@ -23,14 +24,20 @@ controlling).}
 
 \item{nboot}{A positive integer. Number of bootstrap replications (default =
 199).}
+
+\item{useParallel}{Logical. If \code{useParallel=TRUE}, use multi core
+computation.}
+
+\item{nCores}{A positive integer. Optional. If \code{useParallel=TRUE}, the
+number of cores defaults to all but one.}
 }
 \value{
 A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
-  99 percetn level.
+  99 percent level.
 }
 \description{
 \code{wmboot} implements the new bootstrap procedure designed
-  to detect bubbles and crisis periods whilw mitigating the potential impact
+  to detect bubbles and crisis periods while mitigating the potential impact
   of heteroskedasticity and to effect family-wise size control in recursive
   testing algorithms (Phillips and Shi, forthcoming).
 }

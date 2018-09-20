@@ -38,7 +38,7 @@ ind95      <- (bsadf > t(quantile95[2, ])) * 1
 
 # locate bubble/crisis dates
 monitorDates <- spread$date[swindow0:obs]
-OT      <- locate(ind95, monitorDates)
+OT           <- locate(ind95, monitorDates)
 
 # Show bubble/crisis periods
 disp(OT, obs)

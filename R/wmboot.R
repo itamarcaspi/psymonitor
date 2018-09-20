@@ -1,7 +1,7 @@
 #' @title Conduct the new composite bootstrapping for the PSY test.
 #'
 #' @description  \code{wmboot} implements the new bootstrap procedure designed
-#'   to detect bubbles and crisis periods whilw mitigating the potential impact
+#'   to detect bubbles and crisis periods while mitigating the potential impact
 #'   of heteroskedasticity and to effect family-wise size control in recursive
 #'   testing algorithms (Phillips and Shi, forthcoming).
 #'
@@ -16,9 +16,13 @@
 #'   controlling).
 #' @param nboot A positive integer. Number of bootstrap replications (default =
 #'   199).
+#' @param useParallel Logical. If \code{useParallel=TRUE}, use multi core
+#'   computation.
+#' @param nCores A positive integer. Optional. If \code{useParallel=TRUE}, the
+#'   number of cores defaults to all but one.
 #'
 #' @return A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
-#'   99 percetn level.
+#'   99 percent level.
 #'
 #' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
 #'   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
@@ -44,7 +48,8 @@
 #' }
 
 
-wmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199) {
+wmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199,
+                   useParallel=TRUE, nCores) {
   qe    <- as.matrix(c(0.90, 0.95, 0.99))
   nboot <- nboot
 
@@ -96,14 +101,19 @@ wmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199) {
   # The PSY Test ------------------------------------------------------------
 
   # setup parallel backend to use many processors
-  no_cores <- detectCores() - 1
-  cl       <- makeCluster(no_cores)
+  if (useParallel==TRUE && missing(nCores)) {
+    nCores <- detectCores() - 1
+  } else {
+    nCores <- 1
+  }
+  cl <- makeCluster(nCores)
   registerDoParallel(cl)
 
   #----------------------------------
   dim  <- Tb - swindow0 + 1
   i <- 0
-  MPSY <- foreach(i = 1:nboot, .inorder = FALSE, .combine = rbind) %dopar% {
+  MPSY <- foreach(i = 1:nboot, .inorder = FALSE, .combine = rbind,
+                  .export = "ADFRcpp") %dopar% {
     PSY(yb[, i], swindow0, IC, adflag)
   }
   #----------------------------------

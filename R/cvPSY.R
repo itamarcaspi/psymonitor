@@ -11,9 +11,13 @@
 #' @param adflag  A positive integer. Lag order when IC=0; maximum number of
 #'   lags when IC>0 (default = 0).
 #' @param nrep A positive integer. Number of replications (default = 199).
+#' @param useParallel Logical. If \code{useParallel=TRUE}, use multi core
+#'   computation.
+#' @param nCores A positive integer. Optional. If \code{useParallel=TRUE}, the
+#'   number of cores defaults to all but one.
 #'
 #' @return A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
-#'   99 percetn level.
+#'   99 percent level.
 #'
 #' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
 #'   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
@@ -35,7 +39,8 @@
 #' cv <- cvPSY(100,  swindow0 = 90, IC = 0, adflag = 1, nrep = 199)
 #' }
 
-cvPSY <- function(obs, swindow0, IC=0, adflag=0, nrep=199) {
+cvPSY <- function(obs, swindow0, IC=0, adflag=0, nrep=199,
+                  useParallel=TRUE, nCores) {
 
   if (missing(swindow0)) {
     swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs)))
@@ -55,12 +60,17 @@ cvPSY <- function(obs, swindow0, IC=0, adflag=0, nrep=199) {
   y <- apply(z, 2, cumsum)
 
   # setup parallel backend
-  no_cores <- detectCores() - 1
-  cl <- makeCluster(no_cores)
+  if (useParallel == TRUE && missing(nCores)) {
+    nCores <- detectCores() - 1
+  } else {
+    nCores <- 1
+  }
+  cl <- makeCluster(nCores)
   registerDoParallel(cl)
 
   i <- 0
-  MPSY <- foreach(i = 1:m, .inorder = FALSE, .combine = rbind) %dopar% {
+  MPSY <- foreach(i = 1:m, .inorder = FALSE, .combine = rbind,
+                  .export = "ADFRcpp") %dopar% {
     PSY(y[, i], swindow0, IC, adflag)
   }
 

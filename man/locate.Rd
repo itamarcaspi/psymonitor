@@ -4,13 +4,13 @@
 \alias{locate}
 \title{Locate bubble/crisis periods}
 \usage{
-locate(ind, date)
+locate(index, dates)
 }
 \arguments{
-\item{ind}{A vector. A dummy variable that equals 1 for a bubble/crisis
+\item{index}{A vector. A dummy variable that equals 1 for a bubble/crisis
 period and 0 otherwise.}
 
-\item{index}{A vector. Dates of the time series.}
+\item{dates}{A vector. Dates of the time series.}
 }
 \value{
 A vector. Dates identified as bubbles or crisis.
@@ -32,14 +32,12 @@ Tb       <- 24 + swindow0 - 1
 bsadf          <- PSY(y, swindow0)
 quantilesBsadf <- wmboot(y, swindow0, Tb=Tb)
 
-#' monitorDates <- spread$date[swindow0:obs]
+# monitorDates <- spread$date[swindow0:obs]
 quantile95 <- quantilesBsadf \%*\% matrix(1, nrow = 1, ncol = dim)
 ind95      <- (bsadf > t(quantile95[2, ])) * 1
-
-# locate bubble/crisis dates
 monitorDates <- spread$date[swindow0:obs]
 
-
+# locate bubble/crisis dates
 locate(ind95, monitorDates)
 
 
