@@ -50,7 +50,7 @@ ADFRcpp <- function(y, IC=0, adflag=0) {
       } else x2 <- xx
 
       # OLS regression
-      result <- RcppEigen::fastLmPure(x2, dy01)
+      result <- fastLmPure(x2, dy01)
       beta   <- result$coefficients   #@-model A-@ ### need work
       eps    <- dy01 - x2 %*% beta
       # Information Criteria
