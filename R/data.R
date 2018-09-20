@@ -3,7 +3,7 @@
 #' S&P 500 price to dividend ratio: January 1973-- July 2017
 #'
 #'
-#' @format Data frame
+#' @format A tibble
 #' @source Datastream International.
 #' @keywords datasets
 #' @examples
@@ -17,7 +17,7 @@
 #' an index constructed as a GDP weighted 10-year government bond yield of the
 #' GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries.
 #'
-#' @format Data frame
+#' @format A tibble
 #' @source Datastream International.
 #' @keywords datasets
 #' @examples

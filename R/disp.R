@@ -3,7 +3,8 @@
 #' @description \code{disp} generates a data.frame that holds bubble/crisis
 #'   periods identified by the PSY procedure
 #'
-#' @param OT A vector. Dates identified as bubbles/crisis by the
+#' @param obs   A positive integer. The number of observations.
+#' @param OT A date vector. Bubbles/crisis periods identified by the
 #'   \code{spymonitor::locate} function.
 #'
 #' @return A vector of strings with bubble/crisis periods.
@@ -24,14 +25,34 @@
 #'
 #' @examples
 #' \donttest{
-#' y  <- rnorm(100)
+#' data(spread)
+#' y <- spread$value
+#' obs <- length(y)
+#' swindow0 <- floor(obs*(0.01 + 1.8/sqrt(obs)))
+#' dim      <- obs - swindow0 + 1
+#' Tb       <- 24 + swindow0 - 1
+#'
+#' # Estimate PSY statistics and CVs
+#' bsadf  <- PSY(y, swindow0)
+#' quantilesBsadf <- wmboot(y, swindow0, Tb=Tb)
+#'
+#' #' monitorDates <- spread$date[swindow0:obs]
+#' quantile95 <- quantilesBsadf %*% matrix(1, nrow = 1, ncol = dim)
+#' ind95      <- (bsadf > t(quantile95[2, ])) * 1
+#'
+#' # locate bubble/crisis dates
+#' monitorDates <- spread$date[swindow0:obs]
+#' OT      <- locate(ind95, monitorDates)
+#'
+#' # Show bubble/crisis periods
+#' disp(OT, obs)
+#'
 #' }
 
-disp <- function(OT) {
-  t <- length(y)
+disp <- function(OT, obs) {
   v <- nrow(OT)
   dateStamps <- data.frame(start = NULL, end = NULL)
-  rN <- sample(1:t, v, replace = TRUE)
+  rN <- sample(1:obs, v, replace = TRUE)
   for (j in 1:v) {
     if (OT[j, 1] == OT[j, 2]) {
       newEntry <- data.frame(start = OT[j, 1],

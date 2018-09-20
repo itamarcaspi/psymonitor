@@ -12,7 +12,8 @@
 #'   lags when IC>0 (default = 0).
 #' @param nrep A positive integer. Number of replications (default = 199).
 #'
-#' @return Vector, BSADF test statistic.
+#' @return A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
+#'   99 percetn level.
 #'
 #' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
 #'   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
@@ -27,6 +28,7 @@
 #' @import parallel
 #' @import foreach
 #' @importFrom stats rnorm
+#' @importFrom stats quantile
 #'
 #' @examples
 #' \donttest{
@@ -57,8 +59,9 @@ cvPSY <- function(obs, swindow0, IC=0, adflag=0, nrep=199) {
   cl <- makeCluster(no_cores)
   registerDoParallel(cl)
 
-  MPSY <- foreach(iter = 1:m, .combine = rbind) %dopar% {
-    PSY(y[, iter], swindow0, IC, adflag)
+  i <- 0
+  MPSY <- foreach(i = 1:m, .inorder = FALSE, .combine = rbind) %dopar% {
+    PSY(y[, i], swindow0, IC, adflag)
   }
 
 

@@ -17,7 +17,8 @@
 #' @param nboot A positive integer. Number of bootstrap replications (default =
 #'   199).
 #'
-#' @return TBA
+#' @return A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
+#'   99 percetn level.
 #'
 #' @references Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
 #'   multiple bubbles: Historical episodes of exuberance and collapse in the S&P
@@ -101,8 +102,9 @@ wmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199) {
 
   #----------------------------------
   dim  <- Tb - swindow0 + 1
-  MPSY <- foreach(iter = 1:nboot, .combine = rbind) %dopar% {
-    PSY(yb[, iter], swindow0, IC, adflag)
+  i <- 0
+  MPSY <- foreach(i = 1:nboot, .inorder = FALSE, .combine = rbind) %dopar% {
+    PSY(yb[, i], swindow0, IC, adflag)
   }
   #----------------------------------
   stopCluster(cl)
