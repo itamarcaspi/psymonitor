@@ -4,8 +4,7 @@
 \name{psymonitor-package}
 \alias{psymonitor}
 \alias{psymonitor-package}
-\title{psymonitor: psymonitor: Real Time Monitoring of Bubbles and Crisis
-    with R}
+\title{psymonitor: psymonitor: Real Time Monitoring of Bubbles and Crisis}
 \description{
 \if{html}{\figure{logo.png}{options: align='right'}}
 
