@@ -110,18 +110,18 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>locate</span>(<span class='no'>ind</span>, <span class='no'>date</span>)</pre>
+    <pre class="usage"><span class='fu'>locate</span>(<span class='no'>index</span>, <span class='no'>dates</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ind</th>
+      <th>index</th>
       <td><p>A vector. A dummy variable that equals 1 for a bubble/crisis
 period and 0 otherwise.</p></td>
     </tr>
     <tr>
-      <th>index</th>
+      <th>dates</th>
       <td><p>A vector. Dates of the time series.</p></td>
     </tr>
     </table>
@@ -145,7 +145,28 @@ period and 0 otherwise.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='no'>spread</span>)
+
+<span class='no'>y</span>        <span class='kw'>&lt;-</span> <span class='no'>spread</span>$<span class='no'>value</span>
+<span class='no'>obs</span>      <span class='kw'>&lt;-</span> <span class='fu'>length</span>(<span class='no'>y</span>)
+<span class='no'>swindow0</span> <span class='kw'>&lt;-</span> <span class='fu'>floor</span>(<span class='no'>obs</span>*(<span class='fl'>0.01</span> + <span class='fl'>1.8</span>/<span class='fu'>sqrt</span>(<span class='no'>obs</span>)))
+<span class='no'>dim</span>      <span class='kw'>&lt;-</span> <span class='no'>obs</span> - <span class='no'>swindow0</span> + <span class='fl'>1</span>
+<span class='no'>Tb</span>       <span class='kw'>&lt;-</span> <span class='fl'>24</span> + <span class='no'>swindow0</span> - <span class='fl'>1</span>
+
+<span class='co'># Estimate PSY statistics and CVs</span>
+<span class='no'>bsadf</span>          <span class='kw'>&lt;-</span> <span class='fu'><a href='PSY.html'>PSY</a></span>(<span class='no'>y</span>, <span class='no'>swindow0</span>)
+<span class='no'>quantilesBsadf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='wmboot.html'>wmboot</a></span>(<span class='no'>y</span>, <span class='no'>swindow0</span>, <span class='kw'>Tb</span><span class='kw'>=</span><span class='no'>Tb</span>)
+
+<span class='co'># monitorDates &lt;- spread$date[swindow0:obs]</span>
+<span class='no'>quantile95</span> <span class='kw'>&lt;-</span> <span class='no'>quantilesBsadf</span> <span class='kw'>%*%</span> <span class='fu'>matrix</span>(<span class='fl'>1</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='no'>dim</span>)
+<span class='no'>ind95</span>      <span class='kw'>&lt;-</span> (<span class='no'>bsadf</span> <span class='kw'>&gt;</span> <span class='fu'>t</span>(<span class='no'>quantile95</span>[<span class='fl'>2</span>, ])) * <span class='fl'>1</span>
+<span class='no'>monitorDates</span> <span class='kw'>&lt;-</span> <span class='no'>spread</span>$<span class='no'>date</span>[<span class='no'>swindow0</span>:<span class='no'>obs</span>]
+
+<span class='co'># locate bubble/crisis dates</span>
+<span class='fu'>locate</span>(<span class='no'>ind95</span>, <span class='no'>monitorDates</span>)</div><div class='output co'>#&gt; [1] "2008-03-01" "2008-09-01" "2010-05-01" "2008-03-01" "2009-03-01"
+#&gt; [6] "2012-08-01"</div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

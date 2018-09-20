@@ -116,16 +116,18 @@
 <p>The S&amp;P 500 stock market has been a central focus of attention in global financial markets due to the size of this market and its impact on other financial markets. As an illustration of the methods discussed in this chapter, we conduct a pseudo real-time monitoring exercise for bubbles and crises in this market with the PSY strategy. The sample period runs from January 1973 to July 2018, downloaded monthly from <em>Datastream International</em>. The price-dividend ratio is computed as the inverse of dividend yields. The first step is to import the data to R, using the following code:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(snp)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">snp <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pd =</span> <span class="dv">1</span><span class="op">/</span>value, <span class="dt">date =</span> <span class="kw">dmy</span>(date)) -&gt;</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pd =</span> <span class="dv">1</span><span class="op">/</span>value) -&gt;</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span>snp</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">head</span>(snp)</a></code></pre></div>
-<pre><code>        date value        pd
-1 1973-01-31  2.27 0.4405286
-2 1973-02-28  2.35 0.4255319
-3 1973-03-30  2.36 0.4237288
-4 1973-04-30  2.47 0.4048583
-5 1973-05-31  2.50 0.4000000
-6 1973-06-29  2.51 0.3984064</code></pre>
+<pre><code># A tibble: 6 x 3
+  date       value    pd
+  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 1973-01-31  2.27 0.441
+2 1973-02-28  2.35 0.426
+3 1973-03-30  2.36 0.424
+4 1973-04-30  2.47 0.405
+5 1973-05-31  2.5  0.4  
+6 1973-06-29  2.51 0.398</code></pre>
 <p>In the presence of a speculative bubble, asset prices characteristically deviate in an explosive way from fundamentals, representing exuberance in the speculative behavior driving the market. In the present case, this deviation implies that the log price-dividend ratio is expected to follow an explosive process over the expansive phase of the bubble. But during crisis periods, the price-dividend ratio is expected to follow a random (downward) drift martingale process, in contrast to a small (local to zero) constant drift martingale process that typically applies under normal market conditions. According to the theory detailed in Section 3 and 4, we expect to witness rejection of the null hypothesis in the PSY test empirical outcomes during both bubble and crisis periods.</p>
 <p>Figure 1 plots the price-to-dividend ratio of the S&amp;P 500 index. We observe a dramatic increase in the data series in the late 1990s, followed by a rapid fall in the early 2000s. The market experienced another episode of slump in late 2008.</p>
 <p><img src="illustrationSNP_files/figure-html/plot-1.png" width="768"></p>
@@ -146,15 +148,15 @@
 <a class="sourceLine" id="cb4-9" data-line-number="9">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">199</span></a></code></pre></div>
 <p>Next, we run the test</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">Q_SPSY &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wmboot.html">wmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wmboot.html">wmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
 <p>The identified origination and termination dates can be calculated and viewed with the following commands:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">monitorDates  &lt;-<span class="st"> </span>snp<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">Q_PSY         &lt;-<span class="st"> </span>Q_SPSY <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">ind95         &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(Q_PSY[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">OT            &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, monitorDates)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>snp<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(quantile95[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">periods      &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, monitorDates)</a></code></pre></div>
 <p>and printed out using the <em>disp</em> function</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(OT)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(periods, obs)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(bubbleDates, <span class="dt">caption =</span> <span class="st">"Bubble and Crisis Periods in the S&amp;P 500"</span>)</a></code></pre></div>
 <table class="table">
 <caption>Bubble and Crisis Periods in the S&amp;P 500</caption>

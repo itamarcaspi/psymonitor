@@ -112,7 +112,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>cvPSY</span>(<span class='no'>obs</span>, <span class='no'>swindow0</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>199</span>)</pre>
+    <pre class="usage"><span class='fu'>cvPSY</span>(<span class='no'>obs</span>, <span class='no'>swindow0</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>199</span>,
+  <span class='kw'>useParallel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>nCores</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,11 +141,22 @@ lags when IC&gt;0 (default = 0).</p></td>
       <th>nrep</th>
       <td><p>A positive integer. Number of replications (default = 199).</p></td>
     </tr>
+    <tr>
+      <th>useParallel</th>
+      <td><p>Logical. If <code>useParallel=TRUE</code>, use multi core
+computation.</p></td>
+    </tr>
+    <tr>
+      <th>nCores</th>
+      <td><p>A positive integer. Optional. If <code>useParallel=TRUE</code>, the
+number of cores defaults to all but one.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Vector, BSADF test statistic.</p>
+    <p>A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
+  99 percent level.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 

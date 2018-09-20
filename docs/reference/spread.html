@@ -118,7 +118,7 @@ GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries.</p>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>Data frame</p>
+    <p>A tibble</p>
     
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
@@ -126,13 +126,15 @@ GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>head</span>(<span class='no'>spread</span>)</div><div class='output co'>#&gt;         date     value
-#&gt; 1 01/06/1997 1.2225196
-#&gt; 2 01/07/1997 1.0259384
-#&gt; 3 01/08/1997 1.0510309
-#&gt; 4 01/09/1997 0.8448181
-#&gt; 5 01/10/1997 0.7406163
-#&gt; 6 01/11/1997 0.7833504</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>head</span>(<span class='no'>spread</span>)</div><div class='output co'>#&gt; # A tibble: 6 x 2
+#&gt;   date       value
+#&gt;   &lt;date&gt;     &lt;dbl&gt;
+#&gt; 1 1997-06-01 1.22 
+#&gt; 2 1997-07-01 1.03 
+#&gt; 3 1997-08-01 1.05 
+#&gt; 4 1997-09-01 0.845
+#&gt; 5 1997-10-01 0.741
+#&gt; 6 1997-11-01 0.783</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
