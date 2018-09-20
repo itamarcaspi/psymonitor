@@ -1,7 +1,6 @@
 Type: Package
 Package: psymonitor
 Title: psymonitor: Real Time Monitoring of Bubbles and Crisis
-    with R
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Peter",
