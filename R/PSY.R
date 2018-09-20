@@ -40,7 +40,7 @@ PSY <- function(y, swindow0, IC=0, adflag=0) {
   bsadfs <- matrix(data = NA, nrow = t, ncol = 1)
 
   for (r2 in swindow0:t) {
-    rwadft <- matrix(data = 0, nrow = r2 - swindow0 + 1, ncol = 1)
+    rwadft <- matrix(data = -999, nrow = r2 - swindow0 + 1, ncol = 1)
     for (r1 in 1:(r2 - swindow0 + 1)) {
       rwadft[r1] <- as.numeric(ADFRcpp(y[r1:r2], IC, adflag)) # two tail 5% significant level
     }
