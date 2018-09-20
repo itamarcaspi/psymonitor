@@ -29,7 +29,8 @@ ADF <- function(y, IC=0, adflag=0) {
   const <- rep(1,T1)
 
   y1 <- as.matrix(y[1:T1])
-  dy <- as.matrix(y[2:T0] - y[1:T1])
+  y0 <- as.matrix(y[2:T0])
+  dy <- as.matrix(y0 - y1)
   x1 <- as.matrix(cbind(y1,const))
 
   t   <- T1 - adflag
