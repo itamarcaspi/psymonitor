@@ -13,8 +13,8 @@ template:
   params:
     bootswatch: flatly
     docsearch:
-      api_key: API_KEY
-      index_name: INDEX_NAME
+      api_key: e656dd3edb0bba05760e48324639d75e
+      index_name: psymonitor
 
 navbar:
   type: default
