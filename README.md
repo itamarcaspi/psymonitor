@@ -29,7 +29,7 @@ You can install the **development** version from
 devtools::install_github("itamarcaspi/psymonitor")
 ```
 
-## Example
+## Usage
 
 For the illustration purposes we will use data on the credit risk in the
 European sovereign sector, that is proxied by an index constructed as a
@@ -95,9 +95,9 @@ print(crisisDates)
 
 Pleas cheack the packages’ articles for an elaborated analysis of the
 [spreads
-data](https://itamarcaspi.github.io/psymonitor/articles/illustrationSNP.html),
+data](https://itamarcaspi.github.io/psymonitor/articles/illustrationBONDS.html),
 as well as a demonstration using data on the [S\&P 500 price-to-dividend
-ratio](https://itamarcaspi.github.io/psymonitor/articles/illustrationBONDS.html).
+ratio](https://itamarcaspi.github.io/psymonitor/articles/illustrationSNP.html).
 
 -----
 
