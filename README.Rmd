@@ -13,7 +13,7 @@ output: github_document
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/itamarcaspi/psymonitor?branch=master&svg=true)](https://ci.appveyor.com/project/itamarcaspi/psymonitor)
 
 
-psymonitor provides an accessible implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.
+`psymonitor` provides an accessible implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.
 
 ## Installation
 
@@ -37,7 +37,7 @@ knitr::opts_chunk$set(eval = FALSE, echo = TRUE,
                       comment = NA)
 ```
 
-Let’s walk through some basics. First load packages and get some data.
+Let’s walk through some basics. First load the `psymonitor` package and get data on GIIPS spread.
 
 ```{r data}
 library(psymonitor)
@@ -45,7 +45,7 @@ data(spread)
 
 ```
 
-Next, estimate the psy test statistic using PSY() and its corresponding bootstrap-based critical values using wmboot().
+Next, estimate the PSY test statistic using `PSY()` and its corresponding bootstrap-based critical values using `wmboot()`.
 
 ```{r test}
 y        <- spread$value
@@ -59,7 +59,7 @@ quantilesBsadf <- wmboot(y, Tb = Tb, nboot = 99, nCores = 2) #Note that the numb
 
 ```
 
-Next, identify crisis periods, defined as periods where the test statistic is above its corresponding critical value, using the locate() function.
+Next, identify crisis periods, defined as periods where the test statistic is above its corresponding critical value, using the `locate()` function.
 
 ```{r dateStamp}
 monitorDates <- spread$date[swindow0:obs]
@@ -68,7 +68,7 @@ ind95        <- (bsadf > t(quantile95[2, ])) * 1
 periods      <- locate(ind95, monitorDates)  # Locate crisis periods
 ```
 
-Finally, print a table that holds the identified crisis periods with the help of the disp() function.
+Finally, print a table that holds the identified crisis periods with the help of the `disp()` function.
 
 ```{r printResults}
 crisisDates <- disp(periods, obs)  #generate table that holds crisis periods

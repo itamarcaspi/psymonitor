@@ -9,7 +9,7 @@ status](https://travis-ci.org/itamarcaspi/psymonitor.svg?branch=master)](https:/
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/itamarcaspi/psymonitor?branch=master&svg=true)](https://ci.appveyor.com/project/itamarcaspi/psymonitor)
 
-psymonitor provides an accessible implementation of the popular
+`psymonitor` provides an accessible implementation of the popular
 real-time monitoring strategy proposed by Phillips, Shi and Yu
 (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate
 the potential impact of heteroskedasticity and to effect family-wise
@@ -44,15 +44,16 @@ knitr::opts_chunk$set(eval = FALSE, echo = TRUE,
                       comment = NA)
 ```
 
-Let’s walk through some basics. First load packages and get some data.
+Let’s walk through some basics. First load the `psymonitor` package and
+get data on GIIPS spread.
 
 ``` r
 library(psymonitor)
 data(spread)
 ```
 
-Next, estimate the psy test statistic using PSY() and its corresponding
-bootstrap-based critical values using wmboot().
+Next, estimate the PSY test statistic using `PSY()` and its
+corresponding bootstrap-based critical values using `wmboot()`.
 
 ``` r
 y        <- spread$value
@@ -66,8 +67,8 @@ quantilesBsadf <- wmboot(y, Tb = Tb, nboot = 99, nCores = 2) #Note that the numb
 ```
 
 Next, identify crisis periods, defined as periods where the test
-statistic is above its corresponding critical value, using the locate()
-function.
+statistic is above its corresponding critical value, using the
+`locate()` function.
 
 ``` r
 monitorDates <- spread$date[swindow0:obs]
@@ -77,7 +78,7 @@ periods      <- locate(ind95, monitorDates)  # Locate crisis periods
 ```
 
 Finally, print a table that holds the identified crisis periods with the
-help of the disp()
+help of the `disp()`
 function.
 
 ``` r
