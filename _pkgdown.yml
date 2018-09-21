@@ -48,8 +48,8 @@ reference:
   - title: "Monitoring"
     desc: "Functions for real-time monitiring of asset markets"
     contents:
-      - cvPSY
-      - wmboot
+      - cvPSYmc
+      - cvPSYwmboot
       - locate
       - disp
   - title: "Data"

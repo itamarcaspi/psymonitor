@@ -55,7 +55,7 @@ Tb       <- 24 + swindow0 - 1  # Set sample size control for the bootstrap prece
 dim      <- obs - swindow0 + 1
 
 bsadf          <- PSY(y)
-quantilesBsadf <- wmboot(y, Tb = Tb, nboot = 99, nCores = 2) #Note that the number of cores is arbitrarily set to 2.
+quantilesBsadf <- cvPSYwmboot(y, Tb = Tb, nboot = 99, nCores = 2) #Note that the number of cores is arbitrarily set to 2.
 
 ```
 

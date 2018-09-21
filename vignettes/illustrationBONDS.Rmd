@@ -94,7 +94,7 @@ Next, we run the test
 
 ```{r PSY, include=TRUE, message=FALSE, warning=FALSE}
 bsadf          <- PSY(y, swindow0, IC, adflag)
-quantilesBsadf <- wmboot(y, swindow0, IC, adflag, Tb, nboot, nCores = 2) #Note that the number of cores is arbitrarily set to 2.
+quantilesBsadf <- cvPSYwmboot(y, swindow0, IC, adflag, Tb, nboot, nCores = 2) #Note that the number of cores is arbitrarily set to 2.
 ```
 
 The identified origination and termination dates can be calculated and
