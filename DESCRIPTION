@@ -13,16 +13,16 @@ Authors@R:
              family = "Caspi",
              role = c("aut", "cre"),
              email = "caspi.itamar@gmail.com"))
-Description: Apply the popular real-time monitoring strategy proposed
-    by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap
-    procedure designed to mitigate the potential impact of
+Description: Apply the popular real-time monitoring strategy
+    proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new
+    bootstrap procedure designed to mitigate the potential impact of
     heteroskedasticity and to effect family-wise size control in recursive
     testing algorithms (Phillips and Shi, forthcoming).
 License: GPL-3
 URL: https://github.com/itamarcaspi/psymonitor
 BugReports: https://github.com/itamarcaspi/psymonitor/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 3.0.2)
 Imports: 
     doParallel (>= 1.0.11),
     foreach (>= 1.4.4),
