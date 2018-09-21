@@ -4,4 +4,7 @@ pkgdown_sha: ~
 articles:
   illustrationBONDS: illustrationBONDS.html
   illustrationSNP: illustrationSNP.html
+urls:
+  reference: https://itamarcaspi.github.io/psymonitor/reference
+  article: https://itamarcaspi.github.io/psymonitor/articles
 

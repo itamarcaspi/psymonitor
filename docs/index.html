@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>psymonitor: Real Time Monitoring of Bubbles and Crisis
-    with R • psymonitor</title>
+<title>psymonitor: Real Time Monitoring of Bubbles and Crisis • psymonitor</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="psymonitor: Real Time Monitoring of Bubbles and Crisis
-    with R">
+<script src="pkgdown.js"></script><!-- docsearch --><script src="docsearch.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css">
+<link href="docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="psymonitor: Real Time Monitoring of Bubbles and Crisis">
 <meta property="og:description" content="The *psymonitor* package provides an R
     implementation of the popular real-time monitoring strategy proposed
     by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap
@@ -21,7 +21,7 @@
     has been shown effective for bubble and crisis detection (PSY,
     2015a,b; Phillips and Shi, 2017) and is now widely used by academic
     researchers, central bank economists, and fiscal regulators.">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://itamarcaspi.github.io/psymonitor/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -47,13 +47,31 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li>
   <a href="reference/index.html">Functions</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/illustrationSNP.html">Monitoring the S&amp;P 500</a>
+    </li>
+    <li>
+      <a href="articles/illustrationBONDS.html">Monitoring the European Sovereign Debt Market</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">News</a>
-</li>
-<li>
-  <a href="articles/index.html">Guides</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -61,10 +79,17 @@
   <a href="https://github.com/itamarcaspi/psymonitor/">
     <span class="fa fa-github"></span>
      
+    GitHub
   </a>
 </li>
       </ul>
+<form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
+      </form>
+      
+    </div>
 <!--/.nav-collapse -->
   </div>
 <!--/.container -->
@@ -84,7 +109,7 @@
 <a href="#psymonitor" class="anchor"></a>psymonitor <img src="reference/figures/logo.png" align="right" height="139/">
 </h1></div>
 
-<p>The <em>psymonitor</em> package provides an R implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.</p>
+<p>psymonitor provides an accessible implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -95,6 +120,58 @@
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
+<p>For the illustration purposes we will use data on the credit risk in the European sovereign sector, that is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland, Italy, Greece, and Portugal) countries, and comes with the ‘psymonitor’ package.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Set global options for runing code chuncks</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>, <span class="dt">echo =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">                      <span class="dt">warning =</span> <span class="ot">FALSE</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">                      <span class="dt">comment =</span> <span class="ot">NA</span>)</a></code></pre></div>
+<p>Let’s walk through some basics. First load packages and get some data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(psymonitor)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">data</span>(spread)</a></code></pre></div>
+<p>Next, estimate the psy test statistic using PSY() and its corresponding bootstrap-based critical values using wmboot().</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(obs <span class="op">*</span><span class="st"> </span>(<span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(obs))) <span class="co"># Set minimal window size</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">Tb       &lt;-<span class="st"> </span><span class="dv">24</span> <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># Set sample size control for the bootstrap precedure</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">dim      &lt;-<span class="st"> </span>obs <span class="op">-</span><span class="st"> </span>swindow0 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="reference/PSY.html">PSY</a></span>(y)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="reference/wmboot.html">wmboot</a></span>(y, <span class="dt">Tb =</span> Tb, <span class="dt">nboot =</span> <span class="dv">99</span>, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
+<p>Next, identify crisis periods, defined as periods where the test statistic is above its corresponding critical value, using the locate() function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(quantile95[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">periods      &lt;-<span class="st"> </span><span class="kw"><a href="reference/locate.html">locate</a></span>(ind95, monitorDates)  <span class="co"># Locate crisis periods</span></a></code></pre></div>
+<p>Finally, print a table that holds the identified crisis periods with the help of the disp() function.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">crisisDates &lt;-<span class="st"> </span><span class="kw"><a href="reference/disp.html">disp</a></span>(periods, obs)  <span class="co">#generate table that holds crisis periods</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">print</span>(crisisDates)</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right"></th>
+<th align="right">start</th>
+<th align="right">end</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">2008-03-01</td>
+<td align="right">2008-03-01</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">2008-09-01</td>
+<td align="right">2009-04-01</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">2010-05-01</td>
+<td align="right">2012-08-01</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>Pleas cheack the packages’ articles for an elaborated analysis of the <a href="https://itamarcaspi.github.io/psymonitor/articles/illustrationSNP.html">spreads data</a>, as well as a demonstration using data on the <a href="https://itamarcaspi.github.io/psymonitor/articles/illustrationBONDS.html">S&amp;P 500 price-to-dividend ratio</a>.</p>
+<hr>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
@@ -169,6 +246,20 @@
 </div>
 
   
-
-  </body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script><script>
+  docsearch({
+    
+    
+    apiKey: 'API_KEY',
+    indexName: 'INDEX_NAME',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+</body>
 </html>

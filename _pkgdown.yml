@@ -1,6 +1,4 @@
-template:
-  params:
-    bootswatch: flatly
+url: https://itamarcaspi.github.io/psymonitor
 
 authors:
   Peter C.B. Phillips:
@@ -10,18 +8,36 @@ authors:
   Itamar Caspi:
     href: http://www.itamarcaspi.net/
 
+
+template:
+  params:
+    bootswatch: flatly
+    docsearch:
+      api_key: API_KEY
+      index_name: INDEX_NAME
+
 navbar:
   type: default
   left:
+    - icon: fa-home
+      href: index.html
     - text: "Functions"
       href: reference/index.html
+    - text: "Articles"
+      menu:
+        - text: Monitoring the S&P 500
+          href: articles/illustrationSNP.html
+        - text: Monitoring the European Sovereign Debt Market
+          href: articles/illustrationBONDS.html
     - text: "News"
       href: news/index.html
-    - text: "Guides"
-      href: articles/index.html
   right:
-   - icon: fa-github
+   - text: "GitHub"
+     icon: fa-github
      href: https://github.com/itamarcaspi/psymonitor/
+
+articles:
+
 
 reference:
   - title: "Test statistics"

@@ -29,6 +29,12 @@
 <script src="../pkgdown.js"></script>
 
 
+<!-- docsearch -->
+<script src="../docsearch.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+<link href="../docsearch.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+
 
 <meta property="og:title" content="Credit risk in the European sovereign sector — spread" />
 
@@ -36,7 +42,7 @@
 an index constructed as a GDP weighted 10-year government bond yield of the
 GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries." />
 
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://itamarcaspi.github.io/psymonitor/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -72,13 +78,31 @@ GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Functions</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/illustrationSNP.html">Monitoring the S&amp;P 500</a>
+    </li>
+    <li>
+      <a href="../articles/illustrationBONDS.html">Monitoring the European Sovereign Debt Market</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
-</li>
-<li>
-  <a href="../articles/index.html">Guides</a>
 </li>
       </ul>
       
@@ -87,9 +111,16 @@ GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries." />
   <a href="https://github.com/itamarcaspi/psymonitor/">
     <span class="fa fa-github"></span>
      
+    GitHub
   </a>
 </li>
       </ul>
+      
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
+        </div>
+      </form>
       
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -164,6 +195,23 @@ GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries.</p>
    </div>
 
   
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script>
+  docsearch({
+    
+    
+    apiKey: 'API_KEY',
+    indexName: 'INDEX_NAME',
+    inputSelector: 'input#search-input.form-control',
+    transformData: function(hits) {
+      return hits.map(function (hit) {
+        hit.url = updateHitURL(hit);
+        return hit;
+      });
+    }
+  });
+</script>
+
 
   </body>
 </html>

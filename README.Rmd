@@ -13,7 +13,7 @@ output: github_document
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/itamarcaspi/psymonitor?branch=master&svg=true)](https://ci.appveyor.com/project/itamarcaspi/psymonitor)
 
 
-The *psymonitor* package provides an R implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.
+psymonitor provides an accessible implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.
 
 ## Installation
 
@@ -29,22 +29,29 @@ devtools::install_github("itamarcaspi/psymonitor")
 
 For the illustration purposes we will use data on the credit risk in the European sovereign sector, that is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland, Italy, Greece, and Portugal) countries, and comes with the 'psymonitor' package.
 
+
+```{r Rmdsetup, include=TRUE, message=FALSE, warning=FALSE}
+# Set global options for runing code chuncks
+knitr::opts_chunk$set(eval = FALSE, echo = TRUE,
+                      warning = FALSE, message = FALSE,
+                      comment = NA)
+```
+
 Let’s walk through some basics. First load packages and get some data.
 
-```{r data, include=TRUE, message=FALSE, warning=FALSE}
+```{r data}
 library(psymonitor)
-
 data(spread)
-head(spread)
+
 ```
 
 Next, estimate the psy test statistic using PSY() and its corresponding bootstrap-based critical values using wmboot().
 
-```{r test, include=TRUE, message=FALSE, warning=FALSE}
+```{r test}
 y        <- spread$value
 obs      <- length(y)
-swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs)))
-Tb       <- 24 + swindow0 - 1
+swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs))) # Set minimal window size
+Tb       <- 24 + swindow0 - 1  # Set sample size control for the bootstrap precedure
 dim      <- obs - swindow0 + 1
 
 bsadf          <- PSY(y)
@@ -54,19 +61,29 @@ quantilesBsadf <- wmboot(y, Tb = Tb, nboot = 99, nCores = 2) #Note that the numb
 
 Next, identify crisis periods, defined as periods where the test statistic is above its corresponding critical value, using the locate() function.
 
-```{r dateStamp, include=TRUE, message=FALSE, warning=FALSE}
+```{r dateStamp}
 monitorDates <- spread$date[swindow0:obs]
 quantile95   <- quantilesBsadf %*% matrix(1, nrow = 1, ncol = dim)
 ind95        <- (bsadf > t(quantile95[2, ])) * 1
-periods      <- locate(ind95, monitorDates)
+periods      <- locate(ind95, monitorDates)  # Locate crisis periods
 ```
 
 Finally, print a table that holds the identified crisis periods with the help of the disp() function.
 
-```{r printResults, include=TRUE, message=FALSE, warning=FALSE, results = 'asis'}
-crisisDates <- disp(periods, obs)
+```{r printResults}
+crisisDates <- disp(periods, obs)  #generate table that holds crisis periods
 print(crisisDates)
 ```
+       
+|   |  start     |  end       |
+|--:|-----------:|-----------:|
+|  1|  2008-03-01|  2008-03-01|
+|  2|  2008-09-01|  2009-04-01|
+|  3|  2010-05-01|  2012-08-01|
+
+---
+
+Pleas cheack the packages' articles for an elaborated analysis of the [spreads data](https://itamarcaspi.github.io/psymonitor/articles/illustrationSNP.html), as well as a demonstration using data on the [S&P 500 price-to-dividend ratio](https://itamarcaspi.github.io/psymonitor/articles/illustrationBONDS.html).
 
 ---
 
