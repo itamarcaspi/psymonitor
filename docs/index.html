@@ -105,7 +105,7 @@
 <a href="#psymonitor" class="anchor"></a>psymonitor <img src="reference/figures/logo.png" align="right" height="139/">
 </h1></div>
 
-<p>psymonitor provides an accessible implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.</p>
+<p><code>psymonitor</code> provides an accessible implementation of the popular real-time monitoring strategy proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new bootstrap procedure designed to mitigate the potential impact of heteroskedasticity and to effect family-wise size control in recursive testing algorithms (Phillips and Shi, forthcoming). This methodology has been shown effective for bubble and crisis detection (PSY, 2015a,b; Phillips and Shi, 2017) and is now widely used by academic researchers, central bank economists, and fiscal regulators.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -121,10 +121,10 @@
 <a class="sourceLine" id="cb2-2" data-line-number="2">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>, <span class="dt">echo =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">                      <span class="dt">warning =</span> <span class="ot">FALSE</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">                      <span class="dt">comment =</span> <span class="ot">NA</span>)</a></code></pre></div>
-<p>Let’s walk through some basics. First load packages and get some data.</p>
+<p>Let’s walk through some basics. First load the <code>psymonitor</code> package and get data on GIIPS spread.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(psymonitor)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">data</span>(spread)</a></code></pre></div>
-<p>Next, estimate the psy test statistic using PSY() and its corresponding bootstrap-based critical values using wmboot().</p>
+<p>Next, estimate the PSY test statistic using <code><a href="reference/PSY.html">PSY()</a></code> and its corresponding bootstrap-based critical values using <code><a href="reference/wmboot.html">wmboot()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(obs <span class="op">*</span><span class="st"> </span>(<span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(obs))) <span class="co"># Set minimal window size</span></a>
@@ -133,12 +133,12 @@
 <a class="sourceLine" id="cb4-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb4-7" data-line-number="7">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="reference/PSY.html">PSY</a></span>(y)</a>
 <a class="sourceLine" id="cb4-8" data-line-number="8">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="reference/wmboot.html">wmboot</a></span>(y, <span class="dt">Tb =</span> Tb, <span class="dt">nboot =</span> <span class="dv">99</span>, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
-<p>Next, identify crisis periods, defined as periods where the test statistic is above its corresponding critical value, using the locate() function.</p>
+<p>Next, identify crisis periods, defined as periods where the test statistic is above its corresponding critical value, using the <code><a href="reference/locate.html">locate()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(quantile95[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">periods      &lt;-<span class="st"> </span><span class="kw"><a href="reference/locate.html">locate</a></span>(ind95, monitorDates)  <span class="co"># Locate crisis periods</span></a></code></pre></div>
-<p>Finally, print a table that holds the identified crisis periods with the help of the disp() function.</p>
+<p>Finally, print a table that holds the identified crisis periods with the help of the <code><a href="reference/disp.html">disp()</a></code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">crisisDates &lt;-<span class="st"> </span><span class="kw"><a href="reference/disp.html">disp</a></span>(periods, obs)  <span class="co">#generate table that holds crisis periods</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">print</span>(crisisDates)</a></code></pre></div>
 <table class="table">
