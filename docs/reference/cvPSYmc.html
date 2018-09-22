@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Simulate the finite sample critical values for the PSY test. — cvPSY • psymonitor</title>
+<title>Simulate the finite sample critical values for the PSY test. — cvPSYmc • psymonitor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Simulate the finite sample critical values for the PSY test. — cvPSY" />
+<meta property="og:title" content="Simulate the finite sample critical values for the PSY test. — cvPSYmc" />
 
-<meta property="og:description" content="cvPSY implements the real time bubble detection procedure
+<meta property="og:description" content="cvPSYmc implements the real time bubble detection procedure
   of Phillips, Shi and Yu (2015a,b)" />
 
 <meta property="og:image" content="https://itamarcaspi.github.io/psymonitor/logo.png" />
@@ -132,18 +132,18 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Simulate the finite sample critical values for the PSY test.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/itamarcaspi/psymonitor/blob/master/R/cvPSY.R'><code>R/cvPSY.R</code></a></small>
-    <div class="hidden name"><code>cvPSY.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/itamarcaspi/psymonitor/blob/master/R/cvPSYmc.R'><code>R/cvPSYmc.R</code></a></small>
+    <div class="hidden name"><code>cvPSYmc.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>cvPSY</code> implements the real time bubble detection procedure
+    <p><code>cvPSYmc</code> implements the real time bubble detection procedure
   of Phillips, Shi and Yu (2015a,b)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>cvPSY</span>(<span class='no'>obs</span>, <span class='no'>swindow0</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>199</span>,
+    <pre class="usage"><span class='fu'>cvPSYmc</span>(<span class='no'>obs</span>, <span class='no'>swindow0</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>199</span>,
   <span class='kw'>useParallel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>nCores</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -200,7 +200,7 @@ number of cores defaults to all but one.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>cv</span> <span class='kw'>&lt;-</span> <span class='fu'>cvPSY</span>(<span class='fl'>100</span>,  <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='fl'>90</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>199</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>cv</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvPSY.html'>cvPSY</a></span>(<span class='fl'>100</span>,  <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='fl'>90</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>nrep</span> <span class='kw'>=</span> <span class='fl'>199</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -235,8 +235,8 @@ number of cores defaults to all but one.</p></td>
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: 'e656dd3edb0bba05760e48324639d75e',
+    indexName: 'psymonitor',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

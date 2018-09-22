@@ -56,7 +56,7 @@ Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for
   multiple bubbles: Limit Theory for Real-Time Detectors. \emph{International
   Economic Review}, 56(4), 1079--1134.
 
-* Phillips, P. C. B., & Shi, S.(forthcoming). Real time
+Phillips, P. C. B., & Shi, S.(forthcoming). Real time
   monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
   C.R. Rao (Eds.), \emph{Handbook of Statistics Volume 41 - Econometrics
   Using R}.

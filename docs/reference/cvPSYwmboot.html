@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Conduct the new composite bootstrapping for the PSY test. — wmboot • psymonitor</title>
+<title>Conduct the new composite bootstrapping for the PSY test. — cvPSYwmboot • psymonitor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Conduct the new composite bootstrapping for the PSY test. — wmboot" />
+<meta property="og:title" content="Conduct the new composite bootstrapping for the PSY test. — cvPSYwmboot" />
 
-<meta property="og:description" content="wmboot implements the new bootstrap procedure designed
+<meta property="og:description" content="cvPSYwmboot implements the new bootstrap procedure designed
   to detect bubbles and crisis periods while mitigating the potential impact
   of heteroskedasticity and to effect family-wise size control in recursive
   testing algorithms (Phillips and Shi, forthcoming)." />
@@ -134,20 +134,20 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Conduct the new composite bootstrapping for the PSY test.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/itamarcaspi/psymonitor/blob/master/R/wmboot.R'><code>R/wmboot.R</code></a></small>
-    <div class="hidden name"><code>wmboot.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/itamarcaspi/psymonitor/blob/master/R/cvPSYwmboot.R'><code>R/cvPSYwmboot.R</code></a></small>
+    <div class="hidden name"><code>cvPSYwmboot.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>wmboot</code> implements the new bootstrap procedure designed
+    <p><code>cvPSYwmboot</code> implements the new bootstrap procedure designed
   to detect bubbles and crisis periods while mitigating the potential impact
   of heteroskedasticity and to effect family-wise size control in recursive
   testing algorithms (Phillips and Shi, forthcoming).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>wmboot</span>(<span class='no'>y</span>, <span class='no'>swindow0</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>Tb</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>199</span>,
+    <pre class="usage"><span class='fu'>cvPSYwmboot</span>(<span class='no'>y</span>, <span class='no'>swindow0</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='no'>Tb</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>199</span>,
   <span class='kw'>useParallel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>nCores</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -207,7 +207,7 @@ number of cores defaults to all but one.</p></td>
 <p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015b). Testing for
   multiple bubbles: Limit Theory for Real-Time Detectors. <em>International
   Economic Review</em>, 56(4), 1079--1134.</p>
-<p>* Phillips, P. C. B., &amp; Shi, S.(forthcoming). Real time
+<p>Phillips, P. C. B., &amp; Shi, S.(forthcoming). Real time
   monitoring of asset markets: Bubbles and crisis. In Hrishikesh D. Vinod and
   C.R. Rao (Eds.), <em>Handbook of Statistics Volume 41 - Econometrics
   Using R</em>.</p>
@@ -215,10 +215,10 @@ number of cores defaults to all but one.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>)
-<span class='fu'>wmboot</span>(<span class='no'>y</span>,  <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Tb</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>99</span>)</div><div class='output co'>#&gt;         [,1]
-#&gt; 90% 1.212874
-#&gt; 95% 1.439794
-#&gt; 99% 1.979439</div></pre>
+<span class='fu'><a href='wmboot.html'>wmboot</a></span>(<span class='no'>y</span>,  <span class='kw'>swindow0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Tb</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>nboot</span> <span class='kw'>=</span> <span class='fl'>99</span>)</div><div class='output co'>#&gt;         [,1]
+#&gt; 90% 1.183636
+#&gt; 95% 1.414715
+#&gt; 99% 2.224010</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -253,8 +253,8 @@ number of cores defaults to all but one.</p></td>
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: 'e656dd3edb0bba05760e48324639d75e',
+    indexName: 'psymonitor',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

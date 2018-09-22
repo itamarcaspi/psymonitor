@@ -176,7 +176,7 @@
 <a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">199</span></a></code></pre></div>
 <p>Next, we run the test</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wmboot.html">wmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-2" data-line-number="2">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cvPSYwmboot.html">cvPSYwmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
 <p>The identified origination and termination dates can be calculated and viewed with the following commands:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>snp<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
@@ -293,8 +293,8 @@
   docsearch({
     
     
-    apiKey: 'API_KEY',
-    indexName: 'INDEX_NAME',
+    apiKey: 'e656dd3edb0bba05760e48324639d75e',
+    indexName: 'psymonitor',
     inputSelector: 'input#search-input.form-control',
     transformData: function(hits) {
       return hits.map(function (hit) {

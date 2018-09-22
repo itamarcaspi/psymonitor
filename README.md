@@ -53,7 +53,7 @@ data(spread)
 ```
 
 Next, estimate the PSY test statistic using `PSY()` and its
-corresponding bootstrap-based critical values using `wmboot()`.
+corresponding bootstrap-based critical values using `cvPSYwmboot()`.
 
 ``` r
 y        <- spread$value

@@ -1,5 +1,5 @@
 {
-  "index_name": "INDEX_NAME",
+  "index_name": "psymonitor",
   "start_urls": [
     {
       "url": "https://itamarcaspi.github.io/psymonitor/index.html",
