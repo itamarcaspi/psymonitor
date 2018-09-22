@@ -124,7 +124,7 @@
 <p>Let’s walk through some basics. First load the <code>psymonitor</code> package and get data on GIIPS spread.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(psymonitor)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">data</span>(spread)</a></code></pre></div>
-<p>Next, estimate the PSY test statistic using <code><a href="reference/PSY.html">PSY()</a></code> and its corresponding bootstrap-based critical values using <code><a href="reference/wmboot.html">wmboot()</a></code>.</p>
+<p>Next, estimate the PSY test statistic using <code><a href="reference/PSY.html">PSY()</a></code> and its corresponding bootstrap-based critical values using <code><a href="reference/cvPSYwmboot.html">cvPSYwmboot()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(obs <span class="op">*</span><span class="st"> </span>(<span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(obs))) <span class="co"># Set minimal window size</span></a>
