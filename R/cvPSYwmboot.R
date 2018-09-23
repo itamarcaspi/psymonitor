@@ -112,8 +112,7 @@ cvPSYwmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199,
   #----------------------------------
   dim  <- Tb - swindow0 + 1
   i <- 0
-  MPSY <- foreach(i = 1:nboot, .inorder = FALSE, .combine = rbind,
-                  .export = "ADFRcpp") %dopar% {
+  MPSY <- foreach(i = 1:nboot, .inorder = FALSE, .combine = rbind) %dopar% {
     PSY(yb[, i], swindow0, IC, adflag)
   }
   #----------------------------------

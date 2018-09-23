@@ -69,8 +69,7 @@ cvPSYmc <- function(obs, swindow0, IC=0, adflag=0, nrep=199,
   registerDoParallel(cl)
 
   i <- 0
-  MPSY <- foreach(i = 1:m, .inorder = FALSE, .combine = rbind,
-                  .export = "ADFRcpp") %dopar% {
+  MPSY <- foreach(i = 1:m, .inorder = FALSE, .combine = rbind) %dopar% {
     PSY(y[, i], swindow0, IC, adflag)
   }
 
