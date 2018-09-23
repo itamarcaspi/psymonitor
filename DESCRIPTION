@@ -28,7 +28,6 @@ Imports:
     foreach (>= 1.4.4),
     magrittr (>= 1.5),
     parallel (>= 3.5.0),
-    RcppEigen (>= 0.3.3.4.0)
 Suggests: 
     knitr (>= 1.20),
     lubridate (>= 1.7.4),

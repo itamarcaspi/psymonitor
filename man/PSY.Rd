@@ -28,7 +28,7 @@ Vector, BSADF test statistic.
 \examples{
 \donttest{
 y     <- rnorm(100)
-BSADF <- PSY(y,  swindow0 = 90, IC = 0, adflag = 1)
+bsadf <- PSY(y, IC = 0, adflag = 1)
 }
 }
 \references{
