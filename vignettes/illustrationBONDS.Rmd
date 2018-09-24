@@ -40,9 +40,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE,
 # e.g., install.packages("MultipleBubbles")
 
 library(psymonitor)  # For testting for bubble monitoring
-library(tidyverse)   # To handle data
-library(lubridate)   # To handle dates
-library(knitr)       # for tables
+library(ggplot2)     # To handle plots
+library(knitr)       # for nice looking tables
 
 ```
 

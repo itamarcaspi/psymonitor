@@ -29,12 +29,12 @@ Imports:
     magrittr,
     parallel
 Suggests: 
+    ggplot2,
     knitr,
     lubridate,
     rmarkdown,
     spelling,
     testthat,
-    tidyverse
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

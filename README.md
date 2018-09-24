@@ -94,7 +94,7 @@ print(crisisDates)
 
 -----
 
-Pleas cheack the packages’ articles for an elaborated analysis of the
+Pleas check the packages’ articles for an elaborated analysis of the
 [spreads
 data](https://itamarcaspi.github.io/psymonitor/articles/illustrationBONDS.html),
 as well as a demonstration using data on the [S\&P 500 price-to-dividend

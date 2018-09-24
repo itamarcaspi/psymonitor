@@ -40,10 +40,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE,
 # e.g., install.packages("MultipleBubbles")
 
 library(psymonitor)  # For testting for bubble monitoring
-library(tidyverse)   # To handle data
-library(lubridate)   # To handle dates
-library(knitr)       # for tables
-
+library(ggplot2)     # To handle plots
+library(knitr)       # for nice looking tables
 
 ```
 
@@ -60,9 +58,7 @@ first step is to import the data to R, using the following code:
 
 ```{r readData, include=TRUE, message=FALSE, warning=FALSE}
 data(snp)
-snp %>%
-  mutate(pd = 1/value) ->
-  snp
+snp$pd <-  1/snp$value
 head(snp)
 ```
 
