@@ -133,19 +133,16 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># e.g., install.packages("MultipleBubbles")</span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw">library</span>(psymonitor)  <span class="co"># For testting for bubble monitoring</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">library</span>(tidyverse)   <span class="co"># To handle data</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">library</span>(lubridate)   <span class="co"># To handle dates</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="kw">library</span>(knitr)       <span class="co"># for tables</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="kw">library</span>(ggplot2)     <span class="co"># To handle plots</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">library</span>(knitr)       <span class="co"># for nice looking tables</span></a></code></pre></div>
 </div>
 <div id="the-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-data" class="anchor"></a>The Data</h2>
 <p>The S&amp;P 500 stock market has been a central focus of attention in global financial markets due to the size of this market and its impact on other financial markets. As an illustration of the methods discussed in this chapter, we conduct a pseudo real-time monitoring exercise for bubbles and crises in this market with the PSY strategy. The sample period runs from January 1973 to July 2018, downloaded monthly from <em>Datastream International</em>. The price-dividend ratio is computed as the inverse of dividend yields. The first step is to import the data to R, using the following code:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(snp)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">snp <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pd =</span> <span class="dv">1</span><span class="op">/</span>value) -&gt;</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span>snp</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">head</span>(snp)</a></code></pre></div>
+<a class="sourceLine" id="cb2-2" data-line-number="2">snp<span class="op">$</span>pd &lt;-<span class="st">  </span><span class="dv">1</span><span class="op">/</span>snp<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">head</span>(snp)</a></code></pre></div>
 <pre><code># A tibble: 6 x 3
   date       value    pd
   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
