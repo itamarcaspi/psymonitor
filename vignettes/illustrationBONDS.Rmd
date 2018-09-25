@@ -19,7 +19,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 keywords: Bubbles, crisis, recursive evolving, consistency.
 abstract: |
-  In this tutorial we illustrate the effectiveness of the PSY procedure in detecting        crisis with an applications to the European Sovereign Sector using R and the              *psymonitor* package.
+  In this tutorial we illustrate the effectiveness of the PSY procedure in detecting      crisis with an applications to the European Sovereign Sector using R and the            *psymonitor* package.
   
 ---
 
@@ -89,7 +89,7 @@ nboot    <- 9
 
 ```
 
-Next, we run the test
+Next, we run the test and simulate critical values via the bootstrap.
 
 ```{r PSY, include=TRUE, message=FALSE, warning=FALSE}
 bsadf          <- PSY(y, swindow0, IC, adflag)

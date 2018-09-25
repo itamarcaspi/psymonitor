@@ -106,7 +106,7 @@ Tb       <- 12*yr + swindow0 - 1
 nboot    <- 199
 ```
 
-Next, we run the test
+Next, we run the test and simulate critical values via the bootstrap.
 
 ```{r PSY, include=TRUE, message=FALSE, warning=FALSE}
 bsadf          <- PSY(y, swindow0, IC, adflag)
