@@ -44,7 +44,7 @@ A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
 \examples{
 \donttest{
 y <- rnorm(100)
-wmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb = 20, nboot = 99)
+cvPSYwmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb, nboot = 99)
 }
 }
 \references{

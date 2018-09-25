@@ -1,6 +1,6 @@
-#' @title Bubble/crisis periods data frame
+#' @title Generate a table with identified bubble/crisis periods
 #'
-#' @description \code{disp} generates a data.frame that holds bubble/crisis
+#' @description \code{disp} generates a data frame with bubble/crisis
 #'   periods identified by the PSY procedure
 #'
 #' @param obs   A positive integer. The number of observations.

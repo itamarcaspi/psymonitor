@@ -44,7 +44,7 @@
 #' @examples
 #' \donttest{
 #' y <- rnorm(100)
-#' wmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb = 20, nboot = 99)
+#' cvPSYwmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb, nboot = 99)
 #' }
 
 
@@ -67,9 +67,14 @@ cvPSYwmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199,
     swindow0 <- floor(t * (0.01 + 1.8 / sqrt(t)))
   }
 
+  if (missing(Tb)) {
+    stop("Missing a value for 'Tb'", call. = FALSE)
+  }
+
   # The DGP
   set.seed(101)
-  rN <- matrix(sample(1:T0, Tb * nboot, replace = TRUE), nrow = Tb, ncol = nboot)
+  rN <- matrix(sample(1:T0, Tb * nboot, replace = TRUE),
+               nrow = Tb, ncol = nboot)
   wn <- matrix(rnorm(1), nrow = Tb, ncol = nboot)
 
   dyb <- matrix(0, nrow = Tb - 1, ncol = nboot)
@@ -101,7 +106,7 @@ cvPSYwmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199,
   # The PSY Test ------------------------------------------------------------
 
   # setup parallel backend to use many processors
-  if (useParallel==TRUE && missing(nCores)) {
+  if (useParallel == TRUE && missing(nCores)) {
     nCores <- detectCores() - 1
   } else {
     nCores <- 1

@@ -1,7 +1,7 @@
 #' @title Simulate the finite sample critical values for the PSY test.
 #'
-#' @description \code{cvPSYmc} implements the real time bubble detection procedure
-#'   of Phillips, Shi and Yu (2015a,b)
+#' @description \code{cvPSYmc} implements the real time bubble detection
+#'   procedure of Phillips, Shi and Yu (2015a,b)
 #'
 #' @param obs   A positive integer. The number of observations.
 #' @param swindow0 A positive integer. Minimum window size (default = \eqn{T
@@ -10,6 +10,10 @@
 #'   (default = 0).
 #' @param adflag  A positive integer. Lag order when IC=0; maximum number of
 #'   lags when IC>0 (default = 0).
+#' @param multiplicity Logical. If \code{multiplicity=TRUE}, use family-wise
+#'   size control in the recursive testing algorithms.
+#' @param Tb A positive integer. The simulated sample size (swindow0+
+#'   controlling). Ignonred if \code{multiplicity=FALSE}.
 #' @param nrep A positive integer. Number of replications (default = 199).
 #' @param useParallel Logical. If \code{useParallel=TRUE}, use multi core
 #'   computation.
@@ -36,25 +40,30 @@
 #'
 #' @examples
 #' \donttest{
-#' cv <- cvPSY(100,  swindow0 = 90, IC = 0, adflag = 1, nrep = 199)
+#' cv <- cvPSYmc(100,  swindow0 = 90, IC = 0, adflag = 1, nrep = 199)
 #' }
 
 cvPSYmc <- function(obs, swindow0, IC=0, adflag=0, nrep=199,
-                  useParallel=TRUE, nCores) {
+                    multiplicity=TRUE, Tb, useParallel=TRUE, nCores) {
+
+  qe <- as.matrix(c(0.90, 0.95, 0.99))
 
   if (missing(swindow0)) {
     swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs)))
   }
 
-  qe <- as.matrix(c(0.90, 0.95, 0.99))
-  m  <- nrep
+  if (multiplicity) {
+    if (missing(Tb)) {
+      stop("Missing a value for 'Tb'", call. = FALSE)
+    } else {
+      obs <- Tb
+    }
+  }
 
   dim <- obs - swindow0 + 1
 
-  SI <- 1
   set.seed(101)
-  rnorm(SI)
-  e <- replicate(m, rnorm(obs))
+  e <- replicate(nrep, rnorm(obs))
   a <- obs^(-1)
   z <- e + a
   y <- apply(z, 2, cumsum)
@@ -69,7 +78,7 @@ cvPSYmc <- function(obs, swindow0, IC=0, adflag=0, nrep=199,
   registerDoParallel(cl)
 
   i <- 0
-  MPSY <- foreach(i = 1:m, .inorder = FALSE, .combine = rbind) %dopar% {
+  MPSY <- foreach(i = 1:nrep, .inorder = FALSE, .combine = rbind) %dopar% {
     PSY(y[, i], swindow0, IC, adflag)
   }
 

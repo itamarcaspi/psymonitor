@@ -5,7 +5,7 @@
 \title{Simulate the finite sample critical values for the PSY test.}
 \usage{
 cvPSYmc(obs, swindow0, IC = 0, adflag = 0, nrep = 199,
-  useParallel = TRUE, nCores)
+  multiplicity = TRUE, Tb, useParallel = TRUE, nCores)
 }
 \arguments{
 \item{obs}{A positive integer. The number of observations.}
@@ -21,6 +21,12 @@ lags when IC>0 (default = 0).}
 
 \item{nrep}{A positive integer. Number of replications (default = 199).}
 
+\item{multiplicity}{Logical. If \code{multiplicity=TRUE}, use family-wise
+size control in the recursive testing algorithms.}
+
+\item{Tb}{A positive integer. The simulated sample size (swindow0+
+controlling). Ignonred if \code{multiplicity=FALSE}.}
+
 \item{useParallel}{Logical. If \code{useParallel=TRUE}, use multi core
 computation.}
 
@@ -32,12 +38,12 @@ A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
   99 percent level.
 }
 \description{
-\code{cvPSYmc} implements the real time bubble detection procedure
-  of Phillips, Shi and Yu (2015a,b)
+\code{cvPSYmc} implements the real time bubble detection
+  procedure of Phillips, Shi and Yu (2015a,b)
 }
 \examples{
 \donttest{
-cv <- cvPSY(100,  swindow0 = 90, IC = 0, adflag = 1, nrep = 199)
+cv <- cvPSYmc(100,  swindow0 = 90, IC = 0, adflag = 1, nrep = 199)
 }
 }
 \references{
