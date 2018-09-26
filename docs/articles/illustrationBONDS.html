@@ -197,10 +197,10 @@
 <a class="sourceLine" id="cb4-7" data-line-number="7">adflag   &lt;-<span class="st"> </span><span class="dv">6</span></a>
 <a class="sourceLine" id="cb4-8" data-line-number="8">yr       &lt;-<span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">9</span></a></code></pre></div>
-<p>Next, we run the test</p>
+<a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">99</span></a></code></pre></div>
+<p>Next, we run the test and simulate critical values via the bootstrap.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cvPSYwmboot.html">cvPSYwmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-2" data-line-number="2">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cvPSYwmboot.html">cvPSYwmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co"># Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
 <p>The identified origination and termination dates can be calculated and viewed with the following commands:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
@@ -226,7 +226,7 @@
 </tr>
 <tr class="odd">
 <td align="left">2010-05-01</td>
-<td align="left">2012-08-01</td>
+<td align="left">2012-09-01</td>
 </tr>
 </tbody>
 </table>
