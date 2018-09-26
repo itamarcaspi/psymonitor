@@ -103,7 +103,7 @@ IC       <- 2
 adflag   <- 6
 yr       <- 2
 Tb       <- 12*yr + swindow0 - 1
-nboot    <- 199
+nboot    <- 99
 ```
 
 Next, we run the test and simulate critical values via the bootstrap.

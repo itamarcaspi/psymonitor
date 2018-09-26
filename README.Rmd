@@ -30,7 +30,7 @@ devtools::install_github("itamarcaspi/psymonitor")
 For the illustration purposes we will use data on the credit risk in the European sovereign sector, that is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland, Italy, Greece, and Portugal) countries, and comes with the 'psymonitor' package.
 
 
-```{r Rmdsetup, include=TRUE, message=FALSE, warning=FALSE}
+```{r Rmdsetup, echo=FALSE, include=FALSE, message=FALSE, warning=FALSE}
 # Set global options for runing code chuncks
 knitr::opts_chunk$set(eval = FALSE, echo = TRUE,
                       warning = FALSE, message = FALSE,
@@ -45,17 +45,30 @@ data(spread)
 
 ```
 
+
+Next, define a few parameters for the test and the simulation.
+
+```{r setup}
+y        <- spread$value
+obs      <- length(y)
+swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs))) # set minimal window size
+Tb       <- 24 + swindow0 - 1  # set sample size control for the bootstrap precedure
+dim      <- obs - swindow0 + 1  
+IC       <- 2  # use BIC to select the number of lags
+adflag   <- 6  # set the maximum nuber of lags to 6
+yr       <- 2  
+Tb       <- 12*yr + swindow0 - 1  # Set the control sample size
+nboot    <- 99  # set the number of replications for the bootstrap
+
+```
+
 Next, estimate the PSY test statistic using `PSY()` and its corresponding bootstrap-based critical values using `cvPSYwmboot()`.
 
 ```{r test}
-y        <- spread$value
-obs      <- length(y)
-swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs))) # Set minimal window size
-Tb       <- 24 + swindow0 - 1  # Set sample size control for the bootstrap precedure
-dim      <- obs - swindow0 + 1
-
-bsadf          <- PSY(y)
-quantilesBsadf <- cvPSYwmboot(y, Tb = Tb, nboot = 99, nCores = 2) #Note that the number of cores is arbitrarily set to 2.
+bsadf          <- PSY(y)  # estimate the PSY test statistics sequence
+quantilesBsadf <- cvPSYwmboot(y, swindow0 = swindow0, IC = IC,
+                              adflag = adflag, Tb = Tb, nboot = 99,
+                              nCores = 2) # simulate critical values via wild bootstrap. Note that the number of cores is arbitrarily set to 2.
 
 ```
 

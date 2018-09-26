@@ -37,13 +37,6 @@ GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland,
 Italy, Greece, and Portugal) countries, and comes with the ‘psymonitor’
 package.
 
-``` r
-# Set global options for runing code chuncks
-knitr::opts_chunk$set(eval = FALSE, echo = TRUE,
-                      warning = FALSE, message = FALSE,
-                      comment = NA)
-```
-
 Let’s walk through some basics. First load the `psymonitor` package and
 get data on GIIPS spread.
 
@@ -52,18 +45,29 @@ library(psymonitor)
 data(spread)
 ```
 
-Next, estimate the PSY test statistic using `PSY()` and its
-corresponding bootstrap-based critical values using `cvPSYwmboot()`.
+Next, define a few parameters for the test and the simulation.
 
 ``` r
 y        <- spread$value
 obs      <- length(y)
-swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs))) # Set minimal window size
-Tb       <- 24 + swindow0 - 1  # Set sample size control for the bootstrap precedure
-dim      <- obs - swindow0 + 1
+swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs))) # set minimal window size
+Tb       <- 24 + swindow0 - 1  # set sample size control for the bootstrap precedure
+dim      <- obs - swindow0 + 1  
+IC       <- 2  # use BIC to select the number of lags
+adflag   <- 6  # set the maximum nuber of lags to 6
+yr       <- 2  
+Tb       <- 12*yr + swindow0 - 1  # Set the control sample size
+nboot    <- 99  # set the number of replications for the bootstrap
+```
 
-bsadf          <- PSY(y)
-quantilesBsadf <- cvPSYwmboot(y, Tb = Tb, nboot = 99, nCores = 2) #Note that the number of cores is arbitrarily set to 2.
+Next, estimate the PSY test statistic using `PSY()` and its
+corresponding bootstrap-based critical values using `cvPSYwmboot()`.
+
+``` r
+bsadf          <- PSY(y)  # estimate the PSY test statistics sequence
+quantilesBsadf <- cvPSYwmboot(y, swindow0 = swindow0, IC = IC,
+                              adflag = adflag, Tb = Tb, nboot = 99,
+                              nCores = 2) # simulate critical values via wild bootstrap. Note that the number of cores is arbitrarily set to 2.
 ```
 
 Next, identify crisis periods, defined as periods where the test
