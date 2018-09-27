@@ -20,7 +20,7 @@ A vector of strings with bubble/crisis periods.
   periods identified by the PSY procedure
 }
 \examples{
-\donttest{
+\dontrun{
 data(spread)
 
 y        <- spread$value

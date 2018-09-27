@@ -19,7 +19,7 @@ A vector. Dates identified as bubbles or crisis.
 \code{locate} locate bubble/crisis periods with non-zero bubble indicator
 }
 \examples{
-\donttest{
+\dontrun{
 data(spread)
 
 y        <- spread$value

@@ -23,7 +23,7 @@ Numeric, ADF test statistic.
   statistic with lag order set fixed or selected by AIC or BIC.
 }
 \examples{
-\donttest{
+\dontrun{
 y <- rnorm(100)
 tstat <- ADF(y,  IC = 0, adflag = 1)
 }
