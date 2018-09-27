@@ -44,7 +44,7 @@
 #' @examples
 #' \donttest{
 #' y <- rnorm(100)
-#' cvPSYwmboot(y,  swindow0 = 10, IC = 0, adflag = 1, Tb, nboot = 99)
+#' cv <- cvPSYwmboot(y, IC = 0, adflag = 1, Tb = 30, nboot = 99)
 #' }
 
 
