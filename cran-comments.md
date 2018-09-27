@@ -1,6 +1,7 @@
 ## Test environments
 * local OS X install, R 3.5.0
 * linux 14.04 (on travis-ci), R 3.4.4
+* Windows Server 2012 on appveyor (devel and release)
 * Rhub
   * Fedora Linux, R-devel, clang, gfortran
   * Ubuntu Linux 16.04 LTS, R-release, GCC
