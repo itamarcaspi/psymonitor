@@ -12,10 +12,10 @@ PSY(y, swindow0, IC = 0, adflag = 0)
 \item{swindow0}{A positive integer. Minimum window size (default = \eqn{T
 (0.01 + 1.8/\sqrt{T})}, where \eqn{T} denotes the sample size)}
 
-\item{IC}{A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
-(default = 0).}
+\item{IC}{An integer. 0 for fixed lag order (default), 1 for AIC and 2 for
+BIC (default = 0).}
 
-\item{adflag}{A positive integer, lag order when IC=0; maximum number of
+\item{adflag}{An integer, lag order when IC=0; maximum number of
 lags when IC>0 (default = 0).}
 }
 \value{

@@ -9,10 +9,10 @@ ADF(y, IC = 0, adflag = 0)
 \arguments{
 \item{y}{A vector, The data.}
 
-\item{IC}{A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
+\item{IC}{An integer. 0 for fixed lag (default) order 1 for AIC and 2 for BIC
 (default = 0).}
 
-\item{adflag}{A positive integer. Lag order when IC=0; maximum number of
+\item{adflag}{An integer. Lag order when IC=0; maximum number of
 lags when IC>0 (default = 0).}
 }
 \value{

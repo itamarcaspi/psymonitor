@@ -8,9 +8,9 @@
 #' @param y   A vector. The data.
 #' @param swindow0 A positive integer. Minimum window size (default = \eqn{T
 #'   (0.01 + 1.8/\sqrt{T})}, where \eqn{T} denotes the sample size),
-#' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
-#'   (default = 0).
-#' @param adflag  A positive integer. Lag order when IC=0; maximum number of
+#' @param IC  An integer. 0 for fixed lag order (default), 1 for AIC and 2 for
+#'   BIC (default = 0).
+#' @param adflag  An integer, lag order when IC=0; maximum number of
 #'   lags when IC>0 (default = 0).
 #' @param Tb A positive integer. The simulated sample size (swindow0+
 #'   controlling).

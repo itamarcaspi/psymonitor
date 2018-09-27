@@ -7,30 +7,26 @@
 ADFres(y, IC, adflag)
 }
 \arguments{
-\item{y}{Vector, data.}
+\item{y}{A Vector. Data.}
 
-\item{IC}{Integer, 0 for fixed lag order 1 for AIC and 2 for BIC.}
+\item{IC}{An integer, 0 for fixed lag order (default), 1 for AIC and 2 for
+BIC.}
 
-\item{adflag}{Integer, lag order when IC=0; maximum number of lags when IC>0.}
+\item{adflag}{An integer. Lag order when IC=0; maximum number of lags when
+IC>0 (default = 0).}
 }
 \value{
 Numeric, ADF test statistic.
 }
 \description{
-\code{ADFres} estimates the ADF model under the null with lag order selected
-by AIC or BIC
-}
-\examples{
-\donttest{
-y <- rnorm(100)
-ADFmodel <- ADFres(y,  IC = 0, adflag = 1)
-}
+\code{ADFres} estimates the ADF model under the null with lag
+  order selected by AIC or BIC
 }
 \references{
-Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for multiple bubbles:
-  Historical episodes of exuberance and collapse in the S&P 500.
-  \emph{International Economic Review}, 56(4), 1034--1078.
-  Phillips, P. C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles:
-  Limit Theory for Real-Time Detectors.
-  \emph{International Economic Review}, 56(4), 1079--1134.
+Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
+  multiple bubbles: Historical episodes of exuberance and collapse in the S&P
+  500. \emph{International Economic Review}, 56(4), 1034--1078. Phillips, P.
+  C. B., Shi, S., & Yu, J. (2015b). Testing for multiple bubbles: Limit
+  Theory for Real-Time Detectors. \emph{International Economic Review},
+  56(4), 1079--1134.
 }

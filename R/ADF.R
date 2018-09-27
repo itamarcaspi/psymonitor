@@ -4,9 +4,9 @@
 #'   statistic with lag order set fixed or selected by AIC or BIC.
 #'
 #' @param y   A vector, The data.
-#' @param IC  A positive integer. 0 for fixed lag order 1 for AIC and 2 for BIC
+#' @param IC  An integer. 0 for fixed lag (default) order 1 for AIC and 2 for BIC
 #'   (default = 0).
-#' @param adflag  A positive integer. Lag order when IC=0; maximum number of
+#' @param adflag  An integer. Lag order when IC=0; maximum number of
 #'   lags when IC>0 (default = 0).
 #'
 #' @return Numeric, ADF test statistic.
