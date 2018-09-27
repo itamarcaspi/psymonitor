@@ -25,7 +25,7 @@ Numeric, ADF test statistic.
 \examples{
 \donttest{
 y <- rnorm(100)
-ADFstat <- ADF(y,  IC = 0, adflag = 1)
+tstat <- ADF(y,  IC = 0, adflag = 1)
 }
 }
 \references{

@@ -43,7 +43,7 @@ A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
 }
 \examples{
 \donttest{
-cv <- cvPSYmc(100,  swindow0 = 90, IC = 0, adflag = 1, nrep = 199)
+cv <- cvPSYmc(100, IC = 0, adflag = 1, Tb = 30, nrep = 199)
 }
 }
 \references{
