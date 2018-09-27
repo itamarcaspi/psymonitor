@@ -18,7 +18,7 @@
 #'
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' y <- rnorm(100)
 #' tstat <- ADF(y,  IC = 0, adflag = 1)
 #' }

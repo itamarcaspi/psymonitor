@@ -42,7 +42,7 @@
 #' @import foreach
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' y <- rnorm(100)
 #' cv <- cvPSYwmboot(y, IC = 0, adflag = 1, Tb = 30, nboot = 99, nCores = 2)
 #' }

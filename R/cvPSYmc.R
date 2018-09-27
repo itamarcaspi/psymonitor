@@ -39,7 +39,7 @@
 #' @importFrom stats quantile
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' cv <- cvPSYmc(100, IC = 0, adflag = 1, Tb = 30, nrep = 199, nCores = 2)
 #' }
 

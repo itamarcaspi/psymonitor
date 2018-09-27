@@ -24,7 +24,7 @@
 #'
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' data(spread)
 #'
 #' y        <- spread$value

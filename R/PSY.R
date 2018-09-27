@@ -24,7 +24,7 @@
 #'
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' y     <- rnorm(100)
 #' bsadf <- PSY(y, IC = 0, adflag = 1)
 #' }
