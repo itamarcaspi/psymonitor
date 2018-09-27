@@ -51,8 +51,7 @@ Next, define a few parameters for the test and the simulation.
 y        <- spread$value
 obs      <- length(y)
 swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs))) # set minimal window size
-Tb       <- 24 + swindow0 - 1  # set sample size control for the bootstrap precedure
-dim      <- obs - swindow0 + 1  
+Tb       <- 24 + swindow0 - 1  # control for sample size for the bootstrap precedure
 IC       <- 2  # use BIC to select the number of lags
 adflag   <- 6  # set the maximum nuber of lags to 6
 yr       <- 2  
@@ -64,7 +63,9 @@ Next, estimate the PSY test statistic using `PSY()` and its
 corresponding bootstrap-based critical values using `cvPSYwmboot()`.
 
 ``` r
-bsadf          <- PSY(y)  # estimate the PSY test statistics sequence
+bsadf          <- PSY(y, swindow0 = swindow0, IC = IC,
+                      adflag = adflag)  # estimate the PSY test statistics sequence
+
 quantilesBsadf <- cvPSYwmboot(y, swindow0 = swindow0, IC = IC,
                               adflag = adflag, Tb = Tb, nboot = 99,
                               nCores = 2) # simulate critical values via wild bootstrap. Note that the number of cores is arbitrarily set to 2.
@@ -75,6 +76,7 @@ statistic is above its corresponding critical value, using the
 `locate()` function.
 
 ``` r
+dim          <- obs - swindow0 + 1 
 monitorDates <- spread$date[swindow0:obs]
 quantile95   <- quantilesBsadf %*% matrix(1, nrow = 1, ncol = dim)
 ind95        <- (bsadf > t(quantile95[2, ])) * 1
