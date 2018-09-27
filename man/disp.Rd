@@ -31,7 +31,7 @@ Tb       <- 24 + swindow0 - 1
 
 # Estimate PSY statistics and CVs
 bsadf          <- PSY(y, swindow0)
-quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb)
+quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb, nCores = 2)
 quantile95     <- quantilesBsadf \%*\% matrix(1, nrow = 1, ncol = dim)
 
 # locate bubble/crisis dates

@@ -30,7 +30,7 @@ Tb       <- 24 + swindow0 - 1
 
 # Estimate PSY statistics and CVs
 bsadf          <- PSY(y, swindow0)
-quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb)
+quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb, nCores = 2)
 
 monitorDates   <- spread$date[swindow0:obs]
 quantile95     <- quantilesBsadf \%*\% matrix(1, nrow = 1, ncol = dim)
