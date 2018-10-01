@@ -1,11 +1,12 @@
-vers <- packageVersion("psymonitor")
-vers <- paste("R package version", vers)
-
 citHeader("To cite the psymonitor package in publications, please use:")
 
 bibentry(bibtype = "Manual",
   title = "{psymonitor}: Real Time Monitoring of Asset Markets",
   author = "Itamar Caspi and Peter C. B. Phillips and Shuping Shi",
   year = 2018,
-  note = vers,
-  url = "https://itamarcaspi.github.io/psymonitor/")
+  note = "R package version 0.0.1",
+  url = "https://itamarcaspi.github.io/psymonitor/",
+
+
+  textVersion = "Caspi, I., Phillips, P. C. B., and Shi, S. (2018). psymonitor: Real Time Monitoring of Asset Markets. R package version 0.0.1. https://itamarcaspi.github.io/psymonitor"
+)
