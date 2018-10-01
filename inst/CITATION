@@ -8,5 +8,9 @@ bibentry(bibtype = "Manual",
   url = "https://itamarcaspi.github.io/psymonitor/",
 
 
-  textVersion = "Caspi, I., Phillips, P. C. B., and Shi, S. (2018). psymonitor: Real Time Monitoring of Asset Markets. R package version 0.0.1. https://itamarcaspi.github.io/psymonitor"
+  textVersion  =
+  paste("Caspi, I., Phillips, P. C. B., and Shi, S. (2018).",
+        "Real Time Monitoring of Asset Markets with psymonitor.",
+        "R package version 0.0.1.",
+        "<https://itamarcaspi.github.io/psymonitor/>.")
 )

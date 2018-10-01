@@ -19,4 +19,5 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Fixed issues in CITATION file which can now be used appropriately.
+* Changed the format of CITATION (I've put url in < >).
+* Significantly shortened running time of our vignettes.
