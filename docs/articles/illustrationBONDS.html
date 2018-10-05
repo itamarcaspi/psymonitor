@@ -123,7 +123,7 @@
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
 <p>Before beginning the tutorial, make sure that you have all the necessary packages. Try running the cell below and, if any issues arise, follow the instructions within.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>, <span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>,</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">eval =</span> <span class="ot">TRUE</span>, <span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">                      <span class="dt">message =</span> <span class="ot">FALSE</span>, <span class="dt">comment =</span> <span class="ot">NA</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># CRAN Packages </span></a>
@@ -143,12 +143,45 @@
 <p>Credit risk in the European sovereign sector is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland, Italy, Greece, and Portugal) countries.5 The PSY strategy is applied to the spread between the GIIPS bond yield index and the 10-year government bond yield of Germany (used as a proxy for a prevailing benchmark of economic fundamentals). The sample data runs from June 1997 to June 2016 and was downloaded from <em>Datastream International</em>. The GDP data are downloaded quarterly and converted to a monthly frequency by assuming a constant value within each quarter.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(spread)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">kable</span>(<span class="kw">head</span>(spread))</a></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">date</th>
+<th align="right">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1997-06-01</td>
+<td align="right">1.2225196</td>
+</tr>
+<tr class="even">
+<td align="left">1997-07-01</td>
+<td align="right">1.0259384</td>
+</tr>
+<tr class="odd">
+<td align="left">1997-08-01</td>
+<td align="right">1.0510309</td>
+</tr>
+<tr class="even">
+<td align="left">1997-09-01</td>
+<td align="right">0.8448181</td>
+</tr>
+<tr class="odd">
+<td align="left">1997-10-01</td>
+<td align="right">0.7406163</td>
+</tr>
+<tr class="even">
+<td align="left">1997-11-01</td>
+<td align="right">0.7833504</td>
+</tr>
+</tbody>
+</table>
 <p>Figure 3 plots the bond yield spread over the sample period. The bond yield index experienced a rapid and substantial rise between 2008-2009. It continued to mount to historical highs from 2010 onwards and peaked in June 2012. The bond yield index has dropped since then and becomes relatively stable over the last two years. The codes for implementing the PSY procedure are identical to those for Example 1. The estimated start and end dates of the crisis episodes are displayed below.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">ggplot</span>(spread, <span class="kw">aes</span>(date, value)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Figure 1: Credit Risk in the European Sovereign Sector"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">"Year"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">"Index"</span>)</a></code></pre></div>
+<p><img src="illustrationBONDS_files/figure-html/plotSpread-1.png" width="768"></p>
 </div>
 <div id="real-time-monitoring" class="section level2">
 <h2 class="hasAnchor">
@@ -176,6 +209,27 @@
 <p>and printed out using the <em>disp</em> function</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">crisisDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(periods, obs)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(crisisDates, <span class="dt">caption =</span> <span class="st">"Crisis Periods in the European Soevereign Debt Market"</span>)</a></code></pre></div>
+<table class="table">
+<caption>Crisis Periods in the European Soevereign Debt Market</caption>
+<thead><tr class="header">
+<th align="left">start</th>
+<th align="left">end</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2008-03-01</td>
+<td align="left">2008-03-01</td>
+</tr>
+<tr class="even">
+<td align="left">2008-09-01</td>
+<td align="left">2009-04-01</td>
+</tr>
+<tr class="odd">
+<td align="left">2010-05-01</td>
+<td align="left">2012-09-01</td>
+</tr>
+</tbody>
+</table>
 <p>The shaded areas in Figure 2 are the identified periods of crisis obtained using the 95% bootstrap critical values. The first alarm signal of risk appeared in March 2008 and lasts for one month. The alarm was triggered again after the collapse of Lehman Brothers in October 2008 and turns off in March 2009. The stress indicator switched on again in May 2010 and lasted until August 2012.</p>
 <p>The codes for generating the plot and shaded overlays in the figure are as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
@@ -186,6 +240,7 @@
 <a class="sourceLine" id="cb8-6" data-line-number="6">       <span class="dt">subtitle =</span> <span class="st">"June 1997 - June 2016"</span>,</a>
 <a class="sourceLine" id="cb8-7" data-line-number="7">       <span class="dt">caption =</span> <span class="st">"Notes: The solid line is the 10-year government bond yield spread between the PIIGS countries and Germany and the shaded areas are the periods where the PSY statistic exceeds its 95% bootstrap critical value."</span>, </a>
 <a class="sourceLine" id="cb8-8" data-line-number="8">       <span class="dt">x =</span> <span class="st">"Year"</span>, <span class="dt">y =</span> <span class="st">"Index"</span>) </a></code></pre></div>
+<p><img src="illustrationBONDS_files/figure-html/dateStampPlot-1.png" width="768"></p>
 <hr>
 </div>
 <div id="references" class="section level2">

@@ -123,7 +123,7 @@
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
 <p>Before beginning the tutorial, make sure that you have all the necessary packages. Try running the cell below and, if any issues arise, follow the instructions within.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">eval =</span> <span class="ot">FALSE</span>, <span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>,</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">eval =</span> <span class="ot">TRUE</span>, <span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>,</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">                      <span class="dt">message =</span> <span class="ot">FALSE</span>, <span class="dt">comment =</span> <span class="ot">NA</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># CRAN Packages </span></a>
@@ -143,47 +143,107 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(snp)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">snp<span class="op">$</span>pd &lt;-<span class="st">  </span><span class="dv">1</span><span class="op">/</span>snp<span class="op">$</span>value</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">head</span>(snp)</a></code></pre></div>
+<pre><code># A tibble: 6 x 3
+  date       value    pd
+  &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 1973-01-31  2.27 0.441
+2 1973-02-28  2.35 0.426
+3 1973-03-30  2.36 0.424
+4 1973-04-30  2.47 0.405
+5 1973-05-31  2.5  0.4  
+6 1973-06-29  2.51 0.398</code></pre>
 <p>In the presence of a speculative bubble, asset prices characteristically deviate in an explosive way from fundamentals, representing exuberance in the speculative behavior driving the market. In the present case, this deviation implies that the log price-dividend ratio is expected to follow an explosive process over the expansive phase of the bubble. But during crisis periods, the price-dividend ratio is expected to follow a random (downward) drift martingale process, in contrast to a small (local to zero) constant drift martingale process that typically applies under normal market conditions. According to the theory detailed in Section 3 and 4, we expect to witness rejection of the null hypothesis in the PSY test empirical outcomes during both bubble and crisis periods.</p>
 <p>Figure 1 plots the price-to-dividend ratio of the S&amp;P 500 index. We observe a dramatic increase in the data series in the late 1990s, followed by a rapid fall in the early 2000s. The market experienced another episode of slump in late 2008.</p>
+<p><img src="illustrationSNP_files/figure-html/plot-1.png" width="768"></p>
 </div>
 <div id="real-time-monitoring" class="section level2">
 <h2 class="hasAnchor">
 <a href="#real-time-monitoring" class="anchor"></a>Real-Time Monitoring</h2>
 <p>With a training period of 47 observations, we start the pseudo real-time monitoring exercise from November 1976 onwards. The PSY test statistics are compared with the 95% bootstrapped critical value. The empirical size is controlled over a two-year period, i.e., by taking <span class="math inline">\(Tb = 24\)</span>. The lag order is selected by BIC with a maximum lag order of 6, applied to each subsample. The PSY statistic sequence and the corresponding bootstrap critical values can be calculated as follows in R:</p>
 <p>First, we define the series and parameters that are used as inputs for the test procedure:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">y        &lt;-<span class="st"> </span>snp<span class="op">$</span>pd</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">r0       &lt;-<span class="st"> </span><span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span><span class="op">/</span><span class="kw">sqrt</span>(obs)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(r0<span class="op">*</span>obs)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">dim      &lt;-<span class="st"> </span>obs <span class="op">-</span><span class="st"> </span>swindow0 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">IC       &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">adflag   &lt;-<span class="st"> </span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">yr       &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">99</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y        &lt;-<span class="st"> </span>snp<span class="op">$</span>pd</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">r0       &lt;-<span class="st"> </span><span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span><span class="op">/</span><span class="kw">sqrt</span>(obs)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(r0<span class="op">*</span>obs)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">dim      &lt;-<span class="st"> </span>obs <span class="op">-</span><span class="st"> </span>swindow0 <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">IC       &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">adflag   &lt;-<span class="st"> </span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">yr       &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">nboot    &lt;-<span class="st"> </span><span class="dv">99</span></a></code></pre></div>
 <p>Next, we run the test and simulate critical values via the bootstrap.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cvPSYwmboot.html">cvPSYwmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PSY.html">PSY</a></span>(y, swindow0, IC, adflag)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cvPSYwmboot.html">cvPSYwmboot</a></span>(y, swindow0, IC, adflag, Tb, nboot, <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co">#Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
 <p>The identified origination and termination dates can be calculated and viewed with the following commands:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>snp<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(quantile95[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">periods      &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, monitorDates)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">monitorDates &lt;-<span class="st"> </span>snp<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(quantile95[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">periods      &lt;-<span class="st"> </span><span class="kw"><a href="../reference/locate.html">locate</a></span>(ind95, monitorDates)</a></code></pre></div>
 <p>and printed out using the <em>disp</em> function</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(periods, obs)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">kable</span>(bubbleDates, <span class="dt">caption =</span> <span class="st">"Bubble and Crisis Periods in the S&amp;P 500"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">bubbleDates &lt;-<span class="st"> </span><span class="kw"><a href="../reference/disp.html">disp</a></span>(periods, obs)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">kable</span>(bubbleDates, <span class="dt">caption =</span> <span class="st">"Bubble and Crisis Periods in the S&amp;P 500"</span>)</a></code></pre></div>
+<table class="table">
+<caption>Bubble and Crisis Periods in the S&amp;P 500</caption>
+<thead><tr class="header">
+<th align="left">start</th>
+<th align="left">end</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1986-06-30</td>
+<td align="left">1986-06-30</td>
+</tr>
+<tr class="even">
+<td align="left">1987-08-31</td>
+<td align="left">1987-08-31</td>
+</tr>
+<tr class="odd">
+<td align="left">1996-01-31</td>
+<td align="left">1996-01-31</td>
+</tr>
+<tr class="even">
+<td align="left">1996-05-31</td>
+<td align="left">1996-05-31</td>
+</tr>
+<tr class="odd">
+<td align="left">1996-11-29</td>
+<td align="left">1996-11-29</td>
+</tr>
+<tr class="even">
+<td align="left">1997-01-31</td>
+<td align="left">1997-02-28</td>
+</tr>
+<tr class="odd">
+<td align="left">1997-04-30</td>
+<td align="left">1998-07-31</td>
+</tr>
+<tr class="even">
+<td align="left">1998-09-30</td>
+<td align="left">2000-10-31</td>
+</tr>
+<tr class="odd">
+<td align="left">2001-01-31</td>
+<td align="left">2001-01-31</td>
+</tr>
+<tr class="even">
+<td align="left">2008-10-31</td>
+<td align="left">2009-02-27</td>
+</tr>
+</tbody>
+</table>
 <p>Identified periods that last more than a month are shaded in Figure 2. As is evident in the figure, the procedure detects two bubble episode and one crisis episode. The first bubble episode only lasts for two months (1986M06 and 1987M08) and occurred before the Black Monday crash on October 1987. The second bubble episode is the well-known dot-com bubble, starting from January 1996 and terminating in October 2000 (with several breaks in between). For the dot-com bubble episode the identified starting date for market exuberance occurs well before the speech of the former chairman of the Federal Reserve Bank Alan Greenspan in December 1996 where the now famous question `how do we know when irrational exuberance has unduly escalated asset values’ was posed to the audience and financial world. The identified subprime mortgage crisis starts in October 2008, which is one month after the collapse of Lehman Brothers, and terminates in February 2009.</p>
 <p>The codes for generating the plot and shaded overlays in the figure are as follows:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data =</span> bubbleDates, <span class="kw">aes</span>(<span class="dt">xmin =</span> start, <span class="dt">xmax =</span> end, </a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                              <span class="dt">ymin =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">ymax =</span> <span class="ot">Inf</span>), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> snp, <span class="kw">aes</span>(date, pd)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Figure 2: S&amp;P 500 Price-to-Dividend Ratio"</span>,</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">       <span class="dt">subtitle =</span> <span class="st">"January 1973 - July 2018"</span>,</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">       <span class="dt">caption =</span> <span class="st">"Notes: The solid</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">line is the price-to-dividend ratio and the shaded areas are the periods where</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">the PSY statistic exceeds its 95% bootstrapped critical value."</span>, </a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">       <span class="dt">x =</span> <span class="st">"Year"</span>, <span class="dt">y =</span> <span class="st">"Ratio"</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data =</span> bubbleDates, <span class="kw">aes</span>(<span class="dt">xmin =</span> start, <span class="dt">xmax =</span> end, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                              <span class="dt">ymin =</span> <span class="op">-</span><span class="ot">Inf</span>, <span class="dt">ymax =</span> <span class="ot">Inf</span>), <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> snp, <span class="kw">aes</span>(date, pd)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Figure 2: S&amp;P 500 Price-to-Dividend Ratio"</span>,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">       <span class="dt">subtitle =</span> <span class="st">"January 1973 - July 2018"</span>,</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">       <span class="dt">caption =</span> <span class="st">"Notes: The solid</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="st">line is the price-to-dividend ratio and the shaded areas are the periods where</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="st">the PSY statistic exceeds its 95% bootstrapped critical value."</span>, </a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">       <span class="dt">x =</span> <span class="st">"Year"</span>, <span class="dt">y =</span> <span class="st">"Ratio"</span>) </a></code></pre></div>
+<p><img src="illustrationSNP_files/figure-html/dateStampPlot-1.png" width="768"></p>
 <hr>
 </div>
 <div id="references" class="section level2">

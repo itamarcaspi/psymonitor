@@ -38,8 +38,8 @@
 
 <meta property="og:title" content="Estimate the ADF model under the null — ADFres" />
 
-<meta property="og:description" content="ADFres estimates the ADF model under the null with lag order selected
-by AIC or BIC" />
+<meta property="og:description" content="ADFres estimates the ADF model under the null with lag
+  order selected by AIC or BIC" />
 
 <meta property="og:image" content="https://itamarcaspi.github.io/psymonitor/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -70,7 +70,7 @@ by AIC or BIC" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">psymonitor</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1</span>
       </span>
     </div>
 
@@ -138,8 +138,8 @@ by AIC or BIC" />
 
     <div class="ref-description">
     
-    <p><code>ADFres</code> estimates the ADF model under the null with lag order selected
-by AIC or BIC</p>
+    <p><code>ADFres</code> estimates the ADF model under the null with lag
+  order selected by AIC or BIC</p>
     
     </div>
 
@@ -150,15 +150,17 @@ by AIC or BIC</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>y</th>
-      <td><p>Vector, data.</p></td>
+      <td><p>A Vector. Data.</p></td>
     </tr>
     <tr>
       <th>IC</th>
-      <td><p>Integer, 0 for fixed lag order 1 for AIC and 2 for BIC.</p></td>
+      <td><p>An integer, 0 for fixed lag order (default), 1 for AIC and 2 for
+BIC.</p></td>
     </tr>
     <tr>
       <th>adflag</th>
-      <td><p>Integer, lag order when IC=0; maximum number of lags when IC&gt;0.</p></td>
+      <td><p>An integer. Lag order when IC=0; maximum number of lags when
+IC&gt;0 (default = 0).</p></td>
     </tr>
     </table>
     
@@ -168,17 +170,14 @@ by AIC or BIC</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015a). Testing for multiple bubbles:
-  Historical episodes of exuberance and collapse in the S&amp;P 500.
-  <em>International Economic Review</em>, 56(4), 1034--1078.
-  Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015b). Testing for multiple bubbles:
-  Limit Theory for Real-Time Detectors.
-  <em>International Economic Review</em>, 56(4), 1079--1134.</p>
+    <p>Phillips, P. C. B., Shi, S., &amp; Yu, J. (2015a). Testing for
+  multiple bubbles: Historical episodes of exuberance and collapse in the S&amp;P
+  500. <em>International Economic Review</em>, 56(4), 1034--1078. Phillips, P.
+  C. B., Shi, S., &amp; Yu, J. (2015b). Testing for multiple bubbles: Limit
+  Theory for Real-Time Detectors. <em>International Economic Review</em>,
+  56(4), 1079--1134.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>y</span> <span class='kw'>&lt;-</span> <span class='fu'>rnorm</span>(<span class='fl'>100</span>)
-<span class='no'>ADFmodel</span> <span class='kw'>&lt;-</span> <span class='fu'>ADFres</span>(<span class='no'>y</span>,  <span class='kw'>IC</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>adflag</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -188,9 +187,7 @@ by AIC or BIC</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
