@@ -34,7 +34,7 @@ ADF <- function(y, IC=0, adflag=0) {
   x1 <- as.matrix(cbind(y1,const))
 
   t   <- T1 - adflag
-  dof <- t - 2
+  dof <- t - adflag - 2
 
   if (IC > 0) {
     ICC <- matrix(0,nrow = adflag + 1,ncol = 1)
