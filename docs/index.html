@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">psymonitor</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
       </span>
     </div>
 
@@ -116,7 +116,7 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>For the illustration purposes we will use data on the credit risk in the European sovereign sector, that is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland, Italy, Greece, and Portugal) countries, and comes with the ‘psymonitor’ package.</p>
+<p>For the illustration purposes we will use data on the credit risk in the European sovereign sector, that is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries, and comes with the ‘psymonitor’ package.</p>
 <p>Let’s walk through some basics. First load the <code>psymonitor</code> package and get data on GIIPS spread.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(psymonitor)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">data</span>(spread)</a></code></pre></div>
@@ -124,12 +124,11 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(obs <span class="op">*</span><span class="st"> </span>(<span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(obs))) <span class="co"># set minimal window size</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">Tb       &lt;-<span class="st"> </span><span class="dv">24</span> <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># control for sample size for the bootstrap precedure</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">IC       &lt;-<span class="st"> </span><span class="dv">2</span>  <span class="co"># use BIC to select the number of lags</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">adflag   &lt;-<span class="st"> </span><span class="dv">6</span>  <span class="co"># set the maximum nuber of lags to 6</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">yr       &lt;-<span class="st"> </span><span class="dv">2</span>  </a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># Set the control sample size</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">nboot    &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># set the number of replications for the bootstrap</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-4" data-line-number="4">IC       &lt;-<span class="st"> </span><span class="dv">2</span>  <span class="co"># use BIC to select the number of lags</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">adflag   &lt;-<span class="st"> </span><span class="dv">6</span>  <span class="co"># set the maximum nuber of lags to 6</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">yr       &lt;-<span class="st"> </span><span class="dv">2</span>  </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># Set the control sample size</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">nboot    &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># set the number of replications for the bootstrap</span></a></code></pre></div>
 <p>Next, estimate the PSY test statistic using <code><a href="reference/PSY.html">PSY()</a></code> and its corresponding bootstrap-based critical values using <code><a href="reference/cvPSYwmboot.html">cvPSYwmboot()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="reference/PSY.html">PSY</a></span>(y, <span class="dt">swindow0 =</span> swindow0, <span class="dt">IC =</span> IC,</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">                      <span class="dt">adflag =</span> adflag)  <span class="co"># estimate the PSY test statistics sequence</span></a>

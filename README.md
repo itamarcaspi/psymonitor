@@ -33,9 +33,9 @@ devtools::install_github("itamarcaspi/psymonitor")
 
 For the illustration purposes we will use data on the credit risk in the
 European sovereign sector, that is proxied by an index constructed as a
-GDP weighted 10-year government bond yield of the GIIPS (Spain, Ireland,
-Italy, Greece, and Portugal) countries, and comes with the ‘psymonitor’
-package.
+GDP weighted 10-year government bond yield of the GIIPS (Greece,
+Ireland, Italy, Portugal, and Spain) countries, and comes with the
+‘psymonitor’ package.
 
 Let’s walk through some basics. First load the `psymonitor` package and
 get data on GIIPS spread.
@@ -51,7 +51,6 @@ Next, define a few parameters for the test and the simulation.
 y        <- spread$value
 obs      <- length(y)
 swindow0 <- floor(obs * (0.01 + 1.8 / sqrt(obs))) # set minimal window size
-Tb       <- 24 + swindow0 - 1  # control for sample size for the bootstrap precedure
 IC       <- 2  # use BIC to select the number of lags
 adflag   <- 6  # set the maximum nuber of lags to 6
 yr       <- 2  
