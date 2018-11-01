@@ -18,31 +18,6 @@ A vector. Dates identified as bubbles or crisis.
 \description{
 \code{locate} locate bubble/crisis periods with non-zero bubble indicator
 }
-\examples{
-\donttest{
-data(spread)
-
-y        <- spread$value[1:50]
-obs      <- length(y)
-swindow0 <- floor(obs*(0.01 + 1.8/sqrt(obs)))
-dim      <- obs - swindow0 + 1
-Tb       <- 24 + swindow0 - 1
-
-# Estimate PSY statistics and CVs
-bsadf          <- PSY(y, swindow0)
-quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb, nboot = 49, nCores = 2)
-
-monitorDates   <- spread$date[swindow0:obs]
-quantile95     <- quantilesBsadf \%*\% matrix(1, nrow = 1, ncol = dim)
-ind95          <- (bsadf > t(quantile95[2, ])) * 1
-monitorDates   <- spread$date[swindow0:obs]
-
-# locate bubble/crisis dates
-locate(ind95, monitorDates)
-
-
-}
-}
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
   multiple bubbles: Historical episodes of exuberance and collapse in the S&P

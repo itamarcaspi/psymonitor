@@ -9,7 +9,7 @@
 \if{html}{\figure{logo.png}{options: align='right'}}
 
 Apply the popular real-time monitoring strategy
-    proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new
+    proposed by Phillips, Shi and Yu (2015a,b;PSY) <doi:10.1111/iere.12132>, <doi:10.1111/iere.12131>, along with a new
     bootstrap procedure designed to mitigate the potential impact of
     heteroskedasticity and to effect family-wise size control in recursive
     testing algorithms (Phillips and Shi, forthcoming).
