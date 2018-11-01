@@ -21,3 +21,4 @@ This is a resubmission. In this version I have:
 
 * Changed the format of CITATION (I've put url in < >).
 * Significantly shortened running time of our vignettes.
+* Shortened runnig time of examples (<5s)
