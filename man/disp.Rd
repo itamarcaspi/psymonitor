@@ -23,7 +23,7 @@ A vector of strings with bubble/crisis periods.
 \donttest{
 data(spread)
 
-y        <- spread$value[1:50]
+y        <- spread$value[150:200]
 obs      <- length(y)
 swindow0 <- floor(obs*(0.01 + 1.8/sqrt(obs)))
 dim      <- obs - swindow0 + 1
