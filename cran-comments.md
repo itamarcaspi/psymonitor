@@ -19,6 +19,5 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Changed the format of CITATION (I've put url in < >).
-* Significantly shortened running time of our vignettes.
 * Shortened runnig time of examples (<5s)
+* Added doi to Description for two refferences that are available. The third reference is unpublihsed yet so there is no doi/URL. 
