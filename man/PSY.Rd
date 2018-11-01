@@ -26,8 +26,8 @@ Vector, BSADF test statistic.
   of Phillips, Shi and Yu (2015a,b)
 }
 \examples{
-\dontrun{
-y     <- rnorm(100)
+\donttest{
+y     <- rnorm(80)
 bsadf <- PSY(y, IC = 0, adflag = 1)
 }
 }

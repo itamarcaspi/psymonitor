@@ -20,10 +20,10 @@ A vector of strings with bubble/crisis periods.
   periods identified by the PSY procedure
 }
 \examples{
-\dontrun{
+\donttest{
 data(spread)
 
-y        <- spread$value
+y        <- spread$value[1:50]
 obs      <- length(y)
 swindow0 <- floor(obs*(0.01 + 1.8/sqrt(obs)))
 dim      <- obs - swindow0 + 1
@@ -31,7 +31,7 @@ Tb       <- 24 + swindow0 - 1
 
 # Estimate PSY statistics and CVs
 bsadf          <- PSY(y, swindow0)
-quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb, nCores = 2)
+quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb, nboot = 49, nCores = 2)
 quantile95     <- quantilesBsadf \%*\% matrix(1, nrow = 1, ncol = dim)
 
 # locate bubble/crisis dates

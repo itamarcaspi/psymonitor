@@ -19,10 +19,10 @@ A vector. Dates identified as bubbles or crisis.
 \code{locate} locate bubble/crisis periods with non-zero bubble indicator
 }
 \examples{
-\dontrun{
+\donttest{
 data(spread)
 
-y        <- spread$value
+y        <- spread$value[1:50]
 obs      <- length(y)
 swindow0 <- floor(obs*(0.01 + 1.8/sqrt(obs)))
 dim      <- obs - swindow0 + 1
@@ -30,7 +30,7 @@ Tb       <- 24 + swindow0 - 1
 
 # Estimate PSY statistics and CVs
 bsadf          <- PSY(y, swindow0)
-quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb, nCores = 2)
+quantilesBsadf <- cvPSYwmboot(y, swindow0, Tb=Tb, nboot = 49, nCores = 2)
 
 monitorDates   <- spread$date[swindow0:obs]
 quantile95     <- quantilesBsadf \%*\% matrix(1, nrow = 1, ncol = dim)

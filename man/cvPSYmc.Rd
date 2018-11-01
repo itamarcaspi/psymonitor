@@ -42,8 +42,8 @@ A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
   procedure of Phillips, Shi and Yu (2015a,b)
 }
 \examples{
-\dontrun{
-cv <- cvPSYmc(100, IC = 0, adflag = 1, Tb = 30, nrep = 199, nCores = 2)
+\donttest{
+cv <- cvPSYmc(80, IC = 0, adflag = 1, Tb = 30, nrep = 99, nCores = 2)
 }
 }
 \references{

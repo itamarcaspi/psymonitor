@@ -42,8 +42,8 @@ A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
   testing algorithms (Phillips and Shi, forthcoming).
 }
 \examples{
-\dontrun{
-y <- rnorm(100)
+\donttest{
+y <- rnorm(80)
 cv <- cvPSYwmboot(y, IC = 0, adflag = 1, Tb = 30, nboot = 99, nCores = 2)
 }
 }

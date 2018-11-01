@@ -30,7 +30,7 @@ Before beginning the tutorial, make sure that you have all the necessary package
 
 
 ```{r packages, include=TRUE, message=FALSE, warning=FALSE}
-knitr::opts_chunk$set(eval = TRUE, echo = TRUE, warning = FALSE,
+knitr::opts_chunk$set(eval = FALSE, echo = TRUE, warning = FALSE,
                       message = FALSE, comment = NA)
 
 # CRAN Packages 
