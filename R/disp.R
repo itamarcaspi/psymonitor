@@ -24,7 +24,7 @@
 #'
 #'
 #' @examples
-#' \donttest{
+#' # \donttest{
 #' data(spread)
 #'
 #' y        <- spread$value[150:200]
@@ -46,7 +46,7 @@
 #' # Show bubble/crisis periods
 #' disp(OT, obs)
 #'
-#' }
+#' # }
 
 disp <- function(OT, obs) {
   if (is.null(OT)) {

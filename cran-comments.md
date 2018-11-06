@@ -19,5 +19,4 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Shortened runnig time of examples (<5s)
-* Added doi to Description for two refferences that are available. The third reference is unpublihsed yet so there is no doi/URL. 
+* Fixed so that examples can now run 

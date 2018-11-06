@@ -24,10 +24,10 @@
 #'
 #'
 #' @examples
-#' \donttest{
+#' # \donttest{
 #' y     <- rnorm(80)
 #' bsadf <- PSY(y, IC = 0, adflag = 1)
-#' }
+#' # }
 
 PSY <- function(y, swindow0, IC=0, adflag=0) {
 

@@ -20,7 +20,7 @@ A vector of strings with bubble/crisis periods.
   periods identified by the PSY procedure
 }
 \examples{
-\donttest{
+# \donttest{
 data(spread)
 
 y        <- spread$value[150:200]
@@ -42,7 +42,7 @@ OT           <- locate(ind95, monitorDates)
 # Show bubble/crisis periods
 disp(OT, obs)
 
-}
+# }
 }
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
