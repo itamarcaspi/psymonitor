@@ -43,7 +43,7 @@
 #'
 #' @examples
 #' y <- rnorm(80)
-#' cv <- cvPSYwmboot(y, IC = 0, adflag = 1, Tb = 30, nboot = 99, nCores = 2)
+#' cv <- cvPSYwmboot(y, IC = 0, adflag = 1, Tb = 30, nboot = 99, nCores = 1)
 #'
 
 cvPSYwmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199,

@@ -39,7 +39,7 @@
 #' @importFrom stats quantile
 #'
 #' @examples
-#' cv <- cvPSYmc(80, IC = 0, adflag = 1, Tb = 30, nrep = 99, nCores = 2)
+#' cv <- cvPSYmc(80, IC = 0, adflag = 1, Tb = 30, nrep = 99, nCores = 1)
 
 cvPSYmc <- function(obs, swindow0, IC=0, adflag=0, nrep=199,
                     multiplicity=TRUE, Tb, useParallel=TRUE, nCores) {
@@ -75,11 +75,14 @@ cvPSYmc <- function(obs, swindow0, IC=0, adflag=0, nrep=199,
   cl <- makeCluster(nCores)
   registerDoParallel(cl)
 
+  #----------------------------------
   i <- 0
   MPSY <- foreach(i = 1:nrep, .inorder = FALSE, .combine = rbind) %dopar% {
     PSY(y[, i], swindow0, IC, adflag)
   }
+  #----------------------------------
 
+  stopCluster(cl)
 
   Q_PSY <- as.matrix(quantile(MPSY, qe), na.rm = TRUE)
 

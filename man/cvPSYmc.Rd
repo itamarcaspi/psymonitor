@@ -42,7 +42,7 @@ A matrix. BSADF bootstrap critical value sequence at the 90, 95 and
   procedure of Phillips, Shi and Yu (2015a,b)
 }
 \examples{
-cv <- cvPSYmc(80, IC = 0, adflag = 1, Tb = 30, nrep = 99, nCores = 2)
+cv <- cvPSYmc(80, IC = 0, adflag = 1, Tb = 30, nrep = 99, nCores = 1)
 }
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
