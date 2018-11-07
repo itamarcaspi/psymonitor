@@ -18,10 +18,8 @@
 #'
 #'
 #' @examples
-#' # \donttest{
 #' y <- rnorm(100)
 #' tstat <- ADF(y,  IC = 0, adflag = 1)
-#' # }
 
 ADF <- function(y, IC=0, adflag=0) {
   T0    <- length(y)
