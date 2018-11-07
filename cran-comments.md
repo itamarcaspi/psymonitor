@@ -19,4 +19,4 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Fixed so that examples can now run 
+* Removed `\donttest' from all examples that now run
