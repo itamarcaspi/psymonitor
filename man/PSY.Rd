@@ -26,10 +26,10 @@ Vector, BSADF test statistic.
   of Phillips, Shi and Yu (2015a,b)
 }
 \examples{
-# \donttest{
+
 y     <- rnorm(80)
 bsadf <- PSY(y, IC = 0, adflag = 1)
-# }
+
 }
 \references{
 Phillips, P. C. B., Shi, S., & Yu, J. (2015a). Testing for
