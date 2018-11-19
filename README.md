@@ -21,6 +21,13 @@ regulators.
 
 ## Installation
 
+You can install the **stable** version from
+[CRAN](https://cran.r-project.org/web/packages/psymonitor/index.html)
+
+``` r
+install.packages("psymonitor")
+```
+
 You can install the **development** version from
 [GitHub](https://github.com/itamarcaspi/psymonitor/)
 

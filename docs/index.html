@@ -13,7 +13,7 @@
 <link href="docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Real Time Monitoring of Asset Markets: Bubbles and Crisis">
 <meta property="og:description" content="Apply the popular real-time monitoring strategy
-    proposed by Phillips, Shi and Yu (2015a,b;PSY), along with a new
+    proposed by Phillips, Shi and Yu (2015a,b;PSY) &lt;doi:10.1111/iere.12132&gt;, &lt;doi:10.1111/iere.12131&gt;, along with a new
     bootstrap procedure designed to mitigate the potential impact of
     heteroskedasticity and to effect family-wise size control in recursive
     testing algorithms (Phillips and Shi, forthcoming).">
@@ -109,42 +109,44 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
+<p>You can install the <strong>stable</strong> version from <a href="https://cran.r-project.org/web/packages/psymonitor/index.html">CRAN</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"psymonitor"</span>)</a></code></pre></div>
 <p>You can install the <strong>development</strong> version from <a href="https://github.com/itamarcaspi/psymonitor/">GitHub</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"itamarcaspi/psymonitor"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"itamarcaspi/psymonitor"</span>)</a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>For the illustration purposes we will use data on the credit risk in the European sovereign sector, that is proxied by an index constructed as a GDP weighted 10-year government bond yield of the GIIPS (Greece, Ireland, Italy, Portugal, and Spain) countries, and comes with the ‘psymonitor’ package.</p>
 <p>Let’s walk through some basics. First load the <code>psymonitor</code> package and get data on GIIPS spread.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(psymonitor)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">data</span>(spread)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(psymonitor)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">data</span>(spread)</a></code></pre></div>
 <p>Next, define a few parameters for the test and the simulation.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(obs <span class="op">*</span><span class="st"> </span>(<span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(obs))) <span class="co"># set minimal window size</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">IC       &lt;-<span class="st"> </span><span class="dv">2</span>  <span class="co"># use BIC to select the number of lags</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">adflag   &lt;-<span class="st"> </span><span class="dv">6</span>  <span class="co"># set the maximum nuber of lags to 6</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">yr       &lt;-<span class="st"> </span><span class="dv">2</span>  </a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># Set the control sample size</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">nboot    &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># set the number of replications for the bootstrap</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y        &lt;-<span class="st"> </span>spread<span class="op">$</span>value</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">obs      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">swindow0 &lt;-<span class="st"> </span><span class="kw">floor</span>(obs <span class="op">*</span><span class="st"> </span>(<span class="fl">0.01</span> <span class="op">+</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(obs))) <span class="co"># set minimal window size</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">IC       &lt;-<span class="st"> </span><span class="dv">2</span>  <span class="co"># use BIC to select the number of lags</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">adflag   &lt;-<span class="st"> </span><span class="dv">6</span>  <span class="co"># set the maximum nuber of lags to 6</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">yr       &lt;-<span class="st"> </span><span class="dv">2</span>  </a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">Tb       &lt;-<span class="st"> </span><span class="dv">12</span><span class="op">*</span>yr <span class="op">+</span><span class="st"> </span>swindow0 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># Set the control sample size</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">nboot    &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># set the number of replications for the bootstrap</span></a></code></pre></div>
 <p>Next, estimate the PSY test statistic using <code><a href="reference/PSY.html">PSY()</a></code> and its corresponding bootstrap-based critical values using <code><a href="reference/cvPSYwmboot.html">cvPSYwmboot()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="reference/PSY.html">PSY</a></span>(y, <span class="dt">swindow0 =</span> swindow0, <span class="dt">IC =</span> IC,</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">                      <span class="dt">adflag =</span> adflag)  <span class="co"># estimate the PSY test statistics sequence</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="reference/cvPSYwmboot.html">cvPSYwmboot</a></span>(y, <span class="dt">swindow0 =</span> swindow0, <span class="dt">IC =</span> IC,</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">                              <span class="dt">adflag =</span> adflag, <span class="dt">Tb =</span> Tb, <span class="dt">nboot =</span> <span class="dv">99</span>,</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">                              <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co"># simulate critical values via wild bootstrap. Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">bsadf          &lt;-<span class="st"> </span><span class="kw"><a href="reference/PSY.html">PSY</a></span>(y, <span class="dt">swindow0 =</span> swindow0, <span class="dt">IC =</span> IC,</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                      <span class="dt">adflag =</span> adflag)  <span class="co"># estimate the PSY test statistics sequence</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">quantilesBsadf &lt;-<span class="st"> </span><span class="kw"><a href="reference/cvPSYwmboot.html">cvPSYwmboot</a></span>(y, <span class="dt">swindow0 =</span> swindow0, <span class="dt">IC =</span> IC,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">                              <span class="dt">adflag =</span> adflag, <span class="dt">Tb =</span> Tb, <span class="dt">nboot =</span> <span class="dv">99</span>,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">                              <span class="dt">nCores =</span> <span class="dv">2</span>) <span class="co"># simulate critical values via wild bootstrap. Note that the number of cores is arbitrarily set to 2.</span></a></code></pre></div>
 <p>Next, identify crisis periods, defined as periods where the test statistic is above its corresponding critical value, using the <code><a href="reference/locate.html">locate()</a></code> function.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">dim          &lt;-<span class="st"> </span>obs <span class="op">-</span><span class="st"> </span>swindow0 <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">monitorDates &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(quantile95[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">periods      &lt;-<span class="st"> </span><span class="kw"><a href="reference/locate.html">locate</a></span>(ind95, monitorDates)  <span class="co"># Locate crisis periods</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">dim          &lt;-<span class="st"> </span>obs <span class="op">-</span><span class="st"> </span>swindow0 <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">monitorDates &lt;-<span class="st"> </span>spread<span class="op">$</span>date[swindow0<span class="op">:</span>obs]</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">quantile95   &lt;-<span class="st"> </span>quantilesBsadf <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> dim)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">ind95        &lt;-<span class="st"> </span>(bsadf <span class="op">&gt;</span><span class="st"> </span><span class="kw">t</span>(quantile95[<span class="dv">2</span>, ])) <span class="op">*</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">periods      &lt;-<span class="st"> </span><span class="kw"><a href="reference/locate.html">locate</a></span>(ind95, monitorDates)  <span class="co"># Locate crisis periods</span></a></code></pre></div>
 <p>Finally, print a table that holds the identified crisis periods with the help of the <code><a href="reference/disp.html">disp()</a></code> function.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">crisisDates &lt;-<span class="st"> </span><span class="kw"><a href="reference/disp.html">disp</a></span>(periods, obs)  <span class="co">#generate table that holds crisis periods</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">print</span>(crisisDates)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">crisisDates &lt;-<span class="st"> </span><span class="kw"><a href="reference/disp.html">disp</a></span>(periods, obs)  <span class="co">#generate table that holds crisis periods</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">print</span>(crisisDates)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right"></th>
@@ -190,6 +192,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=psymonitor">https://​cloud.r-project.org/​package=psymonitor</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/itamarcaspi/psymonitor">https://​github.com/​itamarcaspi/​psymonitor</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/itamarcaspi/psymonitor/issues">https://​github.com/​itamarcaspi/​psymonitor/​issues</a>

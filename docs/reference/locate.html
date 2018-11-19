@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">psymonitor</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.1.9000</span>
       </span>
     </div>
 
@@ -175,30 +175,6 @@ period and 0 otherwise.</p></td>
   Using R</em>.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>data</span>(<span class='no'>spread</span>)
-
-<span class='no'>y</span>        <span class='kw'>&lt;-</span> <span class='no'>spread</span>$<span class='no'>value</span>
-<span class='no'>obs</span>      <span class='kw'>&lt;-</span> <span class='fu'>length</span>(<span class='no'>y</span>)
-<span class='no'>swindow0</span> <span class='kw'>&lt;-</span> <span class='fu'>floor</span>(<span class='no'>obs</span>*(<span class='fl'>0.01</span> + <span class='fl'>1.8</span>/<span class='fu'>sqrt</span>(<span class='no'>obs</span>)))
-<span class='no'>dim</span>      <span class='kw'>&lt;-</span> <span class='no'>obs</span> - <span class='no'>swindow0</span> + <span class='fl'>1</span>
-<span class='no'>Tb</span>       <span class='kw'>&lt;-</span> <span class='fl'>24</span> + <span class='no'>swindow0</span> - <span class='fl'>1</span>
-
-<span class='co'># Estimate PSY statistics and CVs</span>
-<span class='no'>bsadf</span>          <span class='kw'>&lt;-</span> <span class='fu'><a href='PSY.html'>PSY</a></span>(<span class='no'>y</span>, <span class='no'>swindow0</span>)
-<span class='no'>quantilesBsadf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='cvPSYwmboot.html'>cvPSYwmboot</a></span>(<span class='no'>y</span>, <span class='no'>swindow0</span>, <span class='kw'>Tb</span><span class='kw'>=</span><span class='no'>Tb</span>, <span class='kw'>nCores</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-
-<span class='no'>monitorDates</span>   <span class='kw'>&lt;-</span> <span class='no'>spread</span>$<span class='no'>date</span>[<span class='no'>swindow0</span>:<span class='no'>obs</span>]
-<span class='no'>quantile95</span>     <span class='kw'>&lt;-</span> <span class='no'>quantilesBsadf</span> <span class='kw'>%*%</span> <span class='fu'>matrix</span>(<span class='fl'>1</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='no'>dim</span>)
-<span class='no'>ind95</span>          <span class='kw'>&lt;-</span> (<span class='no'>bsadf</span> <span class='kw'>&gt;</span> <span class='fu'>t</span>(<span class='no'>quantile95</span>[<span class='fl'>2</span>, ])) * <span class='fl'>1</span>
-<span class='no'>monitorDates</span>   <span class='kw'>&lt;-</span> <span class='no'>spread</span>$<span class='no'>date</span>[<span class='no'>swindow0</span>:<span class='no'>obs</span>]
-
-<span class='co'># locate bubble/crisis dates</span>
-<span class='fu'>locate</span>(<span class='no'>ind95</span>, <span class='no'>monitorDates</span>)
-
-
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -208,9 +184,7 @@ period and 0 otherwise.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#references">References</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
