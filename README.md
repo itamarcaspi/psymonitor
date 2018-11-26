@@ -3,11 +3,13 @@
 
 # psymonitor <img src="man/figures/logo.png" align="right" height=139/>
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build
 status](https://travis-ci.org/itamarcaspi/psymonitor.svg?branch=master)](https://travis-ci.org/itamarcaspi/psymonitor)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/itamarcaspi/psymonitor?branch=master&svg=true)](https://ci.appveyor.com/project/itamarcaspi/psymonitor)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/psymonitor)](https://cran.r-project.org/package=psymonitor)
 
 `psymonitor` provides an accessible implementation of the popular
 real-time monitoring strategy proposed by Phillips, Shi and Yu
