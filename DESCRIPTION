@@ -1,7 +1,7 @@
 Type: Package
 Package: psymonitor
 Title: Real Time Monitoring of Asset Markets: Bubbles and Crisis
-Version: 0.0.1.9000
+Version: 0.0.2
 Authors@R: 
     c(person(given = "Peter",
              family = "C.B. Phillips",

@@ -1,3 +1,5 @@
+# psymonitor 0.0.2
+
 # psymonitor 0.0.1.9000
 
 * Added rendered vignettes.
