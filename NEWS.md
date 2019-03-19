@@ -1,5 +1,7 @@
 # psymonitor 0.0.2
 
+Fixed RNG compatibility issues.
+
 # psymonitor 0.0.1.9000
 
 * Added rendered vignettes.

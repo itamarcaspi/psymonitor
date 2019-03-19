@@ -13,10 +13,12 @@
 
 0 errors | 0 warnings | 0 note
 
-* This is a new release.
-
 
 ## Resubmission
+
 This is a resubmission. In this version I have:
 
-* Removed `\donttest' from all examples that now run
+* Inserted `suppressWarnings(RNGversion("3.5.0"))` to make our package successfully pass the checks for current R-devel
+and R-release.
+
+  
