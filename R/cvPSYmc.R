@@ -60,6 +60,8 @@ cvPSYmc <- function(obs, swindow0, IC=0, adflag=0, nrep=199,
 
   dim <- obs - swindow0 + 1
 
+  suppressWarnings(RNGversion("3.5.0"))
+
   set.seed(101)
   e <- replicate(nrep, rnorm(obs))
   a <- obs^(-1)

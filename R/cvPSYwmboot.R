@@ -70,6 +70,7 @@ cvPSYwmboot <- function(y, swindow0, IC=0, adflag=0, Tb, nboot=199,
   }
 
   # The DGP
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(101)
   rN <- matrix(sample(1:T0, Tb * nboot, replace = TRUE),
                nrow = Tb, ncol = nboot)
