@@ -46,6 +46,12 @@ locate <- function(index, dates) {
       }
     }
     OT <- EP[1:count, ]
+    
+      if(length(OT) == 2){
+ OT <- matrix()
+ OT <- rbind(EP[1:count,])
+    }
+    
     v <- nrow(OT)
     if (OT[v, 2] == 0) {
       OT[v, 2] <- dates[length(dates)]
