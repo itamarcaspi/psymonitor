@@ -5,7 +5,7 @@
 #'
 #' @param obs   A positive integer. The number of observations.
 #' @param OT A date vector. Bubbles/crisis periods identified by the
-#'   \code{spymonitor::locate} function.
+#'   \code{psymonitor::locate} function.
 #'
 #' @return A vector of strings with bubble/crisis periods.
 #'

@@ -8,7 +8,7 @@ disp(OT, obs)
 }
 \arguments{
 \item{OT}{A date vector. Bubbles/crisis periods identified by the
-\code{spymonitor::locate} function.}
+\code{psymonitor::locate} function.}
 
 \item{obs}{A positive integer. The number of observations.}
 }

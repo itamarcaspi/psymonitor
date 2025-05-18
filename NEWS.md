@@ -1,3 +1,10 @@
+# psymonitor 0.0.3
+
+* Maintenance updates for CRAN resubmission.
+* Fixed trailing comma in `DESCRIPTION`.
+* Updated CITATION and documentation.
+* Corrected reference to `psymonitor::locate` in `disp()` documentation.
+
 # psymonitor 0.0.2.9000
 
 # psymonitor 0.0.2
